@@ -1,4 +1,4 @@
-package controller;
+package app.controller;
 
 public class MainScreen {
 }
