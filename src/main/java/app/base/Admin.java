@@ -1,4 +1,4 @@
 package app.base;
 
-public class Admin {
+public class Admin  extends User{
 }
