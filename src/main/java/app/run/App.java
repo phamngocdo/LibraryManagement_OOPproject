@@ -9,12 +9,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
+    private final int WIDTH = 1024;
+    private final int HEIGHT = 633;
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML(""), WIDTH, HEIGHT);
         stage.setScene(scene);
         stage.show();
     }
