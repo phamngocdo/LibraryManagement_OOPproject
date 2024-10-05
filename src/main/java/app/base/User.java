@@ -15,6 +15,14 @@ public class User {
     public User(String id, String username, String password, String firstName,
                 String lastName, LocalDate birthday, String email, String phoneNumber){
         // Điền các this. vào đây
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getId() {

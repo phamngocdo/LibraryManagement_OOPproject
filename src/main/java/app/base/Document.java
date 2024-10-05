@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class Document {
     private String id;
     private String title;
+    private String isbn;
     private final ArrayList<Author> authors;
     private final ArrayList<Category> categories;
     private final ArrayList<Rating> ratings;
@@ -20,10 +21,11 @@ public class Document {
     private double averageScore;
     private String imageUrl;
 
-    public Document(String id, String title, int quantity, int remaining,
+    public Document(String id, String title, String isbn, int quantity, int remaining,
                           int ratingCount, double averageScore, String imageUrl) {
         this.id = id;
         this.title = title;
+        this.isbn = isbn;
         this.quantity = quantity;
         this.remaining = remaining;
         this.ratingCount = ratingCount;
@@ -49,6 +51,10 @@ public class Document {
     public String getTitle() {
         return title;
     }
+
+    public String getIsbn() { return isbn; }
+
+    public void setIsbn(String isbn) { this.isbn = isbn; }
 
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
