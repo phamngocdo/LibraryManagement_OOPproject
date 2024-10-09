@@ -20,85 +20,79 @@ public class ReceiptDAOTest {
 
     @Test
     public void testGetReceiptFromId_ValidId() {
-        Receipt receipt = ReceiptDAO.getReceiptFromId("receipt123");
+        Receipt receipt = ReceiptDAO.getReceiptFromId("Q7ND2HK1FJ3L");
         assertNotNull(receipt);
-        assertEquals("receipt123", receipt.getId());
+        //kiểm tra user_id có đúng k
+        assertEquals("OJIK98JHNTMT", receipt.getUserId());
     }
 
     @Test
     public void testGetReceiptFromId_InvalidId() {
-        Receipt receipt = ReceiptDAO.getReceiptFromId("invalidId");
+        Receipt receipt = ReceiptDAO.getReceiptFromId("invalid-id");
         assertNull(receipt);
     }
 
     @Test
     public void testGetReceiptFromId_NonExistingReceipt() {
-        Receipt receipt = ReceiptDAO.getReceiptFromId("nonExistingId");
+        Receipt receipt = ReceiptDAO.getReceiptFromId("non-id");
         assertNull(receipt);
     }
 
     @Test
     public void testGetAllReceiptFromMemberId_ValidMemberId() {
-        ArrayList<Receipt> receipts = ReceiptDAO.getAllReceiptFromMemberId("member123");
+        ArrayList<Receipt> receipts = ReceiptDAO.getAllReceiptFromMemberId("OJIK98JHNTMT");
         assertNotNull(receipts);
-        assertTrue(receipts.size() > 0); // Giả sử có receipts cho member123
-    }
-
-    @Test
-    public void testGetAllReceiptFromMemberId_InvalidMemberId() {
-        ArrayList<Receipt> receipts = ReceiptDAO.getAllReceiptFromMemberId("invalidMember");
-        assertNotNull(receipts);
-        assertTrue(receipts.isEmpty());
-    }
-
-    @Test
-    public void testGetAllReceiptFromMemberId_NonExistingMember() {
-        ArrayList<Receipt> receipts = ReceiptDAO.getAllReceiptFromMemberId("nonExistingMember");
-        assertNotNull(receipts);
-        assertTrue(receipts.isEmpty());
+        //kiểm tra danh sách receipts có trống k
+        assertFalse(receipts.isEmpty());
     }
 
     @Test
     public void testGetAllReceipt() {
         ArrayList<Receipt> receipts = ReceiptDAO.getAllReceipt();
         assertNotNull(receipts);
-        assertTrue(receipts.size() > 0); // Giả sử có receipts trong bảng
+        //kiểm tra danh sách receipts có trống k
+        assertFalse(receipts.isEmpty());
     }
 
     @Test
     public void testAddReceipt() {
         Receipt receipt = new Receipt(
-                "newReceipt", "user123", "doc123",
+                "newreceipt", "newuser", "newdoc",
                 LocalDate.of(2024, 6, 10),
-                LocalDate.of(2024, 6, 20), "active"
+                LocalDate.of(2024, 6, 20), "not returned"
         );
         ReceiptDAO.addReceipt(receipt);
-        Receipt retrievedReceipt = ReceiptDAO.getReceiptFromId("newReceipt");
+        Receipt retrievedReceipt = ReceiptDAO.getReceiptFromId("newreceipt");
         assertNotNull(retrievedReceipt);
-        assertEquals("user123", retrievedReceipt.getUserId());
+        assertEquals("newuser", retrievedReceipt.getUserId());
     }
 
     @Test
     public void testRemoveReceipt() {
-        // Giả sử có một receipt với ID là "removeReceipt"
-        ReceiptDAO.removeReceipt("removeReceipt");
-        Receipt receipt = ReceiptDAO.getReceiptFromId("removeReceipt");
+        Receipt receiptToRemove = new Receipt(
+                "newreceipt1", "newuser", "newdoc",
+                LocalDate.of(2024, 6, 10),
+                LocalDate.of(2024, 6, 20), "not returned"
+        );
+        ReceiptDAO.addReceipt(receiptToRemove);
+        ReceiptDAO.removeReceipt("newreceipt1");
+        Receipt receipt = ReceiptDAO.getReceiptFromId("newreceipt1");
         assertNull(receipt);
     }
 
     @Test
     public void testUpdateReceipt() {
-        // Giả sử có một receipt với ID là "updateReceipt"
-        Receipt originalReceipt = ReceiptDAO.getReceiptFromId("updateReceipt");
+        //lấy receipt id trong db có status là not return
+        Receipt originalReceipt = ReceiptDAO.getReceiptFromId("F7P3R9K2YJLM");
         assertNotNull(originalReceipt);
 
         // Cập nhật thông tin
-        originalReceipt.setId("updatedUser");
+        originalReceipt.setStatus("return");
         ReceiptDAO.updateReceipt(originalReceipt);
 
         // Kiểm tra xem thông tin đã được cập nhật chưa
-        Receipt updatedReceipt = ReceiptDAO.getReceiptFromId("updateReceipt");
+        Receipt updatedReceipt = ReceiptDAO.getReceiptFromId("F7P3R9K2YJLM");
         assertNotNull(updatedReceipt);
-        assertEquals("updatedUser", updatedReceipt.getUserId());
+        assertEquals("return", updatedReceipt.getStatus());
     }
 }

@@ -22,7 +22,7 @@ public class UserDAO {
                 //lấy birthday từ db chuyển thành LocalDate
                 String birthdayString = resultSet.getString("birthday");
                 LocalDate birthday = LocalDate.parse(
-                        birthdayString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        birthdayString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 // Chuyển đổi ResultSet thành đối tượng Admin
                 return new Admin(
                         resultSet.getString("user_id"),
@@ -36,7 +36,7 @@ public class UserDAO {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return null;//k tìm thấy trả về null
     }
@@ -51,7 +51,7 @@ public class UserDAO {
                 //lấy birthday từ db chuyển thành LocalDate
                 String birthdayString = resultSet.getString("birthday");
                 LocalDate birthday = LocalDate.parse(
-                        birthdayString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        birthdayString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 // Chuyển đổi ResultSet thành đối tượng Menber
                 return new Member(
                         resultSet.getString("user_id"),
@@ -65,7 +65,7 @@ public class UserDAO {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return null;
     }
@@ -80,7 +80,7 @@ public class UserDAO {
                 //lấy birthday từ db chuyển thành LocalDate
                 String birthdayString = resultSet.getString("birthday");
                 LocalDate birthday = LocalDate.parse(
-                        birthdayString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        birthdayString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 // Chuyển đổi ResultSet thành đối tượng Admin
                 return new Member(
                         resultSet.getString("user_id"),
@@ -94,7 +94,7 @@ public class UserDAO {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return null;//k tìm thấy trả về null
     }
@@ -109,7 +109,7 @@ public class UserDAO {
                 //lấy birthday từ db chuyển thành LocalDate
                 String birthdayString = resultSet.getString("birthday");
                 LocalDate birthday = LocalDate.parse(
-                        birthdayString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        birthdayString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 //thêm member vào danh sách
                 members.add(
                         new Member(
@@ -124,7 +124,7 @@ public class UserDAO {
                         ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return members;
     }
@@ -132,9 +132,9 @@ public class UserDAO {
     public static void addMember(Member member) {
         member.setId(DatabaseManagement.createRandomIdInTable(MAIN_TABLE, "user_id"));
         //thêm các thuộc tính vào DB, chú ý đổi birthday sang String
-        // Chuyển LocalDate birthday sang string dạng yyyy-MM-dd
+        // Chuyển LocalDate birthday sang string dạng dd/MM/yyyy
         String birthdayString = member.getBirthday().format(
-                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String query = String.format(
                 "INSERT INTO %s (user_id, username, password, first_name, last_name, birthday, " +
                         "email, phone_number, role) " +
@@ -172,5 +172,20 @@ public class UserDAO {
         //Cập nhật member bằng cách gọi hàm remove(id) sau đó addMember cho member mới
         removeMember(member.getId());
         addMember(member);
+    }
+
+    public static boolean checkUsernameExist(String username) {
+        //Kiểm tra username
+        String query = String.format("SELECT * FROM %s WHERE username = '%s'", MAIN_TABLE, username);
+        ResultSet resultSet = DatabaseManagement.getResultSetFromQuery(query);
+        try {
+            //nếu kết quả username đã tồn tại
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false; //Username không tồn tại
     }
 }

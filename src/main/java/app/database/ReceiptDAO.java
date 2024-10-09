@@ -20,11 +20,11 @@ public class ReceiptDAO {
                 //lấy borrowing_date từ db chuyển thành LocalDate
                 String borrowingDateString = resultSet.getString("borrowing_date");
                 LocalDate borrowingDate = LocalDate.parse(
-                        borrowingDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        borrowingDateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 //lấy return_date từ db chuyển thành LocalDate
                 String returnDateString = resultSet.getString("return_date");
                 LocalDate returnDate = LocalDate.parse(
-                        returnDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        returnDateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 // Chuyển đổi ResultSet thành đối tượng Receipt
                 return new Receipt(
                         resultSet.getString("receipt_id"),
@@ -36,7 +36,7 @@ public class ReceiptDAO {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return null;
     }
@@ -51,11 +51,11 @@ public class ReceiptDAO {
                 //lấy borrowing_date từ db chuyển thành LocalDate
                 String borrowingDateString = resultSet.getString("borrowing_date");
                 LocalDate borrowingDate = LocalDate.parse(
-                        borrowingDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        borrowingDateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 //lấy return_date từ db chuyển thành LocalDate
                 String returnDateString = resultSet.getString("return_date");
                 LocalDate returnDate = LocalDate.parse(
-                        returnDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        returnDateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 // Chuyển đổi ResultSet thành đối tượng Receipt
                 receipts.add(new Receipt(
                         resultSet.getString("receipt_id"),
@@ -67,7 +67,7 @@ public class ReceiptDAO {
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return receipts;
     }
@@ -83,11 +83,11 @@ public class ReceiptDAO {
                 //lấy borrowing_date từ db chuyển thành LocalDate
                 String borrowingDateString = resultSet.getString("borrowing_date");
                 LocalDate borrowingDate = LocalDate.parse(
-                        borrowingDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        borrowingDateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 //lấy return_date từ db chuyển thành LocalDate
                 String returnDateString = resultSet.getString("return_date");
                 LocalDate returnDate = LocalDate.parse(
-                        returnDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        returnDateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 // Chuyển đổi ResultSet thành đối tượng Receipt
                 receipts.add(new Receipt(
                         resultSet.getString("receipt_id"),
@@ -99,18 +99,18 @@ public class ReceiptDAO {
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return receipts;
     }
 
     public static void addReceipt(Receipt receipt) {
         receipt.setId(DatabaseManagement.createRandomIdInTable(MAIN_TABLE, "receipt_id"));
-        //Chuyển LocalDate borrowingDate, returnDate sang string dạng yyyy-MM-dd
+        //Chuyển LocalDate borrowingDate, returnDate sang string dạng dd/MM/yyyy
         String borrowingDateString = receipt.getBorrowingDate().format(
-                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String returnDateString = receipt.getReturnDate().format(
-                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String query = String.format(
                 "INSERT INTO %s (receipt_id, user_id, document_id, borrowing_date, return_date, status) " +
                         "VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",

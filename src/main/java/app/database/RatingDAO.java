@@ -25,7 +25,7 @@ public class RatingDAO {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return null;
     }
@@ -46,7 +46,7 @@ public class RatingDAO {
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return ratings;
     }
@@ -67,7 +67,7 @@ public class RatingDAO {
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return ratings;
     }
