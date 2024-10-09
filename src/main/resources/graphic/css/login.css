@@ -1,0 +1,64 @@
+.login-pane {
+    -fx-border-radius:20px;
+    -fx-background-radius: 20px;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0.0, 0, 1);
+}
+
+.login-text-field {
+    -fx-border-radius:20px;
+    -fx-background-radius: 20px;
+    -fx-border-color: black;
+    -fx-font-size:14px;
+    -fx-cursor:TEXT;
+    -fx-font-family:"Arial";
+}
+
+
+.login-button {
+    -fx-border-radius:20px;
+    -fx-background-radius:20px;
+    -fx-background-color:black;
+    -fx-text-fill:white;
+    -fx-font-size:14px;
+    -fx-cursor:HAND;
+    -fx-font-family:"Arial";
+    -fx-font-weight:bold;
+}
+
+.radio-button {
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+    -fx-cursor:HAND;
+    -fx-font-family:"Arial";
+}
+
+.radio-button .radio {
+    -fx-background-color: #ffffff; 
+    -fx-border-color: black; 
+    -fx-border-width: 1px;
+    -fx-border-radius:50%;
+}
+
+.radio-button:selected .dot {
+    -fx-background-color: grey;
+    -fx-alignment: CENTER;
+}
+
+.choose-user {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-font-size:14;
+    -fx-font-family:"Arial";
+    -fx-cursor:HAND;
+}
+
+.choose-user .menu-item{
+    -fx-pref-width:128;
+    -fx-cursor:HAND;
+}
+
+.login-button:hover, .choose-user:hover, .choose-user.menu-item :hover {
+    -fx-background-color: #e5e7ef;
+    -fx-text-fill:black;
+}

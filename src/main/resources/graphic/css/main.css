@@ -1,0 +1,5 @@
+@import url(login.css);
+
+.main-pane {
+    -fx-background-color:  #e5e7eb;
+}

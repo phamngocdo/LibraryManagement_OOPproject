@@ -9,7 +9,7 @@ public class CategoryDAO {
     public static final String MAIN_TABLE = "categories";
 
     public static ArrayList<Category> getAllCategoryFromDocId(String docId) {
-        //
+        return new ArrayList<>();
 
     }
 

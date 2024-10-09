@@ -7,15 +7,15 @@ import java.util.ArrayList;
 public class DocumentDAO {
     public static final String MAIN_TABLE = "documents";
 
-    public static Document getDocFromId(String docId) {
-        //
-
-    }
+//    public static Document getDocFromId(String docId) {
+//        //
+//        return new Document();
+//    }
     
-    public static ArrayList<Document> getAllDoc() {
-        //
-
-    }
+//    public static ArrayList<Document> getAllDoc() {
+//        //
+//
+//    }
 
     public static void addDocument(Document doc) {
         doc.setId(DatabaseManagement.createRandomIdInTable(MAIN_TABLE, "document_id"));
