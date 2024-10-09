@@ -22,7 +22,7 @@ public class Document {
     private String imageUrl;
 
     public Document(String id, String title, String isbn, int quantity, int remaining,
-                          int ratingCount, double averageScore, String imageUrl) {
+                    int ratingCount, double averageScore, String imageUrl) {
         this.id = id;
         this.title = title;
         this.isbn = isbn;
@@ -52,9 +52,13 @@ public class Document {
         return title;
     }
 
-    public String getIsbn() { return isbn; }
+    public String getIsbn() {
+        return isbn;
+    }
 
-    public void setIsbn(String isbn) { this.isbn = isbn; }
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
 
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
@@ -100,11 +104,11 @@ public class Document {
         return ratings;
     }
 
-    public ArrayList<String> getCategories() {
+    public ArrayList<Category> getCategories() {
         return categories;
     }
 
-    public ArrayList<String> getAuthors() {
+    public ArrayList<Author> getAuthors() {
         return authors;
     }
 
