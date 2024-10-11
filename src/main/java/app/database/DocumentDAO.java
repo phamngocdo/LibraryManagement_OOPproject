@@ -26,6 +26,18 @@ public class DocumentDAO {
         //xóa tài liệu, receipt, rating tương ứng
     }
 
+    // Kiểm tra xem tài liệu có tồn tại dựa trên tiêu đề
+    public static boolean checkDocumentExist(String title) {
+        String query = String.format("SELECT * FROM %s WHERE title = '%s'", MAIN_TABLE, title);
+        ResultSet resultSet = DatabaseManagement.getResultSetFromQuery(query);
+        try {
+            return resultSet.next(); // Nếu có kết quả thì tài liệu tồn tại
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Thêm tài liệu.
     public static void updateDocument(Document document) {
         //Xóa doc cũ tương ứng với id sau đó thêm doc mới
     }
