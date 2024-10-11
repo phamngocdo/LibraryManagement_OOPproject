@@ -36,6 +36,17 @@ public class CategoryDAO {
 
     }
 
+    // Kiểm tra xem tài liệu có tồn tại.
+    public static boolean checkCategoryExist(String category) {
+        String query = String.format("SELECT * FROM %s WHERE category = '%s'", MAIN_TABLE, category);
+        ResultSet resultSet = DatabaseManagement.getResultSetFromQuery(query);
+        try {
+            return resultSet.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // Thêm thể loại mới.
     public static void addCategory(Category category) {
         category.setId(DatabaseManagement.createRandomIdInTable(MAIN_TABLE, "category_id"));
