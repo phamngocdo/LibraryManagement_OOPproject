@@ -48,7 +48,7 @@
     -fx-background-color: grey;
     -fx-pref-width: 5px; 
     -fx-pref-height: 5px;
-    -fx-translate-x: 0px;
+    -fx-translate-y: -1px;
 }
 
 .choose-user {
@@ -57,18 +57,21 @@
     -fx-font-size:14;
     -fx-font-family:"Arial";
     -fx-cursor:HAND;
+    -fx-text-fill:black;
 }
 
 .choose-user .menu-item{
     -fx-pref-width:128;
     -fx-cursor:HAND;
+    -fx-font-family: "Arial";
+    -fx-text-fill:black;
 }
 
 .login-button:hover {
-    -fx-background-color:rgb(63, 63, 63);
+    -fx-background-color:rgb(49, 49, 49);
 }
 
-.choose-user:hover, .choose-user.menu-item :hover {
+.choose-user:hover {
     -fx-background-color: #e5e7ef;
     -fx-text-fill:black;
 }
