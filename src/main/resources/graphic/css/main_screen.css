@@ -1,0 +1,32 @@
+.main-pane {
+    -fx-background-color:  black;
+    -fx-border-radius:10;
+    -fx-background-radius:10;
+}
+
+.function-pane {
+    -fx-background-color:white;
+    -fx-background-radius:10;
+    -fx-border-radius:10;
+}
+
+.controll-pane{
+    -fx-background-color:black;
+    -fx-background-radius:10;
+    -fx-border-radius:10;
+}
+
+.controll-button{
+    -fx-background-color: black;
+    -fx-text-fill:white;
+    -fx-font-family:"Arial";
+    -fx-font-size:14px;
+    -fx-font-weight:bold;
+    -fx-cursor:HAND;
+}
+
+.controll-button:hover{
+    -fx-border-color:white;
+    -fx-border-width:0px 0px 0px 3px;
+    -fx-background-color:rgb(49, 49, 49);
+}

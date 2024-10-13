@@ -8,6 +8,8 @@
 .login-text-field {
     -fx-border-radius:20px;
     -fx-background-radius: 20px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
     -fx-border-color: black;
     -fx-font-size:14px;
     -fx-cursor:TEXT;
@@ -38,11 +40,15 @@
     -fx-border-color: black; 
     -fx-border-width: 1px;
     -fx-border-radius:50%;
+    -fx-pref-width: 14px; 
+    -fx-pref-height: 14px;
 }
 
 .radio-button:selected .dot {
     -fx-background-color: grey;
-    -fx-alignment: CENTER;
+    -fx-pref-width: 5px; 
+    -fx-pref-height: 5px;
+    -fx-translate-y: -1px;
 }
 
 .choose-user {
@@ -51,14 +57,21 @@
     -fx-font-size:14;
     -fx-font-family:"Arial";
     -fx-cursor:HAND;
+    -fx-text-fill:black;
 }
 
 .choose-user .menu-item{
     -fx-pref-width:128;
     -fx-cursor:HAND;
+    -fx-font-family: "Arial";
+    -fx-text-fill:black;
 }
 
-.login-button:hover, .choose-user:hover, .choose-user.menu-item :hover {
+.login-button:hover {
+    -fx-background-color:rgb(49, 49, 49);
+}
+
+.choose-user:hover {
     -fx-background-color: #e5e7ef;
     -fx-text-fill:black;
 }

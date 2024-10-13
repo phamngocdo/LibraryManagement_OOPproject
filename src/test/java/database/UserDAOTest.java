@@ -19,7 +19,6 @@ public class UserDAOTest {
         DatabaseManagement.setConnection();
     }
 
-    @org.junit.Test
     @Test
     public void testGetAdminFromSignIn_Valid() {
         Admin admin = UserDAO.getAdminFromSignIn("admin", "admin");

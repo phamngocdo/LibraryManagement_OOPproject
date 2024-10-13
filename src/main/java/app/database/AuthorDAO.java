@@ -12,9 +12,6 @@ public class AuthorDAO {
 
     // Lấy ra các tác giả của tác phẩm khi biết docId.
     public static ArrayList<Author> getAllAuthorFromDocId(String docId) {
-<<<<<<< HEAD
-        return new ArrayList<>();
-=======
         ArrayList<Author> authors = new ArrayList<>();
         String query = String.format(
                 "SELECT a.author_id, a.name FROM %s AS a " +
@@ -38,7 +35,6 @@ public class AuthorDAO {
             throw new RuntimeException(e);
         }
         return authors;
->>>>>>> 8b7ef5e5b3f007a6e0c30fc37f58c3ec624d35cf
     }
 
     // Kiểm tra xem tác giả có tồn tại không

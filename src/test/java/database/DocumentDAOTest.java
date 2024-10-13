@@ -1,7 +1,5 @@
 package database;
 
-import app.base.Author;
-import app.base.Category;
 import app.base.Document;
 import app.database.DatabaseManagement;
 import app.database.DocumentDAO;
@@ -12,9 +10,8 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//All Test are correct
 public class DocumentDAOTest {
-
-    private Document testDocument;
 
     @BeforeEach
     void setUp() {
@@ -23,10 +20,9 @@ public class DocumentDAOTest {
 
     @Test
     void testAddDocument() {
-        Document newDocument = new Document("doc2", "New Document", "0987654321", 3,5,
-                2, 5.6, "http://example.com/new_image.jpg");
+        Document newDocument = new Document("", "New Document", "0987654321", 3,5,
+                2, 5.6, "https://example.com/new_image.jpg");
         DocumentDAO.addDocument(newDocument);
-
         Document fetchedDocument = DocumentDAO.getDocFromId(newDocument.getId());
         assertNotNull(fetchedDocument);
         assertEquals("New Document", fetchedDocument.getTitle());
@@ -35,17 +31,19 @@ public class DocumentDAOTest {
 
     @Test
     void testGetDocFromId() {
-        Document fetchedDocument = DocumentDAO.getDocFromId(testDocument.getId());
+        Document fetchedDocument = DocumentDAO.getDocFromId("7Q0TFMI7FIKC");
         assertNotNull(fetchedDocument);
-        assertEquals(testDocument.getId(), fetchedDocument.getId());
-        assertEquals(testDocument.getTitle(), fetchedDocument.getTitle());
+        assertEquals("7Q0TFMI7FIKC", fetchedDocument.getId());
+        assertEquals("Beginning Linux?Programming", fetchedDocument.getTitle());
     }
 
     @Test
     void testRemoveDocument() {
-        DocumentDAO.removeDocument(testDocument.getId());
-
-        Document fetchedDocument = DocumentDAO.getDocFromId(testDocument.getId());
+        Document newDocument = new Document("", "New Document", "0987654321", 3,5,
+                2, 5.6, "https://example.com/new_image.jpg");
+        DocumentDAO.addDocument(newDocument);
+        DocumentDAO.removeDocument(newDocument.getId());
+        Document fetchedDocument = DocumentDAO.getDocFromId(newDocument.getId());
         assertNull(fetchedDocument); // Tài liệu phải bị xóa
     }
 
@@ -53,11 +51,13 @@ public class DocumentDAOTest {
     void testGetAllDoc() {
         ArrayList<Document> documents = DocumentDAO.getAllDoc();
         assertFalse(documents.isEmpty());
-        assertTrue(documents.stream().anyMatch(doc -> doc.getId().equals(testDocument.getId())));
+        assertTrue(documents.stream().anyMatch(doc -> doc.getId().equals("7Q0TFMI7FIKC")));
     }
 
     @Test
     void testUpdateDocument() {
+        Document testDocument = DocumentDAO.getDocFromId("7Q0TFMI7FIKC");
+        assert testDocument != null;
         testDocument.setTitle("Updated Document");
         DocumentDAO.updateDocument(testDocument);
 

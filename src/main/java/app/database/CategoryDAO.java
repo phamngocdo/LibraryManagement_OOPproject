@@ -2,30 +2,25 @@ package app.database;
 
 import app.base.Category;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CategoryDAO {
-    public static final String MAIN_TABLE = "categories";
-    public static final String DOCUMENT_CATEGORY_TABLE = "document_category";
-
     // Lấy ra các thể loại khi biết docId.
     public static ArrayList<Category> getAllCategoryFromDocId(String docId) {
-<<<<<<< HEAD
-        return new ArrayList<>();
-=======
         ArrayList<Category> categories = new ArrayList<>();
-        String query = String.format(
-                "SELECT c.category_id, c.category FROM %s AS c " +
-                        "JOIN %s AS dc " + "ON c.category_id = dc.category_id " +
-                        "WHERE dc.document_id = '%s'",
-                MAIN_TABLE, DOCUMENT_CATEGORY_TABLE, docId
-        );
-
-        ResultSet resultSet = DatabaseManagement.getResultSetFromQuery(query);
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT c.category_id, c.category FROM categories AS c ");
+        query.append("JOIN document_category AS dc ON c.category_id = dc.category_id ");
+        query.append("WHERE dc.document_id = ?");
 
         try {
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, docId);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 categories.add(new Category(
                         resultSet.getString("category_id"),
@@ -36,30 +31,38 @@ public class CategoryDAO {
             throw new RuntimeException(e);
         }
         return categories;
->>>>>>> 8b7ef5e5b3f007a6e0c30fc37f58c3ec624d35cf
-
     }
 
-    // Kiểm tra xem tài liệu có tồn tại.
-    public static boolean checkCategoryExist(String category) {
-        String query = String.format("SELECT * FROM %s WHERE category = '%s'", MAIN_TABLE, category);
-        ResultSet resultSet = DatabaseManagement.getResultSetFromQuery(query);
+    // Thêm thể loại mới.
+    public static void addCategory(Category category) {
+        StringBuilder query = new StringBuilder();
+        query.append("INSERT INTO categories ");
+        query.append("(category_id, category) ");
+        query.append("VALUES (?, ?)");
         try {
-            return resultSet.next();
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, category.getCategory());
+            preparedStatement.setString(2, category.getCategory());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    // Thêm thể loại mới.
-    public static void addCategory(Category category) {
-        category.setId(DatabaseManagement.createRandomIdInTable(MAIN_TABLE, "category_id"));
-        String query = String.format(
-                "INSERT INTO %s (category_id, category) VALUES ('%s', '%s')",
-                MAIN_TABLE,
-                category.getId(),
-                category.getCategory()
-        );
-        DatabaseManagement.executeUpdate(query);
+    public static boolean checkCategoryExist(String category) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT category_id FROM categories ");
+        query.append("WHERE category = ?");
+
+        try {
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, category);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next(); // Nếu có kết quả thì thể loại tồn tại
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
