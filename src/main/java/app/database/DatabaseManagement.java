@@ -6,7 +6,7 @@ import java.util.Random;
 public class DatabaseManagement {
     private static Connection connection;
 
-    private static final String DB_PATH = "src/main/resources/library.db";
+    private static final String DB_PATH = "src/main/resources/database/libray.db";
     private static final int ID_LENGTH = 12;
 
     public static void setConnection() {
