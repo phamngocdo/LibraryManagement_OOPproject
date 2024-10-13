@@ -10,7 +10,7 @@ public class Member extends  User{
     private final ArrayList<Receipt> receipts;
 
     public Member(String id, String username, String password, String firstName,
-                  String lastName, LocalDate birthday, String email, String phoneNumber){
+                  String lastName, String birthday, String email, String phoneNumber){
         super(id, username, password, firstName, lastName, birthday, email, phoneNumber);
         receipts = ReceiptDAO.getAllReceiptFromMemberId(id);
     }

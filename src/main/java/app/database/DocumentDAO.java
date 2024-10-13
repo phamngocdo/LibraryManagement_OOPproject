@@ -145,7 +145,7 @@ public class DocumentDAO {
                         resultSet.getString("image_url")
                 ));
             }
-        } catch (SQLException e) {
+        } catch(SQLException e) {
             throw new RuntimeException(e);
         }
         return documents;

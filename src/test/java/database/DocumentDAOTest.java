@@ -1,5 +1,7 @@
 package database;
 
+import app.base.Author;
+import app.base.Category;
 import app.base.Document;
 import app.database.DatabaseManagement;
 import app.database.DocumentDAO;
@@ -9,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 //All Test are correct
 public class DocumentDAOTest {
 

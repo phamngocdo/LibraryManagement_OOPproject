@@ -39,15 +39,15 @@ public class CategoryDAO {
         query.append("INSERT INTO categories ");
         query.append("(category_id, category) ");
         query.append("VALUES (?, ?)");
-        try {
-            PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
-            preparedStatement.setString(1, category.getCategory());
-            preparedStatement.setString(2, category.getCategory());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+       try {
+           PreparedStatement preparedStatement;
+           preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+           preparedStatement.setString(1, category.getCategory());
+           preparedStatement.setString(2, category.getCategory());
+           preparedStatement.executeUpdate();
+       } catch (SQLException e) {
+           throw new RuntimeException(e);
+       }
     }
 
     public static boolean checkCategoryExist(String category) {
