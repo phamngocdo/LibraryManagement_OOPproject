@@ -1,55 +1,28 @@
 package app.database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Random;
 
 public class DatabaseManagement {
     private static Connection connection;
 
-    private static final String DB_PATH = "src/main/resources/library.db";
+    private static final String DB_PATH = "src/main/resources/database/library.db";
     private static final int ID_LENGTH = 12;
 
     public static void setConnection() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
         } catch (SQLException e) {
-            throw new RuntimeException("Failed to establish a database connection.", e);
+            throw new RuntimeException(e);
         }
     }
 
     public static Connection getConnection() {
         return connection;
-    }
-
-    //Hàm này dùng để truy vấn có kết quả trả về
-    public static ResultSet getResultSetFromQuery(String query) {
-        ResultSet resultSet;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            resultSet = preparedStatement.executeQuery();
-        } catch (SQLException e) {
-            throw new RuntimeException("Error executing query: " + query, e);
-        }
-        return resultSet;
-    }
-
-    //Hàm này được sử dụng cho câu lệnh xóa, thêm, cập nhật
-    public static void executeUpdate(String query) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException("Error executing update: " + query, e);
-        }
-    }
-
-    public static void closeConnection() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Error closing connection.", e);
-        }
     }
 
     public static String createRandomIdInTable(String table, String idColumn) {
@@ -64,16 +37,18 @@ public class DatabaseManagement {
                 result.append(character.charAt(randomIndex));
             }
 
-            String query = String.format("SELECT * FROM %s WHERE %s = ?", table, idColumn);
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            StringBuilder query = new StringBuilder();
+            query.append("SELECT ").append(idColumn).append(" FROM ").append(table);
+            query.append(" WHERE ").append(idColumn).append(" = ?");
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(query.toString());
                 preparedStatement.setString(1, result.toString());
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    if (!resultSet.next()) {
-                        return result.toString();
-                    }
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (!resultSet.next()) {
+                    return result.toString();
                 }
             } catch (SQLException e) {
-                throw new RuntimeException("Error generating random ID.", e);
+                throw new RuntimeException(e);
             }
         }
     }

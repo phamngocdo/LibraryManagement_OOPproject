@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Admin  extends User{
     public Admin(String id, String username, String password, String firstName,
-                String lastName, LocalDate birthday, String email, String phoneNumber){
+                String lastName, String birthday, String email, String phoneNumber){
         super(id, username, password, firstName, lastName, birthday, email, phoneNumber);
     }
 
