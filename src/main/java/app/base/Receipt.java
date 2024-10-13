@@ -7,11 +7,11 @@ public class Receipt {
     private String status;
     private final String userId;
     private final String docId;
-    private final String borrowingDate;
-    private final String returnDate;
+    private final LocalDate borrowingDate;
+    private final LocalDate returnDate;
 
-    public Receipt(String id, String userId, String docId, String borrowingDate,
-                   String returnDate, String status){
+    public Receipt(String id, String userId, String docId, LocalDate borrowingDate,
+                   LocalDate returnDate, String status){
         this.id = id;
         this.userId = userId;
         this.docId = docId;
@@ -44,11 +44,11 @@ public class Receipt {
         return docId;
     }
 
-    public String getBorrowingDate() {
+    public LocalDate getBorrowingDate() {
         return borrowingDate;
     }
 
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 }

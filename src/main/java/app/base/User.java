@@ -8,12 +8,12 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private String birthday;
+    private LocalDate birthday;
     private String email;
     private String phoneNumber;
 
     public User(String id, String username, String password, String firstName,
-                String lastName, String birthday, String email, String phoneNumber){
+                String lastName, LocalDate birthday, String email, String phoneNumber){
         // Điền các this. vào đây
         this.id = id;
         this.username = username;
@@ -65,11 +65,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
