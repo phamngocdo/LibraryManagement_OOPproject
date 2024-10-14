@@ -104,8 +104,18 @@ public class Document {
         return categories;
     }
 
+    public String getCategoriesToString() {
+        //Trả về dưới dạng chuỗi cách nhau bởi dấu phẩy như: Kinh dị, Hài hước, Kỹ thuật
+        return "";
+    }
+
     public ArrayList<Author> getAuthors() {
         return authors;
+    }
+
+    public String getAuthorsToString() {
+        //Tương tự
+        return "";
     }
 
     public ImageView loadImage() {

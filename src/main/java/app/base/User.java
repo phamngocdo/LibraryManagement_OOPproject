@@ -89,8 +89,7 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean signIn(String username, String password) {
-        // Viết các điều kiện kiểm tra thông tin đăng nhập username và password trong db
-        return true;
+    public User signIn(String username, String password) {
+        return null;
     }
 }

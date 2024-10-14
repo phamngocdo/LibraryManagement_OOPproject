@@ -20,15 +20,16 @@ public class Member extends  User{
     }
 
     @Override
-    public boolean signIn(String username, String password) {
-        //Kiểm tra role = "member hay không"//
-        return super.signIn(username, password); // Thêm && role = "member"
+    public Member signIn(String username, String password) {
+        return UserDAO.getMemberFromSignIn(username, password);
     }
 
-    public String signUp(User user) {
-        /* Kiểm tra username, email, phoneNumber có bị trùng không
-        *  nếu trùng thì in ra kiểu như sau "username duplicate" */
-        return "";
+    public String signUp(Member member) {
+        if (UserDAO.checkUsernameExist(member.getUsername())) {
+            return "Username is already taken";
+        }
+        UserDAO.addMember(member);
+        return "Registered successfully";
     }
 
     public void borrowDocument(Document doc) {

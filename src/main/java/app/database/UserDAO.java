@@ -168,7 +168,6 @@ public class UserDAO {
         }
     }
 
-
     // Update a member
     public static void updateMember(Member member) {
         removeMember(member.getId());

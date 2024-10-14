@@ -15,9 +15,8 @@ public class Admin  extends User{
     }
 
     @Override
-    public boolean signIn(String username, String password) {
-        // kiểm tra role = admin không//
-        return super.signIn(username, password); //Thêm && role = "admin"//
+    public Admin signIn(String username, String password) {
+        return UserDAO.getAdminFromSignIn(username, password);
     }
 
     public void addDocument(Document doc) {
