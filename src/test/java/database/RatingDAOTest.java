@@ -34,7 +34,7 @@ public class RatingDAOTest {
 
     @Test
     public void testGetAllRatingFromDocId_Valid() {
-        ArrayList<Rating> ratings = RatingDAO.getAllRatingFromDocId("HEMNRXZDIFQC");
+        ArrayList<Rating> ratings = RatingDAO.getAllRatingFromDocId("HemnRxzdiFQC");
         assertNotNull(ratings);
         assertFalse(ratings.isEmpty());
     }
@@ -48,7 +48,7 @@ public class RatingDAOTest {
 
     @Test
     public void testAddRating() {
-        Rating newRating = new Rating("", "userid", "docid", 5, "Great!");
+        Rating newRating = new Rating("", "OJIK98JHNTMT", "docid", 5, "Great!");
         RatingDAO.addRating(newRating);
         Rating rating = RatingDAO.getRatingFromId(newRating.getId());
         assertNotNull(rating);
