@@ -6,7 +6,6 @@ import app.database.ReceiptDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -65,13 +64,13 @@ public class ReceiptDAOTest {
     @Test
     public void testRemoveReceipt() {
         Receipt receiptToRemove = new Receipt(
-                "", "newuser", "newdoc",
+                "", "OJIK98JHNTMT", "LG5D4ruJCeMC",
                 "10/06/2024",
                 "24/06/2024", "not returned"
         );
         ReceiptDAO.addReceipt(receiptToRemove);
-        ReceiptDAO.removeReceipt("newreceipt1");
-        Receipt receipt = ReceiptDAO.getReceiptFromId("newreceipt1");
+        ReceiptDAO.removeReceipt(receiptToRemove.getId());
+        Receipt receipt = ReceiptDAO.getReceiptFromId(receiptToRemove.getId());
         assertNull(receipt);
     }
 
@@ -82,12 +81,12 @@ public class ReceiptDAOTest {
         assertNotNull(originalReceipt);
 
         // Cập nhật thông tin
-        originalReceipt.setStatus("return");
+        originalReceipt.setStatus("returned");
         ReceiptDAO.updateReceipt(originalReceipt);
 
         // Kiểm tra xem thông tin đã được cập nhật chưa
         Receipt updatedReceipt = ReceiptDAO.getReceiptFromId("4V9KMV8NO0M4");
         assertNotNull(updatedReceipt);
-        assertEquals("return", updatedReceipt.getStatus());
+        assertEquals("returned", updatedReceipt.getStatus());
     }
 }
