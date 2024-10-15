@@ -1,8 +1,7 @@
 package database;
 
-import app.base.Author;
-import app.base.Category;
 import app.base.Document;
+import app.database.DatabaseManagement;
 import app.database.DocumentDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,16 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DocumentDAOTest {
 
-    private Document testDocument;
+    private Document testDocument = DocumentDAO.getDocFromId("SWCPZGEACAAJ");
+    ;
 
     @BeforeEach
-    void setUp() {
-        // Khởi tạo cơ sở dữ liệu thử nghiệm, tạo bảng và chèn dữ liệu mẫu nếu cần.
-        // Ví dụ: Khởi tạo một tài liệu mẫu để kiểm tra
-        testDocument = new Document("doc1", "Test Document", "1234567890", 10, 10, 0, 0.0, "http://example.com/image.jpg");
-        testDocument.getAuthors().add(new Author("auth1", "Test Author"));
-        testDocument.getCategories().add(new Category("cat1", "Test Category"));
-        DocumentDAO.addDocument(testDocument); // Thêm tài liệu vào cơ sở dữ liệu thử nghiệm
+    public void setUp() {
+        DatabaseManagement.setConnection();
     }
 
     @Test
