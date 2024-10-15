@@ -3,6 +3,7 @@ module app {
     requires javafx.fxml;
     requires javafx.graphics;
     requires java.sql;
+    requires java.desktop;
 
     opens app.run to javafx.fxml;
     opens app.controller to javafx.fxml;

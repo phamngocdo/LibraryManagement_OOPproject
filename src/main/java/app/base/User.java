@@ -8,12 +8,12 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private LocalDate birthday;
+    private String birthday;
     private String email;
     private String phoneNumber;
 
     public User(String id, String username, String password, String firstName,
-                String lastName, LocalDate birthday, String email, String phoneNumber){
+                String lastName, String birthday, String email, String phoneNumber){
         // Điền các this. vào đây
         this.id = id;
         this.username = username;
@@ -65,11 +65,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public LocalDate getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -89,8 +89,7 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean signIn(String username, String password) {
-        // Viết các điều kiện kiểm tra thông tin đăng nhập username và password trong db
-        return true;
+    public User signIn(String username, String password) {
+        return null;
     }
 }

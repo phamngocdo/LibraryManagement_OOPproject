@@ -11,30 +11,25 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//All Test are correct
 public class ReceiptDAOTest {
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         DatabaseManagement.setConnection();
     }
 
     @Test
     public void testGetReceiptFromId_ValidId() {
-        Receipt receipt = ReceiptDAO.getReceiptFromId("Q7ND2HK1FJ3L");
+        Receipt receipt = ReceiptDAO.getReceiptFromId("USHXJWYOKG4N");
         assertNotNull(receipt);
         //kiểm tra user_id có đúng k
         assertEquals("OJIK98JHNTMT", receipt.getUserId());
     }
 
     @Test
-    public void testGetReceiptFromId_InvalidId() {
-        Receipt receipt = ReceiptDAO.getReceiptFromId("invalid-id");
-        assertNull(receipt);
-    }
-
-    @Test
     public void testGetReceiptFromId_NonExistingReceipt() {
-        Receipt receipt = ReceiptDAO.getReceiptFromId("non-id");
+        Receipt receipt = ReceiptDAO.getReceiptFromId("999999999999");
         assertNull(receipt);
     }
 
@@ -57,22 +52,22 @@ public class ReceiptDAOTest {
     @Test
     public void testAddReceipt() {
         Receipt receipt = new Receipt(
-                "newreceipt", "newuser", "newdoc",
-                LocalDate.of(2024, 6, 10),
-                LocalDate.of(2024, 6, 20), "not returned"
+                "", "OJIK98JHNTMT", "VKATH_VZXCUC",
+                "10/06/2024",
+                "24/06/2024", "not returned"
         );
         ReceiptDAO.addReceipt(receipt);
-        Receipt retrievedReceipt = ReceiptDAO.getReceiptFromId("newreceipt");
+        Receipt retrievedReceipt = ReceiptDAO.getReceiptFromId(receipt.getId());
         assertNotNull(retrievedReceipt);
-        assertEquals("newuser", retrievedReceipt.getUserId());
+        assertEquals("OJIK98JHNTMT", retrievedReceipt.getUserId());
     }
 
     @Test
     public void testRemoveReceipt() {
         Receipt receiptToRemove = new Receipt(
-                "newreceipt1", "newuser", "newdoc",
-                LocalDate.of(2024, 6, 10),
-                LocalDate.of(2024, 6, 20), "not returned"
+                "", "newuser", "newdoc",
+                "10/06/2024",
+                "24/06/2024", "not returned"
         );
         ReceiptDAO.addReceipt(receiptToRemove);
         ReceiptDAO.removeReceipt("newreceipt1");
@@ -83,7 +78,7 @@ public class ReceiptDAOTest {
     @Test
     public void testUpdateReceipt() {
         //lấy receipt id trong db có status là not return
-        Receipt originalReceipt = ReceiptDAO.getReceiptFromId("F7P3R9K2YJLM");
+        Receipt originalReceipt = ReceiptDAO.getReceiptFromId("4V9KMV8NO0M4");
         assertNotNull(originalReceipt);
 
         // Cập nhật thông tin
@@ -91,7 +86,7 @@ public class ReceiptDAOTest {
         ReceiptDAO.updateReceipt(originalReceipt);
 
         // Kiểm tra xem thông tin đã được cập nhật chưa
-        Receipt updatedReceipt = ReceiptDAO.getReceiptFromId("F7P3R9K2YJLM");
+        Receipt updatedReceipt = ReceiptDAO.getReceiptFromId("4V9KMV8NO0M4");
         assertNotNull(updatedReceipt);
         assertEquals("return", updatedReceipt.getStatus());
     }

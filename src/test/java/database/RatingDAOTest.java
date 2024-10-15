@@ -10,10 +10,11 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//All Test are correct
 public class RatingDAOTest {
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         DatabaseManagement.setConnection();
     }
 
@@ -47,19 +48,19 @@ public class RatingDAOTest {
 
     @Test
     public void testAddRating() {
-        Rating newRating = new Rating("newratingid", "userid", "docid", 5, "Great!");
+        Rating newRating = new Rating("", "userid", "docid", 5, "Great!");
         RatingDAO.addRating(newRating);
-        Rating rating = RatingDAO.getRatingFromId("newratingid");
+        Rating rating = RatingDAO.getRatingFromId(newRating.getId());
         assertNotNull(rating);
         assertEquals("Great!", rating.getComment());
     }
 
     @Test
     public void testRemoveRating() {
-        Rating ratingToRemove = new Rating("newratingid2", "user", "doc", 4, "Good");
+        Rating ratingToRemove = new Rating("", "user", "doc", 4, "Good");
         RatingDAO.addRating(ratingToRemove);
-        RatingDAO.removeRating("newratingid2");
-        Rating removedRating = RatingDAO.getRatingFromId("newratingid2");
+        RatingDAO.removeRating(ratingToRemove.getId());
+        Rating removedRating = RatingDAO.getRatingFromId(ratingToRemove.getId());
         assertNull(removedRating);
     }
 }

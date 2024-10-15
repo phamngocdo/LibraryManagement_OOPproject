@@ -22,7 +22,7 @@ public class Document {
     private String imageUrl;
 
     public Document(String id, String title, String isbn, int quantity, int remaining,
-                    int ratingCount, double averageScore, String imageUrl) {
+                          int ratingCount, double averageScore, String imageUrl) {
         this.id = id;
         this.title = title;
         this.isbn = isbn;
@@ -52,13 +52,9 @@ public class Document {
         return title;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
+    public String getIsbn() { return isbn; }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
+    public void setIsbn(String isbn) { this.isbn = isbn; }
 
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
@@ -108,8 +104,18 @@ public class Document {
         return categories;
     }
 
+    public String getCategoriesToString() {
+        //Trả về dưới dạng chuỗi cách nhau bởi dấu phẩy như: Kinh dị, Hài hước, Kỹ thuật
+        return "";
+    }
+
     public ArrayList<Author> getAuthors() {
         return authors;
+    }
+
+    public String getAuthorsToString() {
+        //Tương tự
+        return "";
     }
 
     public ImageView loadImage() {

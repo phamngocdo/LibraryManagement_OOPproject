@@ -10,14 +10,13 @@ import java.util.ArrayList;
 
 public class Admin  extends User{
     public Admin(String id, String username, String password, String firstName,
-                String lastName, LocalDate birthday, String email, String phoneNumber){
+                String lastName, String birthday, String email, String phoneNumber){
         super(id, username, password, firstName, lastName, birthday, email, phoneNumber);
     }
 
     @Override
-    public boolean signIn(String username, String password) {
-        // kiểm tra role = admin không//
-        return super.signIn(username, password); //Thêm && role = "admin"//
+    public Admin signIn(String username, String password) {
+        return UserDAO.getAdminFromSignIn(username, password);
     }
 
     public void addDocument(Document doc) {
