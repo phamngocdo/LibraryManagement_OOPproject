@@ -5,6 +5,8 @@ module app {
     requires java.sql;
     requires java.desktop;
     requires org.json;
+    requires com.google.zxing;
+    requires com.google.zxing.javase;
 
     opens app.run to javafx.fxml;
     opens app.controller to javafx.fxml;
