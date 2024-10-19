@@ -1,32 +1,31 @@
-.main-pane {
-    -fx-background-color:  black;
-    -fx-border-radius:10;
-    -fx-background-radius:10;
+.root {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
 }
 
 .function-pane {
-    -fx-background-color:white;
-    -fx-background-radius:10;
-    -fx-border-radius:10;
+    -fx-background-color:#f0f1f4;
 }
 
 .controll-pane{
-    -fx-background-color:black;
-    -fx-background-radius:10;
-    -fx-border-radius:10;
+    -fx-background-color:white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.0, 1, 0);
 }
 
 .controll-button{
-    -fx-background-color: black;
-    -fx-text-fill:white;
+    -fx-background-color: white;
+    -fx-text-fill:black;
     -fx-font-family:"Arial";
     -fx-font-size:14px;
     -fx-font-weight:bold;
     -fx-cursor:HAND;
+    -fx-border-radius:5;
+    -fx-background-radius: 5;
 }
 
 .controll-button:hover{
-    -fx-border-color:white;
-    -fx-border-width:0px 0px 0px 3px;
-    -fx-background-color:rgb(49, 49, 49);
+    -fx-background-color:#f0f1f4;
 }

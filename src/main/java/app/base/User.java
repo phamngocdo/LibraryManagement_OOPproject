@@ -1,20 +1,19 @@
 package app.base;
 
-import java.time.LocalDate;
+import app.database.UserDAO;
 
 public class User {
-    private String id;
-    private String username;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String birthday;
-    private String email;
-    private String phoneNumber;
+    protected String id;
+    protected String username;
+    protected String password;
+    protected String firstName;
+    protected String lastName;
+    protected String birthday;
+    protected String email;
+    protected String phoneNumber;
 
     public User(String id, String username, String password, String firstName,
                 String lastName, String birthday, String email, String phoneNumber){
-        // Điền các this. vào đây
         this.id = id;
         this.username = username;
         this.password = password;
@@ -89,7 +88,7 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public User signIn(String username, String password) {
-        return null;
+    public static User login( String username, String password) {
+        return UserDAO.getUserFromLogin(password, username);
     }
 }

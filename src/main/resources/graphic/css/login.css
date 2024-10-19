@@ -2,7 +2,7 @@
     -fx-border-radius:20px;
     -fx-background-radius: 20px;
     -fx-background-color: white;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0.0, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 4, 0.0, 0, 1);
 }
 
 .login-text-field {
@@ -74,4 +74,14 @@
 .choose-user:hover {
     -fx-background-color: #e5e7ef;
     -fx-text-fill:black;
+}
+
+.er-result-label{
+    -fx-font-family: Arial;
+    -fx-text-fill:red;
+}
+
+.suc-result-label {
+    -fx-font-family: Arial;
+    -fx-text-fill: green;
 }

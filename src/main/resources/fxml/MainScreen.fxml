@@ -1,40 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="633.0" prefWidth="1024.0" styleClass="main-pane" stylesheets="@../graphic/css/main_screen.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="633.0" prefWidth="1024.0" stylesheets="@../graphic/css/main_screen.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="633.0" prefWidth="168.0" styleClass="controll-pane">
+      <Pane prefHeight="633.0" prefWidth="197.0" styleClass="controll-pane">
          <children>
-            <ImageView fitHeight="38.0" fitWidth="33.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <Label layoutX="56.0" layoutY="33.0" text="LibZone">
+               <font>
+                  <Font name="Arial Bold" size="22.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="38.0" fitWidth="43.0" layoutX="14.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../graphic/images/logo.png" />
                </image>
             </ImageView>
-            <Label layoutX="55.0" layoutY="19.0" text="LibZone" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold Italic" size="22.0" />
-               </font>
-            </Label>
-            <Button alignment="BASELINE_LEFT" layoutY="152.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="168.0" styleClass="controll-button" text="Sách đã mượn">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../graphic/images/bookshelf.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </Button>
-            <Button alignment="BASELINE_LEFT" layoutY="84.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="168.0" styleClass="controll-button" text="Trang chủ">
+            <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="13.0" layoutY="96.0" prefHeight="30.0" prefWidth="172.0" ripplerFill="#c6c5c5" styleClass="controll-button" text="Trang chủ">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -42,23 +29,35 @@
                      </image>
                   </ImageView>
                </graphic>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </Button>
-            <Button alignment="BASELINE_LEFT" layoutY="568.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="168.0" styleClass="controll-button" text="Đăng xuất">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="13.0" layoutY="138.0" prefHeight="30.0" prefWidth="172.0" ripplerFill="#c6c5c5" styleClass="controll-button" text="Sách đã mượn">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../graphic/images/logout.png" />
+                        <Image url="@../graphic/images/bookshelf.png" />
                      </image>
                   </ImageView>
                </graphic>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </Button>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="13.0" layoutY="577.0" prefHeight="30.0" prefWidth="172.0" ripplerFill="#c6c5c5" styleClass="controll-button" text="Đăng xuất">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../graphic/images/exit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
          </children></Pane>
-      <Pane layoutX="170.0" layoutY="8.0" prefHeight="617.0" prefWidth="845.0" styleClass="function-pane" />
+      <Pane layoutX="198.0" prefHeight="633.0" prefWidth="827.0" styleClass="function-pane" />
    </children>
 </Pane>

@@ -2,6 +2,7 @@ package app.database;
 
 import app.base.Admin;
 import app.base.Member;
+import app.base.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,38 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserDAO {
+
+    public static User getUserFromLogin(String username, String password) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT * FROM users ");
+        query.append("WHERE username=? AND password=?");
+        try {
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                boolean isAdmin = resultSet.getString("role").equals("admin");
+
+                String id = resultSet.getString("user_id");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String birthday = resultSet.getString("birthday");
+                String email = resultSet.getString("email");
+                String phoneNumber = resultSet.getString("phoneNumber");
+
+                if (isAdmin) {
+                    return new Admin(id, username, password, firstName, lastName, birthday, email, phoneNumber);
+                }
+
+                return new Member(id, username, password, firstName, lastName, birthday, email, phoneNumber);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 
     public static Admin getAdminFromSignIn(String username, String password) {
         StringBuilder query = new StringBuilder();

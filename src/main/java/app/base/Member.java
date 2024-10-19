@@ -19,17 +19,12 @@ public class Member extends  User{
         return receipts;
     }
 
-    @Override
-    public Member signIn(String username, String password) {
-        return UserDAO.getMemberFromSignIn(username, password);
-    }
-
-    public String signUp(Member member) {
-        if (UserDAO.checkUsernameExist(member.getUsername())) {
-            return "Username is already taken";
+    public String register() {
+        if (UserDAO.checkUsernameExist(username)) {
+            return "Tên đăng nhập đã được sử dụng!";
         }
-        UserDAO.addMember(member);
-        return "Registered successfully";
+        UserDAO.addMember(this);
+        return "Đăng nhập thành công";
     }
 
     public void borrowDocument(Document doc) {

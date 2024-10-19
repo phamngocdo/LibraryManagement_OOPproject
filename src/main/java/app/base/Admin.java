@@ -14,11 +14,6 @@ public class Admin  extends User{
         super(id, username, password, firstName, lastName, birthday, email, phoneNumber);
     }
 
-    @Override
-    public Admin signIn(String username, String password) {
-        return UserDAO.getAdminFromSignIn(username, password);
-    }
-
     public void addDocument(Document doc) {
         DocumentDAO.addDocument(doc);
     }
