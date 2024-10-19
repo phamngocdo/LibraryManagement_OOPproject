@@ -27,7 +27,7 @@ public class DatabaseManagement {
 
     public static String createRandomIdInTable(String table, String idColumn) {
         Random random = new Random();
-        String character = "1234567890QWERTYUIOPASDFGHJKLZXCVBNM";
+        String character = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
         StringBuilder result;
 
         while (true) {
