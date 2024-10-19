@@ -29,41 +29,13 @@ public class UserDAO {
                 String lastName = resultSet.getString("last_name");
                 String birthday = resultSet.getString("birthday");
                 String email = resultSet.getString("email");
-                String phoneNumber = resultSet.getString("phoneNumber");
+                String phoneNumber = resultSet.getString("phone_number");
 
                 if (isAdmin) {
                     return new Admin(id, username, password, firstName, lastName, birthday, email, phoneNumber);
                 }
 
                 return new Member(id, username, password, firstName, lastName, birthday, email, phoneNumber);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    public static Admin getAdminFromSignIn(String username, String password) {
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM users ");
-        query.append("WHERE username=? AND password=? AND role='admin'");
-        try {
-            PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return new Admin(
-                        resultSet.getString("user_id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getString("birthday"),
-                        resultSet.getString("email"),
-                        resultSet.getString("phone_number")
-                );
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -99,34 +71,6 @@ public class UserDAO {
         return null;
     }
 
-    // Get Member by username and password
-    public static Member getMemberFromSignIn(String username, String password) {
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM users ");
-        query.append("WHERE username=? AND password=? AND role='member'");
-        try {
-            PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return new Member(
-                        resultSet.getString("user_id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getString("birthday"),
-                        resultSet.getString("email"),
-                        resultSet.getString("phone_number")
-                );
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
 
     // Retrieve all members
     public static ArrayList<Member> getAllMember() {
