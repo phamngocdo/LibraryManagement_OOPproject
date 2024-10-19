@@ -106,7 +106,14 @@ public class Document {
 
     public String getCategoriesToString() {
         //Trả về dưới dạng chuỗi cách nhau bởi dấu phẩy như: Kinh dị, Hài hước, Kỹ thuật
-        return "";
+        StringBuilder categoriesString = new StringBuilder();
+        for (int i = 0; i < categories.size(); i++) {
+            categoriesString.append(categories.get(i).getCategory());
+            if (i < categories.size() - 1) {
+                categoriesString.append(", ");
+            }
+        }
+        return categoriesString.toString();
     }
 
     public ArrayList<Author> getAuthors() {
@@ -114,8 +121,14 @@ public class Document {
     }
 
     public String getAuthorsToString() {
-        //Tương tự
-        return "";
+        StringBuilder authorsString = new StringBuilder();
+        for (int i = 0; i < authors.size(); i++) {
+            authorsString.append(authors.get(i).getName());
+            if (i < authors.size() - 1) {
+                authorsString.append(", ");
+            }
+        }
+        return authorsString.toString();
     }
 
     public ImageView loadImage() {
