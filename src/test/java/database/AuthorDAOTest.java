@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AuthorDAOTest {
 
-    private Author testAuthor;
-
     @BeforeEach
     void setUp() {
         DatabaseManagement.setConnection();
@@ -30,7 +28,7 @@ public class AuthorDAOTest {
 
     @Test
     void testCheckAuthorExist() {
-        testAuthor = new Author(null, "Test Author");
+        Author testAuthor = new Author(null, "Test Author");
         AuthorDAO.addAuthor(testAuthor);
         // Kiểm tra xem tác giả đã tồn tại
         assertTrue(AuthorDAO.checkAuthorExist(testAuthor.getName()));
@@ -48,7 +46,7 @@ public class AuthorDAOTest {
         assertFalse(authors.isEmpty()); // Kiểm tra danh sách không rỗng
 
         // Kiểm tra xem có ít nhất một tác giả nào đó
-        Author firstAuthor = authors.get(0);
+        Author firstAuthor = authors.getFirst();
         assertNotNull(firstAuthor.getId());
         assertNotNull(firstAuthor.getName());
 

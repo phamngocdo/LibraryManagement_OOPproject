@@ -42,12 +42,13 @@ public class CategoryDAOTest {
 
     @Test
     void testAddCategory() {
-        // Thêm thể loại mới vào cơ sở dữ liệu
-        Category newCategory = new Category("", "New Category");
+        // Thêm thể loại mới vào cơ sở dữ liệu, nếu chạy test thì đổi tên khác để test
+        Category newCategory = new Category(null, "Newi Category");
+
         CategoryDAO.addCategory(newCategory);
 
         // Kiểm tra thể loại đã được thêm thành công
-        boolean categoryExists = CategoryDAO.checkCategoryExist("New Category");
+        boolean categoryExists = CategoryDAO.checkCategoryExist("Newi Category");
         assertTrue(categoryExists);
     }
 }

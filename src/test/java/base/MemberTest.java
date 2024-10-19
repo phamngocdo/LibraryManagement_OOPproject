@@ -29,7 +29,7 @@ public class MemberTest {
     void testBorrowDocument() {
         int initialRemaining = document.getRemaining(); // Số lượng document còn lại trước khi mượn.
         member.borrowDocument(document);
-        Receipt receipt = member.getReceipts().get(0);
+        Receipt receipt = member.getReceipts().getFirst();
         assertEquals(initialRemaining - 1, document.getRemaining());
         assertEquals("not returned", receipt.getStatus());
         assertEquals(LocalDate.now().toString(), receipt.getBorrowingDate());
@@ -40,9 +40,10 @@ public class MemberTest {
     void testReturnDocument() {
         int initialRemaining = document.getRemaining();
         member.borrowDocument(document);
-        Receipt receipt = member.getReceipts().get(0);
+        Receipt receipt = member.getReceipts().getFirst();
         member.returnDocument(receipt);
         Document updatedDocument = DocumentDAO.getDocFromId(document.getId());
+        assert updatedDocument != null;
         assertEquals(initialRemaining, updatedDocument.getRemaining());
         assertEquals("returned", receipt.getStatus());
     }
@@ -50,9 +51,21 @@ public class MemberTest {
     @Test
     void testRateDocument() {
         int initialRatingCount = document.getRatingCount();
+        double initialAverageScore = document.getAverageScore();
+
         Rating rating = new Rating("rating1", member.getId(), document.getId(), 5, "Great Document!");
+
         member.rateDocument(rating);
+
         Document updatedDocument = DocumentDAO.getDocFromId(document.getId());
+
+        assert updatedDocument != null;
         assertEquals(initialRatingCount + 1, updatedDocument.getRatingCount());
+
+        double expectedAverageScore = (initialRatingCount * initialAverageScore + rating.getRatingScore())
+                / (initialRatingCount + 1);
+
+        assertEquals(expectedAverageScore, updatedDocument.getAverageScore(), 0.001);
     }
+
 }
