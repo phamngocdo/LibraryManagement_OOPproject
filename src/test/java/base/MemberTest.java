@@ -21,7 +21,15 @@ public class MemberTest {
     void setUp() {
         DatabaseManagement.setConnection();
 
-        member = new Member("1", "user1", "pass1", "First", "Last", "1990-01-01", "email@example.com", "123456789");
+        member = new Member(
+                "",
+                "user1",
+                "pass1",
+                "First",
+                "Last",
+                "01-01-1992",
+                "email@example.com",
+                "123456789");
         document = DocumentDAO.getDocFromId("SWCPZGEACAAJ");
     }
 
@@ -53,7 +61,12 @@ public class MemberTest {
         int initialRatingCount = document.getRatingCount();
         double initialAverageScore = document.getAverageScore();
 
-        Rating rating = new Rating("rating1", member.getId(), document.getId(), 5, "Great Document!");
+        Rating rating = new Rating(
+                "rating1",
+                member.getId(),
+                document.getId(),
+                5,
+                "Great Document!");
 
         member.rateDocument(rating);
 

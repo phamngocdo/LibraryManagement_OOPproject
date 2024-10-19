@@ -3,6 +3,7 @@ package app.base;
 import app.database.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Member extends  User{
@@ -33,7 +34,18 @@ public class Member extends  User{
         LocalDate borrowDate = LocalDate.now();
         LocalDate returnDate = borrowDate.plusWeeks(2);
 
-        Receipt receipt = new Receipt(receiptId, this.getId(), doc.getId(), borrowDate.toString(), returnDate.toString(), "not returned");
+        // Định dạng ngày thành DD/MM/YYYY
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedBorrowDate = borrowDate.format(formatter);
+        String formattedReturnDate = returnDate.format(formatter);
+
+        Receipt receipt = new Receipt(
+                receiptId,
+                getId(),
+                doc.getId(),
+                formattedBorrowDate,   // Sử dụng ngày đã định dạng
+                formattedReturnDate,   // Sử dụng ngày đã định dạng
+                "not returned");
 
         // Thêm receipt vào danh sách của member
         receipts.add(receipt);
@@ -43,10 +55,10 @@ public class Member extends  User{
 
         // Cập nhật vào cơ sở dữ liệu
         ReceiptDAO.addReceipt(receipt); // Thêm receipt vào DB
-        DocumentDAO.updateDocument(doc);  // Cập nhật tài liệu
     }
 
-    public void returnDocument(Receipt receipt) {
+
+        public void returnDocument(Receipt receipt) {
         // Cập nhật trạng thái của receipt
         receipt.setStatus("returned");
 
