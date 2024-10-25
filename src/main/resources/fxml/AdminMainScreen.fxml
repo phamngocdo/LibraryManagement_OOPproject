@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1126.0" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.AdminMainScreen">
+    <Pane prefHeight="650.0" prefWidth="180.0" styleClass="controll-pane">
+        <Label layoutX="56.0" layoutY="33.0" text="LibZone">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="38.0" fitWidth="43.0" layoutX="14.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../graphic/images/logo.png" />
+        </ImageView>
+        <JFXButton fx:id="logoutButton" alignment="BASELINE_LEFT" focusTraversable="false" graphicTextGap="15.0" layoutX="9.0" layoutY="576.0" onAction="#onLogout" prefHeight="40.0" prefWidth="162.0" ripplerFill="#c6c5c5" styleClass="controll-button" text="Đăng xuất">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../graphic/images/sign-out.png" />
+                </ImageView>
+            </graphic>
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXButton>
+        <VBox alignment="TOP_CENTER" layoutY="92.0" prefHeight="200.0" prefWidth="180.0" spacing="20.0">
+            <JFXButton fx:id="homeButton" alignment="BASELINE_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#onHome" prefHeight="40.0" prefWidth="162.0" ripplerFill="#c6c5c5" styleClass="controll-button" text="Trang chủ">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../graphic/images/home.png" />
+                    </ImageView>
+                </graphic>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </JFXButton>
+            <JFXButton fx:id="docEditButton" alignment="BASELINE_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#onDocEdit" prefHeight="40.0" prefWidth="162.0" ripplerFill="#c6c5c5" styleClass="controll-button" text="Sửa đổi tài liệu">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../graphic/images/edit-doc.png" />
+                    </ImageView>
+                </graphic>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </JFXButton>
+            <JFXButton fx:id="membersSearchButton" alignment="BASELINE_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#onMembersSearch" prefHeight="40.0" prefWidth="162.0" ripplerFill="#c6c5c5" styleClass="controll-button" text="Tra thành viên">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../graphic/images/members.png" />
+                    </ImageView>
+                </graphic>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </JFXButton>
+            <JFXButton fx:id="receiptsSearchButton" alignment="BASELINE_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#onReceiptsSearch" prefHeight="40.0" prefWidth="168.0" ripplerFill="#c6c5c5" styleClass="controll-button" text="Tra phiếu mượn">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../graphic/images/receipts.png" />
+                    </ImageView>
+                </graphic>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </JFXButton>
+        </VBox>
+    </Pane>
+    <Pane fx:id="functionPane" layoutX="181.0" prefHeight="650.0" prefWidth="945.0" styleClass="function-pane" />
+</Pane>

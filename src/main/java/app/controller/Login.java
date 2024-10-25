@@ -1,12 +1,18 @@
 package app.controller;
 
+import app.base.Admin;
 import app.base.Member;
 import app.base.User;
 import app.run.App;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class Login {
 
@@ -55,7 +61,7 @@ public class Login {
     private Label registerResult;
 
     @FXML
-    private Hyperlink memberLoginLink;
+    private Hyperlink loginLink;
 
     @FXML
     private void initialize() {
@@ -82,7 +88,7 @@ public class Login {
     }
 
     @FXML
-    private void login() {
+    private void onLoginButton() {
         String username = usernameLoginTextField.getText();
         String password;
         if (passwordDisplayLogin.isSelected()) {
@@ -98,11 +104,14 @@ public class Login {
 
         if ((App.currentUser = User.login(usernameLoginTextField.getText(), password)) == null) {
             loginResult.setText("Sai tên đăng nhập hoặc mật khẩu!");
+            return;
         }
+
+        goToMainScreen();
     }
 
     @FXML
-    private void register() {
+    private void onRegisterButton() {
         String username = usernameRegisterTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
@@ -147,7 +156,16 @@ public class Login {
         }
     }
 
-    @FXML
+    @FXML void onLoginLink() {
+        loginPane.setVisible(true);
+        registerPane.setVisible(false);
+    }
+
+    @FXML void onMemberRegisterLink() {
+        loginPane.setVisible(false);
+        registerPane.setVisible(true);
+    }
+
     private void setDisplayPasswordLogin(boolean isSelected) {
         if (isSelected) {
             notHiddenPasswordLoginField.setText(hiddenPasswordLoginField.getText());
@@ -180,13 +198,24 @@ public class Login {
         }
     }
 
-    @FXML void switchLoginPane() {
-        loginPane.setVisible(true);
-        registerPane.setVisible(false);
-    }
+    private void goToMainScreen() {
+        Pane root = App.getRoot();
+        Parent page;
+        URL mainScreenPath = null;
+        if (App.currentUser instanceof Admin) {
+            mainScreenPath = getClass().getResource("/fxml/AdminMainScreen.fxml");
+        }
+        else if (App.currentUser instanceof Member) {
+            mainScreenPath = getClass().getResource("/fxml/MemberMainScreen.fxml");
+        }
 
-    @FXML void switchRegisterPane() {
-        loginPane.setVisible(false);
-        registerPane.setVisible(true);
+        try {
+            assert mainScreenPath != null;
+            page = FXMLLoader.load(mainScreenPath);
+            root.getChildren().clear();
+            root.getChildren().add(page);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

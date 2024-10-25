@@ -1,6 +1,5 @@
 package service;
 
-import app.service.ImageFromAPI;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;

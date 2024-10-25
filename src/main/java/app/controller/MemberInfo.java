@@ -1,4 +1,4 @@
 package app.controller;
 
-public class MainScreen {
+public class MemberInfo {
 }

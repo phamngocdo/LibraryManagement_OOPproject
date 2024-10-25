@@ -1,7 +1,5 @@
 package app.base;
 
-import java.time.LocalDate;
-
 public class Rating {
     private String id;
     private final String userId;

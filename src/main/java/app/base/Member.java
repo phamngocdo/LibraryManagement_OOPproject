@@ -57,8 +57,7 @@ public class Member extends  User{
         ReceiptDAO.addReceipt(receipt); // Thêm receipt vào DB
     }
 
-
-        public void returnDocument(Receipt receipt) {
+    public void returnDocument(Receipt receipt) {
         // Cập nhật trạng thái của receipt
         receipt.setStatus("returned");
 
@@ -75,6 +74,11 @@ public class Member extends  User{
         }
     }
 
+    public void returnDocument(Document doc) {
+        Receipt receipt = ReceiptDAO.getReceiptFromDocAndMember(doc.getId(), getId());
+        assert receipt != null;
+        returnDocument(receipt);
+    }
 
     public void rateDocument(Rating rating) {
         Document doc = DocumentDAO.getDocFromId(rating.getDocId());

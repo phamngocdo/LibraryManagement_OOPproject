@@ -12,198 +12,170 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="633.0"
-      prefWidth="1024.0" style="-fx-background-color: #f0f0f0;" stylesheets="@../graphic/css/style.css"
-      xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.Login">
-   <Pane fx:id="registerPane" focusTraversable="true" layoutX="336.0" layoutY="27.0" prefHeight="580.0"
-         prefWidth="353.0" styleClass="login-pane">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1126.0" style="-fx-background-color: #f0f0f0;" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.Login">
+   <Pane fx:id="registerPane" focusTraversable="true" layoutX="387.0" layoutY="35.0" prefHeight="580.0" prefWidth="353.0" styleClass="login-pane" visible="false">
       <Label layoutX="101.0" layoutY="14.0" text="Đăng kí thành viên">
          <font>
-            <Font name="Arial Bold" size="17.0"/>
+            <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameRegisterTextField" focusTraversable="false" layoutX="15.0" layoutY="140.0"
-                 prefHeight="25.0" prefWidth="324.0" styleClass="login-text-field">
+      <TextField fx:id="usernameRegisterTextField" focusTraversable="false" layoutX="15.0" layoutY="140.0" prefHeight="25.0" prefWidth="324.0" styleClass="login-text-field">
          <font>
-            <Font size="15.0"/>
+            <Font size="15.0" />
          </font>
       </TextField>
-      <TextField fx:id="notHiddenPasswordRegisterField" focusTraversable="false" layoutX="15.0" layoutY="339.0"
-                 prefHeight="25.0" prefWidth="324.0" styleClass="login-text-field">
+      <TextField fx:id="notHiddenPasswordRegisterField" focusTraversable="false" layoutX="15.0" layoutY="339.0" prefHeight="25.0" prefWidth="324.0" styleClass="login-text-field">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </TextField>
       <Label layoutX="15.0" layoutY="321.0" text="Mật khẩu">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" layoutX="82.0" layoutY="553.0" nodeOrientation="RIGHT_TO_LEFT"
-             text="Đã có tài khoản?">
+      <Label alignment="CENTER_RIGHT" layoutX="82.0" layoutY="553.0" nodeOrientation="RIGHT_TO_LEFT" text="Đã có tài khoản?">
          <graphic>
-            <Hyperlink fx:id="memberLoginLink" contentDisplay="RIGHT" focusTraversable="false"
-                       onAction="#switchLoginPane" text="Đăng nhập ngay"/>
+            <Hyperlink fx:id="loginLink" contentDisplay="RIGHT" focusTraversable="false" onAction="#onLoginLink" text="Đăng nhập ngay" />
          </graphic>
          <font>
-            <Font name="Arial" size="12.0"/>
+            <Font name="Arial" size="12.0" />
          </font>
       </Label>
       <Label layoutX="3.0" layoutY="60.0" text="Họ">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
          <padding>
-            <Insets left="16.0"/>
+            <Insets left="16.0" />
          </padding>
       </Label>
       <Label layoutX="188.0" layoutY="60.0" text="Tên">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="firstNameTextField" focusTraversable="false" layoutX="17.0" layoutY="83.0" prefWidth="147.0"
-                 styleClass="login-text-field">
+      <TextField fx:id="firstNameTextField" focusTraversable="false" layoutX="17.0" layoutY="83.0" prefWidth="147.0" styleClass="login-text-field">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="lastNameTextField" focusTraversable="false" layoutX="188.0" layoutY="82.0" prefHeight="30.0"
-                 prefWidth="148.0" styleClass="login-text-field">
+      <TextField fx:id="lastNameTextField" focusTraversable="false" layoutX="188.0" layoutY="82.0" prefHeight="30.0" prefWidth="148.0" styleClass="login-text-field">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="notHiddenConfirmPasswordField" focusTraversable="false" layoutX="15.0" layoutY="405.0"
-                 prefHeight="25.0" prefWidth="324.0" styleClass="login-text-field">
+      <TextField fx:id="notHiddenConfirmPasswordField" focusTraversable="false" layoutX="15.0" layoutY="405.0" prefHeight="25.0" prefWidth="324.0" styleClass="login-text-field">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </TextField>
       <Label layoutX="16.0" layoutY="384.0" text="Nhập lại mật khẩu">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="emailTextField" focusTraversable="false" layoutX="15.0" layoutY="202.0" prefHeight="25.0"
-                 prefWidth="324.0" styleClass="login-text-field">
+      <TextField fx:id="emailTextField" focusTraversable="false" layoutX="15.0" layoutY="202.0" prefHeight="25.0" prefWidth="324.0" styleClass="login-text-field">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </TextField>
       <Label layoutX="15.0" layoutY="180.0" text="Email">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="phoneNumberTextField" focusTraversable="false" layoutX="17.0" layoutY="272.0"
-                 prefHeight="30.0" prefWidth="147.0" styleClass="login-text-field">
+      <TextField fx:id="phoneNumberTextField" focusTraversable="false" layoutX="17.0" layoutY="272.0" prefHeight="30.0" prefWidth="147.0" styleClass="login-text-field">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </TextField>
       <Label layoutX="19.0" layoutY="251.0" text="Số điện thoại">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
       <Label layoutX="188.0" layoutY="252.0" text="Ngày sinh">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="birthdayTextField" focusTraversable="false" layoutX="188.0" layoutY="272.0" prefHeight="30.0"
-                 prefWidth="148.0" promptText="DD/MM/YYYY" styleClass="login-text-field">
+      <TextField fx:id="birthdayTextField" focusTraversable="false" layoutX="188.0" layoutY="272.0" prefHeight="30.0" prefWidth="148.0" promptText="DD/MM/YYYY" styleClass="login-text-field">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </TextField>
-      <RadioButton fx:id="passwordDisplayRegister" layoutX="16.0" layoutY="449.0" mnemonicParsing="false"
-                   text="Hiển thị mật khẩu">
+      <RadioButton fx:id="passwordDisplayRegister" layoutX="16.0" layoutY="449.0" mnemonicParsing="false" text="Hiển thị mật khẩu">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </RadioButton>
       <Label layoutX="13.0" layoutY="121.0" text="Tên đăng nhập">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <JFXButton fx:id="registerButton" layoutX="15.0" layoutY="506.0" onAction="#register" prefHeight="37.0"
-                 prefWidth="324.0" styleClass="login-button" text="Đăng ký"/>
-      <Label fx:id="registerResult" alignment="CENTER" layoutX="19.0" layoutY="482.0" prefHeight="17.0"
-             prefWidth="324.0" text="Label">
+      <JFXButton fx:id="registerButton" layoutX="15.0" layoutY="506.0" onAction="#onRegisterButton" prefHeight="37.0" prefWidth="324.0" styleClass="login-button" text="Đăng ký" />
+      <Label fx:id="registerResult" alignment="CENTER" layoutX="19.0" layoutY="482.0" prefHeight="17.0" prefWidth="324.0" text="Label">
          <font>
-            <Font name="Arial" size="12.0"/>
+            <Font name="Arial" size="12.0" />
          </font>
       </Label>
-      <PasswordField fx:id="hiddenPasswordRegisterField" layoutX="15.0" layoutY="339.0" prefHeight="28.0"
-                     prefWidth="324.0" styleClass="login-text-field"/>
-      <PasswordField fx:id="hiddenConfirmPasswordField" layoutX="15.0" layoutY="405.0" prefHeight="28.0"
-                     prefWidth="324.0" styleClass="login-text-field"/>
+      <PasswordField fx:id="hiddenPasswordRegisterField" layoutX="15.0" layoutY="339.0" prefHeight="28.0" prefWidth="324.0" styleClass="login-text-field" />
+      <PasswordField fx:id="hiddenConfirmPasswordField" layoutX="15.0" layoutY="405.0" prefHeight="28.0" prefWidth="324.0" styleClass="login-text-field" />
    </Pane>
-   <Pane fx:id="loginPane" focusTraversable="true" layoutX="336.0" layoutY="27.0" prefHeight="580.0" prefWidth="353.0"
-         styleClass="login-pane">
+   <Pane fx:id="loginPane" focusTraversable="true" layoutX="387.0" layoutY="35.0" prefHeight="580.0" prefWidth="353.0" styleClass="login-pane">
       <Label layoutX="133.0" layoutY="129.0" text="Đăng nhập">
          <font>
-            <Font name="Arial Bold" size="17.0"/>
+            <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameLoginTextField" focusTraversable="false" layoutX="15.0" layoutY="216.0"
-                 prefHeight="25.0" prefWidth="324.0" styleClass="login-text-field">
+      <TextField fx:id="usernameLoginTextField" focusTraversable="false" layoutX="15.0" layoutY="216.0" prefHeight="25.0" prefWidth="324.0" styleClass="login-text-field">
          <font>
-            <Font size="15.0"/>
+            <Font size="15.0" />
          </font>
       </TextField>
-      <TextField fx:id="notHiddenPasswordLoginField" focusTraversable="false" layoutX="15.0" layoutY="288.0"
-                 prefHeight="25.0" prefWidth="324.0" styleClass="login-text-field" visible="false">
+      <TextField fx:id="notHiddenPasswordLoginField" focusTraversable="false" layoutX="15.0" layoutY="288.0" prefHeight="25.0" prefWidth="324.0" styleClass="login-text-field" visible="false">
          <font>
-            <Font size="15.0"/>
+            <Font size="15.0" />
          </font>
       </TextField>
       <Label layoutX="15.0" layoutY="190.0" text="Tên đăng nhập">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
       <Label layoutX="15.0" layoutY="265.0" text="Mật khẩu">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" layoutX="56.0" layoutY="452.0" nodeOrientation="RIGHT_TO_LEFT"
-             text="Chưa có tài khoản thành viên?">
+      <Label alignment="CENTER_RIGHT" layoutX="56.0" layoutY="452.0" nodeOrientation="RIGHT_TO_LEFT" text="Chưa có tài khoản thành viên?">
          <graphic>
-            <Hyperlink fx:id="memberRegisterLink" contentDisplay="RIGHT" onAction="#switchRegisterPane"
-                       text="Đăng ký ngay"/>
+            <Hyperlink fx:id="memberRegisterLink" contentDisplay="RIGHT" onAction="#onMemberRegisterLink" text="Đăng ký ngay" />
          </graphic>
          <font>
-            <Font name="Arial" size="12.0"/>
+            <Font name="Arial" size="12.0" />
          </font>
       </Label>
-      <RadioButton fx:id="passwordDisplayLogin" layoutX="18.0" layoutY="337.0" mnemonicParsing="false"
-                   prefHeight="23.0" prefWidth="136.0" text="Hiển thị mật khẩu">
+      <RadioButton fx:id="passwordDisplayLogin" layoutX="18.0" layoutY="337.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="136.0" text="Hiển thị mật khẩu">
          <font>
-            <Font size="10.0"/>
+            <Font size="10.0" />
          </font>
       </RadioButton>
-      <ImageView fitHeight="50.0" fitWidth="51.0" layoutX="102.0" layoutY="40.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="@../graphic/images/logo.png"/>
+      <ImageView fitHeight="50.0" fitWidth="51.0" layoutX="102.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../graphic/images/logo.png" />
       </ImageView>
       <Label layoutX="154.0" layoutY="49.0" text="LibZone">
          <font>
-            <Font name="Arial Bold Italic" size="26.0"/>
+            <Font name="Arial Bold Italic" size="26.0" />
          </font>
       </Label>
-      <PasswordField fx:id="hiddenPasswordLoginField" layoutX="14.0" layoutY="288.0" prefHeight="28.0"
-                     prefWidth="324.0" styleClass="login-text-field"/>
-      <JFXButton fx:id="loginButton" layoutX="14.0" layoutY="392.0" onAction="#login" prefHeight="37.0"
-                 prefWidth="324.0" styleClass="login-button" text="Đăng nhập"/>
-      <Label fx:id="loginResult" alignment="CENTER" layoutX="18.0" layoutY="368.0" prefHeight="17.0"
-             prefWidth="324.0" styleClass="er-result-label" textFill="RED">
+      <PasswordField fx:id="hiddenPasswordLoginField" layoutX="14.0" layoutY="288.0" prefHeight="28.0" prefWidth="324.0" styleClass="login-text-field" />
+      <JFXButton fx:id="loginButton" layoutX="14.0" layoutY="392.0" onAction="#onLoginButton" prefHeight="37.0" prefWidth="324.0" styleClass="login-button" text="Đăng nhập" />
+      <Label fx:id="loginResult" alignment="CENTER" layoutX="18.0" layoutY="368.0" prefHeight="17.0" prefWidth="324.0" styleClass="er-result-label" textFill="RED">
          <font>
-            <Font name="Arial" size="12.0"/>
+            <Font name="Arial" size="12.0" />
          </font>
       </Label>
    </Pane>

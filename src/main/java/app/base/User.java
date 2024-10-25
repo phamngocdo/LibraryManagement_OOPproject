@@ -1,6 +1,9 @@
 package app.base;
 
+import app.database.DocumentDAO;
 import app.database.UserDAO;
+
+import java.util.ArrayList;
 
 public class User {
     protected String id;
@@ -86,6 +89,10 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public ArrayList<Document> seeTopRatingDoc() {
+        return DocumentDAO.getBestRatingDocuments(5);
     }
 
     public static User login( String username, String password) {

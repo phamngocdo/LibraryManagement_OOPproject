@@ -1,0 +1,7 @@
+.rated-star{
+    -fx-image: url(graphic/images/rated-star.png);
+}
+
+.un-rated-star{
+    -fx-image: url(graphic/images/un-rate-star.png);
+}

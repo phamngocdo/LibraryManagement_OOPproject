@@ -9,7 +9,26 @@ import java.util.ArrayList;
 
 public class AuthorDAO {
 
-    // Lấy ra các tác giả của tác phẩm khi biết docId.
+    public static ArrayList<Author> getAllAuthors() {
+        ArrayList<Author> authors = new ArrayList<>();
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT * FROM authors");
+        try {
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                authors.add(new Author(
+                        resultSet.getString("author_id"),
+                        resultSet.getString("name")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return authors;
+    }
+
     public static ArrayList<Author> getAllAuthorFromDocId(String docId) {
         ArrayList<Author> authors = new ArrayList<>();
         StringBuilder query = new StringBuilder();
@@ -34,7 +53,6 @@ public class AuthorDAO {
         return authors;
     }
 
-    // Kiểm tra xem tác giả có tồn tại không
     public static boolean checkAuthorExist(String name) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT author_id FROM authors ");
@@ -51,7 +69,6 @@ public class AuthorDAO {
         }
     }
 
-    // Thêm tác giả
     public static void addAuthor(Author author) {
         author.setId(DatabaseManagement.createRandomIdInTable("authors", "author_id"));
         StringBuilder query = new StringBuilder();
