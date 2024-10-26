@@ -1,5 +1,8 @@
 package app.base;
 
+import javax.xml.transform.Result;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Receipt {
@@ -18,6 +21,15 @@ public class Receipt {
         this.borrowingDate = borrowingDate;
         this.returnDate = returnDate;
         this.status = status;
+    }
+
+    public Receipt(ResultSet resultSet) throws SQLException {
+        this.id = resultSet.getString("receipt_id");
+        this.userId = resultSet.getString("user_id");
+        this.docId = resultSet.getString("doc_id");
+        this.borrowingDate = resultSet.getString("borrowing_date");
+        this.returnDate = resultSet.getString("return_date");
+        this.status = resultSet.getString("status");
     }
 
     public void setId(String id) {

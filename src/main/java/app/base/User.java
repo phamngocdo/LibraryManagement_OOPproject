@@ -1,20 +1,24 @@
 package app.base;
 
-import java.time.LocalDate;
+import app.database.DocumentDAO;
+import app.database.UserDAO;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class User {
-    private String id;
-    private String username;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String birthday;
-    private String email;
-    private String phoneNumber;
+    protected String id;
+    protected String username;
+    protected String password;
+    protected String firstName;
+    protected String lastName;
+    protected String birthday;
+    protected String email;
+    protected String phoneNumber;
 
     public User(String id, String username, String password, String firstName,
                 String lastName, String birthday, String email, String phoneNumber){
-        // Điền các this. vào đây
         this.id = id;
         this.username = username;
         this.password = password;
@@ -23,6 +27,17 @@ public class User {
         this.birthday = birthday;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public User(ResultSet resultSets) throws SQLException {
+        this.id = resultSets.getString("user_id");
+        this.username = resultSets.getString("username");
+        this.password = resultSets.getString("password");
+        this.firstName = resultSets.getString("first_name");
+        this.lastName = resultSets.getString("last_name");
+        this.birthday = resultSets.getString("birthday");
+        this.email = resultSets.getString("email");
+        this.phoneNumber = resultSets.getString("phone_number");
     }
 
     public String getId() {
@@ -89,7 +104,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public User signIn(String username, String password) {
-        return null;
+    public ArrayList<Document> seeTopRatingDoc() {
+        return DocumentDAO.getBestRatingDocuments(5);
+    }
+
+    public static User login( String username, String password) {
+        return UserDAO.getUserFromLogin(password, username);
     }
 }

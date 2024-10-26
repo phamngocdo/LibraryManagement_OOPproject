@@ -21,7 +21,7 @@ public class UserDAOTest {
 
     @Test
     public void testGetAdminFromSignIn_Valid() {
-        Admin admin = UserDAO.getAdminFromSignIn("admin", "admin");
+        Admin admin = (Admin) UserDAO.getUserFromLogin("admin", "admin");
         assertNotNull(admin);//kiểm tra xem có null k nếu null testcase sai
         //kiểm tra username lấy đưược có bằng expected k
         assertEquals("admin", admin.getUsername());
@@ -29,13 +29,13 @@ public class UserDAOTest {
 
     @Test
     public void testGetAdminFromSignIn_Invalid() {
-        Admin admin = UserDAO.getAdminFromSignIn("admin", "wrongPassword");
+        Admin admin = (Admin) UserDAO.getUserFromLogin("admin", "wrongPassword");
         assertNull(admin);//null đúng
     }
 
     @Test
     public void testGetAdminFromSignIn_NonExistingAdmin() {
-        Admin admin = UserDAO.getAdminFromSignIn("non-admin", "admin");
+        Admin admin = (Admin) UserDAO.getUserFromLogin("non-admin", "admin");
         assertNull(admin);
     }
 
@@ -60,20 +60,20 @@ public class UserDAOTest {
 
     @Test
     public void testGetMemberFromSignIn_Valid() {
-        Member member = UserDAO.getMemberFromSignIn("member1", "member1");
+        Member member = (Member) UserDAO.getUserFromLogin("member1", "member1");
         assertNotNull(member);
         assertEquals("member1", member.getUsername());
     }
 
     @Test
     public void testGetMemberFromSignIn_Invalid() {
-        Member member = UserDAO.getMemberFromSignIn("member1", "wrongPassword");
+        Member member = (Member) UserDAO.getUserFromLogin("member1", "wrongPassword");
         assertNull(member);
     }
 
     @Test
     public void testGetMemberFromSignIn_NonExistingAdmin() {
-        Admin admin = UserDAO.getAdminFromSignIn("non-menber", "member1");
+        Admin admin = (Admin) UserDAO.getUserFromLogin("non-menber", "member1");
         assertNull(admin);
     }
 

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class DocumentDAO {
 
-    // Tìm kiếm tài lịu khi biết Id.
     public static Document getDocFromId(String docId) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM documents ");
@@ -21,16 +20,7 @@ public class DocumentDAO {
             preparedStatement.setString(1, docId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Document(
-                        resultSet.getString("document_id"),
-                        resultSet.getString("title"),
-                        resultSet.getString("isbn"),
-                        resultSet.getInt("quantity"),
-                        resultSet.getInt("remaining"),
-                        resultSet.getInt("ratings_count"),
-                        resultSet.getDouble("average_rating"),
-                        resultSet.getString("image_url")
-                );
+                return new Document(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -38,7 +28,6 @@ public class DocumentDAO {
         return null;
     }
 
-    // Lấy tất cả tài liệu.
     public static ArrayList<Document> getAllDoc() {
         ArrayList<Document> documents = new ArrayList<>();
         StringBuilder query = new StringBuilder();
@@ -48,16 +37,7 @@ public class DocumentDAO {
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                documents.add(new Document(
-                        resultSet.getString("document_id"),
-                        resultSet.getString("title"),
-                        resultSet.getString("isbn"),
-                        resultSet.getInt("quantity"),
-                        resultSet.getInt("remaining"),
-                        resultSet.getInt("ratings_count"),
-                        resultSet.getDouble("average_rating"),
-                        resultSet.getString("image_url")
-                ));
+                documents.add(new Document(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -65,7 +45,6 @@ public class DocumentDAO {
         return documents;
     }
 
-    // Lấy tất cả tài liệu cùng tác giả.
     public static ArrayList<Document> getAllDocumentFromAuthor(String authorName) {
         ArrayList<Document> documents = new ArrayList<>();
         StringBuilder query = new StringBuilder();
@@ -77,16 +56,7 @@ public class DocumentDAO {
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                documents.add(new Document(
-                        resultSet.getString("document_id"),
-                        resultSet.getString("title"),
-                        resultSet.getString("isbn"),
-                        resultSet.getInt("quantity"),
-                        resultSet.getInt("remaining"),
-                        resultSet.getInt("ratings_count"),
-                        resultSet.getDouble("average_rating"),
-                        resultSet.getString("image_url")
-                ));
+                documents.add(new Document(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -94,7 +64,6 @@ public class DocumentDAO {
         return documents;
     }
 
-    // Lấy ra các tài liệu cùng thể loai.
     public static ArrayList<Document> getAllDocumentFromCategory(String category) {
         ArrayList<Document> documents = new ArrayList<>();
         StringBuilder query = new StringBuilder();
@@ -106,16 +75,7 @@ public class DocumentDAO {
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                documents.add(new Document(
-                        resultSet.getString("document_id"),
-                        resultSet.getString("title"),
-                        resultSet.getString("isbn"),
-                        resultSet.getInt("quantity"),
-                        resultSet.getInt("remaining"),
-                        resultSet.getInt("ratings_count"),
-                        resultSet.getDouble("average_rating"),
-                        resultSet.getString("image_url")
-                ));
+                documents.add(new Document(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -123,27 +83,17 @@ public class DocumentDAO {
         return documents;
     }
 
-    // Lấy ra number tác phẩm có điểm đánh giá cao nhất.
     public static ArrayList<Document> getBestRatingDocuments(int number) {
         ArrayList<Document> documents = new ArrayList<>();
         StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM documents ORDER BY average_rating DESC LIMIT ?");
+        query.append("SELECT * FROM documents ORDER BY average_score DESC LIMIT ?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
             preparedStatement.setInt(1, number);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                documents.add(new Document(
-                        resultSet.getString("document_id"),
-                        resultSet.getString("title"),
-                        resultSet.getString("isbn"),
-                        resultSet.getInt("quantity"),
-                        resultSet.getInt("remaining"),
-                        resultSet.getInt("ratings_count"),
-                        resultSet.getDouble("average_rating"),
-                        resultSet.getString("image_url")
-                ));
+                documents.add(new Document(resultSet));
             }
         } catch(SQLException e) {
             throw new RuntimeException(e);
@@ -151,7 +101,6 @@ public class DocumentDAO {
         return documents;
     }
 
-    // Thêm tài liệu.
     public static void addDocument(Document doc) {
         if (doc.getId().isEmpty()) {
             doc.setId(DatabaseManagement.createRandomIdInTable("documents", "document_id"));
@@ -159,19 +108,23 @@ public class DocumentDAO {
         //Thêm tài liệu phải thêm cho bảng category và author
         StringBuilder docQuery = new StringBuilder();
         docQuery.append("INSERT INTO documents ");
-        docQuery.append("(document_id, title, isbn, quantity, remaining, ratings_count, average_rating, image_url) ");
-        docQuery.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        docQuery.append("(document_id, title, quantity, remaining, ratings_count, average_score, " +
+                "description, pageCount, publisher, published_date, image_url) ");
+        docQuery.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(docQuery.toString());
             preparedStatement.setString(1, doc.getId());
             preparedStatement.setString(2, doc.getTitle());
-            preparedStatement.setString(3, doc.getIsbn());
-            preparedStatement.setInt(4, doc.getQuantity());
-            preparedStatement.setInt(5, doc.getRemaining());
-            preparedStatement.setInt(6, doc.getRatingCount());
-            preparedStatement.setDouble(7, doc.getAverageScore());
-            preparedStatement.setString(8, doc.getImageUrl());
+            preparedStatement.setInt(3, doc.getQuantity());
+            preparedStatement.setInt(4, doc.getRemaining());
+            preparedStatement.setInt(5, doc.getRatingCount());
+            preparedStatement.setDouble(6, doc.getAverageScore());
+            preparedStatement.setString(7, doc.getDescription());
+            preparedStatement.setInt(8, doc.getPageCount());
+            preparedStatement.setString(9, doc.getPublisher());
+            preparedStatement.setString(10, doc.getPublishedDate());
+            preparedStatement.setString(11, doc.getImageUrl());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -197,7 +150,6 @@ public class DocumentDAO {
             }
         }
 
-        // Thêm vào bảng document_author
         for (Author author : doc.getAuthors()) {
             StringBuilder authorDocQuery = new StringBuilder();
             authorDocQuery.append("INSERT INTO document_author (document_id, author_id)");
@@ -218,7 +170,6 @@ public class DocumentDAO {
         }
     }
 
-    // Xóa tài liệu.
     public static void removeDocument(String docId) {
         StringBuilder docQuery = new StringBuilder();
         docQuery.append("DELETE FROM documents ");
@@ -269,19 +220,17 @@ public class DocumentDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error when removing document with id: " + docId, e);
+            throw new RuntimeException(e);
         }
     }
 
-
-    // Kiểm tra xem tài liệu có tồn tại dựa trên tiêu đề
-    public static boolean checkDocumentExist(String title) {
+    public static boolean checkDocumentExist(String id) {
         StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM documents WHERE title = ?");
+        query.append("SELECT * FROM documents WHERE document_id = ?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
-            preparedStatement.setString(1, title);
+            preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next(); // Nếu có kết quả thì tài liệu tồn tại
         } catch (SQLException e) {
@@ -289,7 +238,6 @@ public class DocumentDAO {
         }
     }
 
-    // Thêm tài liệu.
     public static void updateDocument(Document document) {
         //Xóa doc cũ tương ứng với id sau đó thêm doc mới
         removeDocument(document.getId());
