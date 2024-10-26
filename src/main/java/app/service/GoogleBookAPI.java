@@ -1,5 +1,6 @@
 package app.service;
 
+import app.base.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,11 +14,11 @@ public class GoogleBookAPI {
     private static final String GG_BOOK_API_URL = "https://www.googleapis.com/books/v1/volumes/";
     private static final String API_KEY = "AIzaSyApmeiKeZsc5BFbGFqAHJa3kAUybkoQVjY";
 
-    public static HashMap<String, String> getDocFromId(String id) throws Exception {
+    public static Document getDocFromId(String id) throws Exception {
         //Không sử dụng try, catch mà sử dụng throw để class khác xử lí
         //Sử dụng thư viện java.net và org.json
         //Truy xuất các thông tin sau và đưa vào hashmap:
-        //publisher, publishedDate, description, pageCount, language
+        //trả về đối tượng document
         //Chú ý đổi hết về String, nếu thông tin rỗng thì trả về N/A
 
         String apiUrl = GG_BOOK_API_URL + id + "?key=" + API_KEY;

@@ -19,10 +19,15 @@ public class Document {
     private int remaining;
     private int ratingCount;
     private double averageScore;
+    private int pageCount;
+    private String description;
+    private String publisher;
+    private String publisherDate;
     private String imageUrl;
 
     public Document(String id, String title, String isbn, int quantity, int remaining,
-                          int ratingCount, double averageScore, String imageUrl) {
+                    int ratingCount, double averageScore, int pageCount, String description,
+                    String publisher, String publisherDate, String imageUrl) {
         this.id = id;
         this.title = title;
         this.isbn = isbn;
@@ -30,6 +35,10 @@ public class Document {
         this.remaining = remaining;
         this.ratingCount = ratingCount;
         this.averageScore = averageScore;
+        this.pageCount = pageCount;
+        this.description = description;
+        this.publisher = publisher;
+        this.publisherDate = publisherDate;
         this.imageUrl = imageUrl;
         authors = AuthorDAO.getAllAuthorFromDocId(id);
         categories = CategoryDAO.getAllCategoryFromDocId(id);
@@ -52,9 +61,13 @@ public class Document {
         return title;
     }
 
-    public String getIsbn() { return isbn; }
+    public String getIsbn() {
+        return isbn;
+    }
 
-    public void setIsbn(String isbn) { this.isbn = isbn; }
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
 
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
@@ -86,6 +99,38 @@ public class Document {
 
     public int getRemaining() {
         return remaining;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getPublisherDate() {
+        return publisherDate;
+    }
+
+    public void setPublisherDate(String publisherDate) {
+        this.publisherDate = publisherDate;
     }
 
     public void setImageUrl(String imageUrl) {
