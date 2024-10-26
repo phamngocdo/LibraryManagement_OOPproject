@@ -2,6 +2,7 @@ package app.database;
 
 import app.base.Admin;
 import app.base.Member;
+import app.base.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,10 +11,10 @@ import java.util.ArrayList;
 
 public class UserDAO {
 
-    public static Admin getAdminFromSignIn(String username, String password) {
+    public static User getUserFromLogin(String username, String password) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM users ");
-        query.append("WHERE username=? AND password=? AND role='admin'");
+        query.append("WHERE username=? AND password=?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
@@ -21,16 +22,12 @@ public class UserDAO {
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Admin(
-                        resultSet.getString("user_id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getString("birthday"),
-                        resultSet.getString("email"),
-                        resultSet.getString("phone_number")
-                );
+                boolean isAdmin = resultSet.getString("role").equals("admin");
+                if (isAdmin) {
+                    return new Admin(resultSet);
+                }
+
+                return new Member(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -49,16 +46,7 @@ public class UserDAO {
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Member(
-                        resultSet.getString("user_id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getString("birthday"),
-                        resultSet.getString("email"),
-                        resultSet.getString("phone_number")
-                );
+                return new Member(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -66,34 +54,6 @@ public class UserDAO {
         return null;
     }
 
-    // Get Member by username and password
-    public static Member getMemberFromSignIn(String username, String password) {
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM users ");
-        query.append("WHERE username=? AND password=? AND role='member'");
-        try {
-            PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return new Member(
-                        resultSet.getString("user_id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getString("birthday"),
-                        resultSet.getString("email"),
-                        resultSet.getString("phone_number")
-                );
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
 
     // Retrieve all members
     public static ArrayList<Member> getAllMember() {
@@ -106,16 +66,7 @@ public class UserDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 members.add(
-                        new Member(
-                                resultSet.getString("user_id"),
-                                resultSet.getString("username"),
-                                resultSet.getString("password"),
-                                resultSet.getString("first_name"),
-                                resultSet.getString("last_name"),
-                                resultSet.getString("birthday"),
-                                resultSet.getString("email"),
-                                resultSet.getString("phone_number")
-                        ));
+                        new Member(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

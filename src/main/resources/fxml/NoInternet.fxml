@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1126.0" style="-fx-background-color: white;" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+   <ImageView fitHeight="94.0" fitWidth="82.0" layoutX="522.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../graphic/images/no-internet.png" />
+   </ImageView>
+   <Label layoutX="430.0" layoutY="288.0" text="Không có kết nối mạng">
+      <font>
+         <Font name="Arial Bold" size="24.0" />
+      </font>
+   </Label>
+   <Label layoutX="450.0" layoutY="325.0" text="Vui lòng kiểm tra lại đường truyền" textFill="#686868">
+      <font>
+         <Font name="Arial" size="15.0" />
+      </font>
+   </Label>
+</Pane>

@@ -1,0 +1,58 @@
+.seach-button{
+    -fx-background-color: transparent;
+    -fx-cursor: HAND;
+    -fx-border-color: #c5c5c5;
+    -fx-border-width: 0 1 0 0;
+}
+
+.backspace{
+    -fx-background-color: transparent;
+    -fx-cursor: HAND;
+}
+
+.search-field {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-family: Arial;
+    -fx-font-size: 14;
+    -fx-cursor: TEXT;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.0, 1, 0);
+}
+
+.combo-box {
+    -fx-background-color:white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.0, 1, 0);
+}
+
+.combo-box .list-view{
+    -fx-background-color: white;
+    -fx-border-color: white;
+}
+
+.combo-box .list-cell{
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-cursor: HAND;
+}
+
+.combo-box .list-cell:hover{
+    -fx-background-color: #c4c4c4;
+}
+
+.search-list{
+
+}
+
+.list-cell {
+    -fx-background-color: #424242;
+    -fx-text-fill: white;
+}
+
+.list-cell:hover {
+    -fx-background-color: #4caf50;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: black;
+}

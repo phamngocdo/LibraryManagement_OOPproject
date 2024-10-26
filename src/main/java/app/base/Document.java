@@ -2,19 +2,20 @@ package app.base;
 
 import app.database.AuthorDAO;
 import app.database.CategoryDAO;
+import app.database.DocumentDAO;
 import app.database.RatingDAO;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Document {
     private String id;
     private String title;
-    private String isbn;
-    private final ArrayList<Author> authors;
-    private final ArrayList<Category> categories;
-    private final ArrayList<Rating> ratings;
+    private ArrayList<Author> authors;
+    private ArrayList<Category> categories;
+    private ArrayList<Rating> ratings;
     private int quantity;
     private int remaining;
     private int ratingCount;
@@ -22,27 +23,58 @@ public class Document {
     private int pageCount;
     private String description;
     private String publisher;
-    private String publisherDate;
+    private String publishedDate;
     private String imageUrl;
 
-    public Document(String id, String title, String isbn, int quantity, int remaining,
+    public Document(String id, String title, int quantity, int remaining,
                     int ratingCount, double averageScore, int pageCount, String description,
-                    String publisher, String publisherDate, String imageUrl) {
+                    String publisher, String publishedDate, String imageUrl) {
         this.id = id;
         this.title = title;
-        this.isbn = isbn;
         this.quantity = quantity;
         this.remaining = remaining;
         this.ratingCount = ratingCount;
         this.averageScore = averageScore;
+        this.imageUrl = imageUrl;
         this.pageCount = pageCount;
         this.description = description;
         this.publisher = publisher;
-        this.publisherDate = publisherDate;
-        this.imageUrl = imageUrl;
+        this.publishedDate = publishedDate;
         authors = AuthorDAO.getAllAuthorFromDocId(id);
         categories = CategoryDAO.getAllCategoryFromDocId(id);
         ratings = RatingDAO.getAllRatingFromDocId(id);
+    }
+
+    public Document(String id) {
+        Document doc = DocumentDAO.getDocFromId(id);
+        if (doc != null) {
+            this.id = id;
+            title = doc.title;
+            quantity = doc.quantity;
+            remaining = doc.remaining;
+            ratingCount = doc.ratingCount;
+            averageScore = doc.averageScore;
+            imageUrl = doc.imageUrl;
+            authors = AuthorDAO.getAllAuthorFromDocId(id);
+            categories = CategoryDAO.getAllCategoryFromDocId(id);
+            ratings = RatingDAO.getAllRatingFromDocId(id);
+        }
+    }
+
+    public Document(ResultSet resultSet) throws SQLException {
+        if (resultSet != null) {
+            id = resultSet.getString("document_id");
+            title = resultSet.getString("title");
+            quantity = resultSet.getInt("quantity");
+            remaining = resultSet.getInt("remaining");
+            ratingCount = resultSet.getInt("ratings_count");
+            averageScore = resultSet.getDouble("average_score");
+            imageUrl = resultSet.getString("image_url");
+            pageCount = resultSet.getInt("page_count");
+            description = resultSet.getString("description");
+            publisher = resultSet.getString("publisher");
+            publishedDate = resultSet.getString("published_date");
+        }
     }
 
     public void setId(String id) {
@@ -59,14 +91,6 @@ public class Document {
 
     public String getTitle() {
         return title;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
     }
 
     public void setAverageScore(double averageScore) {
@@ -101,44 +125,44 @@ public class Document {
         return remaining;
     }
 
-    public int getPageCount() {
-        return pageCount;
-    }
-
-    public void setPageCount(int pageCount) {
-        this.pageCount = pageCount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public String getPublisherDate() {
-        return publisherDate;
-    }
-
-    public void setPublisherDate(String publisherDate) {
-        this.publisherDate = publisherDate;
-    }
-
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
+    public String getPublishedDate() {
+        return publishedDate;
     }
 
     public ArrayList<Rating> getRatings() {
@@ -151,7 +175,14 @@ public class Document {
 
     public String getCategoriesToString() {
         //Trả về dưới dạng chuỗi cách nhau bởi dấu phẩy như: Kinh dị, Hài hước, Kỹ thuật
-        return "";
+        StringBuilder categoriesString = new StringBuilder();
+        for (int i = 0; i < categories.size(); i++) {
+            categoriesString.append(categories.get(i).getCategory());
+            if (i < categories.size() - 1) {
+                categoriesString.append(", ");
+            }
+        }
+        return categoriesString.toString();
     }
 
     public ArrayList<Author> getAuthors() {
@@ -159,17 +190,17 @@ public class Document {
     }
 
     public String getAuthorsToString() {
-        //Tương tự
-        return "";
+        StringBuilder authorsString = new StringBuilder();
+        for (int i = 0; i < authors.size(); i++) {
+            authorsString.append(authors.get(i).getName());
+            if (i < authors.size() - 1) {
+                authorsString.append(", ");
+            }
+        }
+        return authorsString.toString();
     }
 
-    public ImageView loadImage() {
-        //Hàm này để sau
-        return new ImageView();
-    }
-
-    public HashMap<String, String> seeFullInfoFromApi() {
-        //Hàm này để sau
-        return new HashMap<>();
+    public Image loadImage() {
+        return new Image(imageUrl);
     }
 }

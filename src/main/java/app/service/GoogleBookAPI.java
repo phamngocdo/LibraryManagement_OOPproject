@@ -1,14 +1,12 @@
 package app.service;
 
 import app.base.Document;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 
 public class GoogleBookAPI {
     private static final String GG_BOOK_API_URL = "https://www.googleapis.com/books/v1/volumes/";
@@ -18,7 +16,7 @@ public class GoogleBookAPI {
         //Không sử dụng try, catch mà sử dụng throw để class khác xử lí
         //Sử dụng thư viện java.net và org.json
         //Truy xuất các thông tin sau và đưa vào hashmap:
-        //trả về đối tượng document
+        //publisher, publishedDate, description, pageCount, language
         //Chú ý đổi hết về String, nếu thông tin rỗng thì trả về N/A
 
         String apiUrl = GG_BOOK_API_URL + id + "?key=" + API_KEY;
@@ -61,23 +59,22 @@ public class GoogleBookAPI {
         JSONObject jsonResponse = new JSONObject(response.toString());
         JSONObject volumeInfo = jsonResponse.getJSONObject("volumeInfo");
 
-        // Truy xuất và lưu thông tin vào HashMap
-        HashMap<String, String> information = new HashMap<>();
-        information.put("publisher", getStringOrNA(volumeInfo, "publisher"));
-        information.put("publishedDate", getStringOrNA(volumeInfo, "publishedDate"));
-        information.put("description", getStringOrNA(volumeInfo, "description"));
-        information.put("pageCount", String.valueOf(volumeInfo.optInt("pageCount", 0)));
-        information.put("language", getStringOrNA(volumeInfo, "language"));
+        // Truy xuất thông tin từ JSON và xử lý nếu thiếu giá trị
+        String title = volumeInfo.optString("title", "N/A");
+        String publisher = volumeInfo.optString("publisher", "N/A");
+        String publishedDate = volumeInfo.optString("publishedDate", "N/A");
+        String description = volumeInfo.optString("description", "N/A");
+        int pageCount = volumeInfo.optInt("pageCount", 0);
 
-        return information;
-    }
+        // Lấy ảnh bìa (thumbnail) nếu có
+        String imageUrl = volumeInfo.optJSONObject("imageLinks") != null
+                ? volumeInfo.getJSONObject("imageLinks").optString("thumbnail", "N/A")
+                : "N/A";
 
-    //lấy String hoặc trả về "N/A" nếu không có giá trị
-    private static String getStringOrNA(JSONObject obj, String key) {
-        try {
-            return obj.optString(key, "N/A");
-        } catch (JSONException e) {
-            return "N/A";
-        }
+        return new Document(
+                id, title, 0, 0, 0, 0.0, pageCount, description,
+                publisher, publishedDate, imageUrl
+        );
+
     }
 }

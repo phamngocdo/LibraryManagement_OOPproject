@@ -8,7 +8,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CategoryDAO {
-    // Lấy ra các thể loại khi biết docId.
+
+    public static ArrayList<Category> getAllCategories() {
+        ArrayList<Category> categories = new ArrayList<>();
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT * FROM categories");
+
+        try {
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                categories.add(new Category(
+                        resultSet.getString("category_id"),
+                        resultSet.getString("category")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return categories;
+    }
+
     public static ArrayList<Category> getAllCategoryFromDocId(String docId) {
         ArrayList<Category> categories = new ArrayList<>();
         StringBuilder query = new StringBuilder();
@@ -33,7 +54,6 @@ public class CategoryDAO {
         return categories;
     }
 
-    // Thêm thể loại mới.
     public static void addCategory(Category category) {
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO categories ");

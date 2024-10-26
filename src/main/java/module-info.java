@@ -1,9 +1,9 @@
 module app {
-    requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.graphics;
     requires java.sql;
     requires java.desktop;
+    requires com.jfoenix;
+    requires javafx.controls;
     requires org.json;
     requires com.google.zxing;
     requires com.google.zxing.javase;

@@ -1,6 +1,7 @@
 package app.base;
 
-import java.time.LocalDate;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Rating {
     private String id;
@@ -15,6 +16,14 @@ public class Rating {
         this.docId = docId;
         this.ratingScore = ratingScore;
         this.comment = comment;
+    }
+
+    public Rating(ResultSet resultSet) throws SQLException {
+        id = resultSet.getString("rating_id");
+        userId = resultSet.getString("user_id");
+        docId = resultSet.getString("document_id");
+        ratingScore = resultSet.getInt("rating_score");
+        comment = resultSet.getString("comment");
     }
 
     public String getId() {
