@@ -19,13 +19,7 @@ public class RatingDAO {
             preparedStatement.setString(1, ratingId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Rating(
-                        resultSet.getString("rating_id"),
-                        resultSet.getString("user_id"),
-                        resultSet.getString("document_id"),
-                        resultSet.getInt("rating_score"),
-                        resultSet.getString("comment")
-                );
+                return new Rating(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -45,13 +39,7 @@ public class RatingDAO {
             preparedStatement.setString(1, docId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                ratings.add(new Rating(
-                        resultSet.getString("rating_id"),
-                        resultSet.getString("user_id"),
-                        resultSet.getString("document_id"),
-                        resultSet.getInt("rating_score"),
-                        resultSet.getString("comment")
-                ));
+                ratings.add(new Rating(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -69,13 +57,7 @@ public class RatingDAO {
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                ratings.add(new Rating(
-                        resultSet.getString("rating_id"),
-                        resultSet.getString("user_id"),
-                        resultSet.getString("document_id"),
-                        resultSet.getInt("rating_score"),
-                        resultSet.getString("comment")
-                ));
+                ratings.add(new Rating(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

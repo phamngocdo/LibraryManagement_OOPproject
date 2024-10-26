@@ -19,7 +19,7 @@ public class DocumentInfo {
     private Pane functionPane, infoPane, memberRatingPane;
 
     @FXML
-    private Label authorsLabel, averageScoreLabel, categoriesLabel, idLabel, isbnLabel, languageLabel, pageCountLabel;
+    private Label authorsLabel, averageScoreLabel, categoriesLabel, idLabel, pageCountLabel;
 
     @FXML
     private Label publisherLabel, remainingLabel, pulishedDateLabel, quantityLabel, ratingCountLabel, titleLabel;
@@ -91,9 +91,12 @@ public class DocumentInfo {
         try {
             URL url = getClass().getResource("/fxml/DocumentEdit.fxml");
             if (url != null) {
-                Parent page = FXMLLoader.load(url);
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent page = loader.load();
                 functionPane.getChildren().clear();
                 functionPane.getChildren().add(page);
+                DocumentEditing controller = loader.getController();
+                controller.setDocument(currentDoc);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

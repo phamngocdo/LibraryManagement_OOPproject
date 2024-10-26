@@ -2,6 +2,8 @@ package app.base;
 
 import app.database.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,6 +14,11 @@ public class Member extends  User{
     public Member(String id, String username, String password, String firstName,
                   String lastName, String birthday, String email, String phoneNumber){
         super(id, username, password, firstName, lastName, birthday, email, phoneNumber);
+        receipts = ReceiptDAO.getAllReceiptFromMemberId(id);
+    }
+
+    public Member(ResultSet resultSet) throws SQLException {
+        super(resultSet);
         receipts = ReceiptDAO.getAllReceiptFromMemberId(id);
     }
 

@@ -61,18 +61,6 @@
                         </HBox>
                         <HBox prefWidth="499.0">
                            <children>
-                              <Label text="ISBN:" />
-                              <Label fx:id="isbnLabel" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label text="Ngôn ngữ:" />
-                              <Label fx:id="languageLabel" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
                               <Label text="Số trang:" />
                               <Label fx:id="pageCountLabel" text="Label" />
                            </children>

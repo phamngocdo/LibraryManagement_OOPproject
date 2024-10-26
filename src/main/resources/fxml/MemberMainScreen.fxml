@@ -52,7 +52,7 @@
          <JFXButton fx:id="memberInfoButton" alignment="BASELINE_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#onMemberInfo" prefHeight="40.0" prefWidth="174.0" ripplerFill="#c6c5c5" styleClass="controll-button" text="Thông tin cá nhân">
             <graphic>
                <ImageView fitHeight="20.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../graphic/images/members.png" />
+                  <Image url="@../graphic/images/user.png" />
                </ImageView>
             </graphic>
             <font>

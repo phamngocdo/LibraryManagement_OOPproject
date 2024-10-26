@@ -15,7 +15,6 @@ import java.util.HashMap;
 public class Document {
     private String id;
     private String title;
-    private String isbn;
     private ArrayList<Author> authors;
     private ArrayList<Category> categories;
     private ArrayList<Rating> ratings;
@@ -29,12 +28,11 @@ public class Document {
     private String publishedDate;
     private String imageUrl;
 
-    public Document(String id, String title, String isbn, int quantity, int remaining,
+    public Document(String id, String title, int quantity, int remaining,
                     int ratingCount, double averageScore, int pageCount, String description,
                     String publisher, String publishedDate, String imageUrl ) {
         this.id = id;
         this.title = title;
-        this.isbn = isbn;
         this.quantity = quantity;
         this.remaining = remaining;
         this.ratingCount = ratingCount;
@@ -54,7 +52,6 @@ public class Document {
         if (doc != null) {
             this.id = id;
             title = doc.title;
-            isbn = doc.isbn;
             quantity = doc.quantity;
             remaining = doc.remaining;
             ratingCount = doc.ratingCount;
@@ -70,10 +67,9 @@ public class Document {
         if (resultSet != null) {
             id = resultSet.getString("document_id");
             title = resultSet.getString("title");
-            isbn = resultSet.getString("isbn");
             quantity = resultSet.getInt("quantity");
             remaining = resultSet.getInt("remaining");
-            ratingCount = resultSet.getInt("rating_count");
+            ratingCount = resultSet.getInt("ratings_count");
             averageScore = resultSet.getDouble("average_score");
             imageUrl = resultSet.getString("image_url");
             pageCount = resultSet.getInt("page_count");
@@ -98,10 +94,6 @@ public class Document {
     public String getTitle() {
         return title;
     }
-
-    public String getIsbn() { return isbn; }
-
-    public void setIsbn(String isbn) { this.isbn = isbn; }
 
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;

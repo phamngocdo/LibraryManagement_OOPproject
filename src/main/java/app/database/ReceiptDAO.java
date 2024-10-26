@@ -21,14 +21,7 @@ public class ReceiptDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 // Chuyển đổi ResultSet thành đối tượng Receipt
-                return new Receipt(
-                        resultSet.getString("receipt_id"),
-                        resultSet.getString("user_id"),
-                        resultSet.getString("document_id"),
-                        resultSet.getString("borrowing_date"),
-                        resultSet.getString("return_date"),
-                        resultSet.getString("status")
-                );
+                return new Receipt(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -48,14 +41,7 @@ public class ReceiptDAO {
             preparedStatement.setString(3, "not returned");
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Receipt(
-                        resultSet.getString("receipt_id"),
-                        resultSet.getString("user_id"),
-                        resultSet.getString("document_id"),
-                        resultSet.getString("borrowing_date"),
-                        resultSet.getString("return_date"),
-                        resultSet.getString("status")
-                );
+                return new Receipt(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -76,14 +62,7 @@ public class ReceiptDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 // Chuyển đổi ResultSet thành đối tượng Receipt
-                receipts.add(new Receipt(
-                        resultSet.getString("receipt_id"),
-                        resultSet.getString("user_id"),
-                        resultSet.getString("document_id"),
-                        resultSet.getString("borrowing_date"),
-                        resultSet.getString("return_date"),
-                        resultSet.getString("status")
-                ));
+                receipts.add(new Receipt(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -101,14 +80,7 @@ public class ReceiptDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 // Chuyển đổi ResultSet thành đối tượng Receipt
-                receipts.add(new Receipt(
-                        resultSet.getString("receipt_id"),
-                        resultSet.getString("user_id"),
-                        resultSet.getString("document_id"),
-                        resultSet.getString("borrowing_date"),
-                        resultSet.getString("return_date"),
-                        resultSet.getString("status")
-                ));
+                receipts.add(new Receipt(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

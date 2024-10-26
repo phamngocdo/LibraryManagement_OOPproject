@@ -86,7 +86,7 @@ public class DocumentDAO {
     public static ArrayList<Document> getBestRatingDocuments(int number) {
         ArrayList<Document> documents = new ArrayList<>();
         StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM documents ORDER BY average_rating DESC LIMIT ?");
+        query.append("SELECT * FROM documents ORDER BY average_score DESC LIMIT ?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
@@ -108,19 +108,23 @@ public class DocumentDAO {
         //Thêm tài liệu phải thêm cho bảng category và author
         StringBuilder docQuery = new StringBuilder();
         docQuery.append("INSERT INTO documents ");
-        docQuery.append("(document_id, title, isbn, quantity, remaining, ratings_count, average_rating, image_url) ");
-        docQuery.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        docQuery.append("(document_id, title, quantity, remaining, ratings_count, average_score, " +
+                "description, pageCount, publisher, published_date, image_url) ");
+        docQuery.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(docQuery.toString());
             preparedStatement.setString(1, doc.getId());
             preparedStatement.setString(2, doc.getTitle());
-            preparedStatement.setString(3, doc.getIsbn());
-            preparedStatement.setInt(4, doc.getQuantity());
-            preparedStatement.setInt(5, doc.getRemaining());
-            preparedStatement.setInt(6, doc.getRatingCount());
-            preparedStatement.setDouble(7, doc.getAverageScore());
-            preparedStatement.setString(8, doc.getImageUrl());
+            preparedStatement.setInt(3, doc.getQuantity());
+            preparedStatement.setInt(4, doc.getRemaining());
+            preparedStatement.setInt(5, doc.getRatingCount());
+            preparedStatement.setDouble(6, doc.getAverageScore());
+            preparedStatement.setString(7, doc.getDescription());
+            preparedStatement.setInt(8, doc.getPageCount());
+            preparedStatement.setString(9, doc.getPublisher());
+            preparedStatement.setString(10, doc.getPublishedDate());
+            preparedStatement.setString(11, doc.getImageUrl());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -216,17 +220,17 @@ public class DocumentDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error when removing document with id: " + docId, e);
+            throw new RuntimeException(e);
         }
     }
 
-    public static boolean checkDocumentExist(String title) {
+    public static boolean checkDocumentExist(String id) {
         StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM documents WHERE title = ?");
+        query.append("SELECT * FROM documents WHERE document_id = ?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
-            preparedStatement.setString(1, title);
+            preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next(); // Nếu có kết quả thì tài liệu tồn tại
         } catch (SQLException e) {

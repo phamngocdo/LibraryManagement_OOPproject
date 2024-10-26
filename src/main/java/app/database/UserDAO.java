@@ -23,19 +23,11 @@ public class UserDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 boolean isAdmin = resultSet.getString("role").equals("admin");
-
-                String id = resultSet.getString("user_id");
-                String firstName = resultSet.getString("first_name");
-                String lastName = resultSet.getString("last_name");
-                String birthday = resultSet.getString("birthday");
-                String email = resultSet.getString("email");
-                String phoneNumber = resultSet.getString("phone_number");
-
                 if (isAdmin) {
-                    return new Admin(id, username, password, firstName, lastName, birthday, email, phoneNumber);
+                    return new Admin(resultSet);
                 }
 
-                return new Member(id, username, password, firstName, lastName, birthday, email, phoneNumber);
+                return new Member(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -54,16 +46,7 @@ public class UserDAO {
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Member(
-                        resultSet.getString("user_id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getString("birthday"),
-                        resultSet.getString("email"),
-                        resultSet.getString("phone_number")
-                );
+                return new Member(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -83,16 +66,7 @@ public class UserDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 members.add(
-                        new Member(
-                                resultSet.getString("user_id"),
-                                resultSet.getString("username"),
-                                resultSet.getString("password"),
-                                resultSet.getString("first_name"),
-                                resultSet.getString("last_name"),
-                                resultSet.getString("birthday"),
-                                resultSet.getString("email"),
-                                resultSet.getString("phone_number")
-                        ));
+                        new Member(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

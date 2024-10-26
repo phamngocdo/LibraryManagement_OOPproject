@@ -5,6 +5,8 @@ import app.database.RatingDAO;
 import app.database.ReceiptDAO;
 import app.database.UserDAO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -14,16 +16,26 @@ public class Admin  extends User{
         super(id, username, password, firstName, lastName, birthday, email, phoneNumber);
     }
 
-    public void addDocument(Document doc) {
+    public Admin(ResultSet resultSet) throws SQLException {
+        super(resultSet);
+    }
+
+    public String addDocument(Document doc) {
+        if (DocumentDAO.checkDocumentExist(doc.getId())) {
+            return "Tài liệu đã tồn tại";
+        }
         DocumentDAO.addDocument(doc);
+        return "Thêm tài liệu thành công";
     }
 
-    public void removeDocument(String docId) {
+    public String removeDocument(String docId) {
         DocumentDAO.removeDocument(docId);
+        return "Xóa tài liệu thành công";
     }
 
-    public void updateDocument(Document doc) {
+    public String updateDocument(Document doc) {
         DocumentDAO.updateDocument(doc);
+        return "Cập nhật tài liệu thành công";
     }
 
     public ArrayList<Member> seeAllMemberInfo() {

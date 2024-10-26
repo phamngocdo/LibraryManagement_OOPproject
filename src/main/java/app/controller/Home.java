@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.base.Admin;
 import app.base.Document;
 import app.run.App;
 import app.trie.AuthorNameTrie;
@@ -84,6 +85,11 @@ public class Home {
     }
 
     private void setUpRecommendDoc() {
+        if (App.currentUser instanceof Admin) {
+            progressIndicator.setVisible(false);
+            recommenderPane.setVisible(false);
+            return;
+        }
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {

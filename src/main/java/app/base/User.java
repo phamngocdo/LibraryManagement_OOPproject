@@ -3,6 +3,8 @@ package app.base;
 import app.database.DocumentDAO;
 import app.database.UserDAO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class User {
@@ -25,6 +27,17 @@ public class User {
         this.birthday = birthday;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public User(ResultSet resultSets) throws SQLException {
+        this.id = resultSets.getString("user_id");
+        this.username = resultSets.getString("username");
+        this.password = resultSets.getString("password");
+        this.firstName = resultSets.getString("first_name");
+        this.lastName = resultSets.getString("last_name");
+        this.birthday = resultSets.getString("birthday");
+        this.email = resultSets.getString("email");
+        this.phoneNumber = resultSets.getString("phone_number");
     }
 
     public String getId() {

@@ -19,14 +19,13 @@ public class DocumentDAOTest {
 
     @Test
     void testAddDocument() {
-        Document newDocument = new Document("", "New Document", "0987654321", 3,5,
+        Document newDocument = new Document("", "New Document", 3,5,
                 2, 5.6, 100, "description", "pulisher",
                 "publishDate", "https://example.com/new_image.jpg");
         DocumentDAO.addDocument(newDocument);
         Document fetchedDocument = DocumentDAO.getDocFromId(newDocument.getId());
         assertNotNull(fetchedDocument);
         assertEquals("New Document", fetchedDocument.getTitle());
-        assertEquals("0987654321", fetchedDocument.getIsbn());
     }
 
     @Test
@@ -39,7 +38,7 @@ public class DocumentDAOTest {
 
     @Test
     void testRemoveDocument() {
-        Document newDocument = new Document("", "New Document", "0987654321", 3,5,
+        Document newDocument = new Document("", "New Document", 3,5,
                 2, 5.6, 100, "description", "pulisher",
                 "publishDate", "https://example.com/new_image.jpg");
         DocumentDAO.addDocument(newDocument);
