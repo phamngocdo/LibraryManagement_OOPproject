@@ -205,8 +205,4 @@ public class Document {
     public Image loadImage() {
         return new Image(imageUrl);
     }
-
-    public HashMap<String, String> getFullInfoFromAPI() throws Exception {
-        return GoogleBookAPI.getDocFromId(id);
-    }
 }
