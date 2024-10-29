@@ -166,6 +166,7 @@ public class Document {
     }
 
     public ArrayList<Rating> getRatings() {
+        ratings = RatingDAO.getAllRatingFromDocId(id);
         return ratings;
     }
 
@@ -174,6 +175,7 @@ public class Document {
     }
 
     public String getCategoriesToString() {
+        categories = CategoryDAO.getAllCategoryFromDocId(id);
         //Trả về dưới dạng chuỗi cách nhau bởi dấu phẩy như: Kinh dị, Hài hước, Kỹ thuật
         StringBuilder categoriesString = new StringBuilder();
         for (int i = 0; i < categories.size(); i++) {
@@ -190,6 +192,7 @@ public class Document {
     }
 
     public String getAuthorsToString() {
+        authors = AuthorDAO.getAllAuthorFromDocId(id);
         StringBuilder authorsString = new StringBuilder();
         for (int i = 0; i < authors.size(); i++) {
             authorsString.append(authors.get(i).getName());
