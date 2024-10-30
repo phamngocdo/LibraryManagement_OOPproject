@@ -1,11 +1,17 @@
 package app.controller;
 
 import app.base.*;
+import app.database.DocumentDAO;
+import app.database.RatingDAO;
+import app.database.ReceiptDAO;
 import app.run.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -47,6 +53,10 @@ public class DocumentInfo {
 
     public static Document currentDoc;
 
+    private static final String STATUS_NOT_RETURNED = "not returned";
+    private static final String STATUS_RETURNED = "returned";
+    private int selectedStar;
+
     @FXML
     private void initialize() {
         if (App.currentUser instanceof Admin) {
@@ -61,8 +71,29 @@ public class DocumentInfo {
              * Kiểm tra currentDoc có được mượn không
              * chưa mượn thì hiển thị nút mượn và ngược lại
              */
+            // Lấy biên lai từ database
+            Receipt receipt = ReceiptDAO.getReceiptFromDocAndMember(
+                    currentDoc.getId(),
+                    App.currentUser.getId()
+            );
+
+            if (receipt != null) {
+                if (receipt.getStatus().equals(STATUS_NOT_RETURNED)) {
+                    // Nếu đã mượn, hiển thị nút trả tài liệu
+                    borrowingButton.setVisible(false);
+                    returnButton.setVisible(true);
+                } else if (receipt.getStatus().equals(STATUS_RETURNED)) {
+                    // Nếu chưa mượn, hiển thị nút mượn tài liệu
+                    borrowingButton.setVisible(true);
+                    returnButton.setVisible(false);
+                }
+            } else {
+                borrowingButton.setVisible(true);
+                returnButton.setVisible(false);
+            }
         }
         setUpInfo();
+        setUpRatingHBox();
     }
 
     @FXML
@@ -70,6 +101,28 @@ public class DocumentInfo {
         /**
          * Hàm này đọc số sao + nhận xét và sử dụng (Member) App.currentUser.addRating(rating);
          */
+        try {
+            String comment = memberComment.getText();
+
+            Rating newRating = new Rating(
+                    null,
+                    App.currentUser.getId(),
+                    currentDoc.getId(),
+                    selectedStar,
+                    comment
+            );
+            // Lưu đánh giá vào cơ sở dữ liệu
+            RatingDAO.addRating(newRating);
+            // Thêm đánh giá mới vào giao diện
+            addRatingIntoVBox(newRating);
+            // Xóa nhận xét sau khi gửi
+            memberComment.clear();
+            displayRatedStar(0, starRatingHBox); // Đặt lại HBox về trạng thái ban đầu
+
+            System.out.println("Đánh giá đã được gửi thành công!");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -109,23 +162,74 @@ public class DocumentInfo {
          * Khi nhận được các giá trị thì setText cho các mục và đổi ngược lại 2 cái visible ở trên
          * Chú ý sử dụng hàm getCatogories và getAuthors
          */
+        // Ẩn bảng thông tin và hiển thị ProgressIndicator khi đang tải dữ liệu
+        infoPane.setVisible(false);
+        progressIndicator.setVisible(true);
+
+        // Sử dụng một luồng mới để xử lý tải thông tin tài liệu
+        new Thread(() -> {
+            try {
+                // Lấy thông tin tài liệu hiện tại
+                Document doc = currentDoc = DocumentDAO.getDocFromId("R8RLniX5DNQC");
+                // Cập nhật giao diện trong JavaFX Application Thread
+                javafx.application.Platform.runLater(() -> {
+                    // Hiển thị thông tin tài liệu
+                    titleLabel.setText(doc.getTitle());
+                    idLabel.setText(doc.getId());
+                    authorsLabel.setText(doc.getAuthorsToString());
+                    categoriesLabel.setText(doc.getCategoriesToString());
+                    descriptionTextArea.setText(doc.getDescription());
+                    pageCountLabel.setText(String.valueOf(doc.getPageCount()));
+                    publisherLabel.setText(doc.getPublisher());
+                    pulishedDateLabel.setText(doc.getPublishedDate());
+                    quantityLabel.setText(String.valueOf(doc.getQuantity()));
+                    remainingLabel.setText(String.valueOf(doc.getRemaining()));
+                    ratingCountLabel.setText(String.valueOf(doc.getRatingCount()));
+                    averageScoreLabel.setText(String.format("%.2f", doc.getAverageScore()));
+
+                    // Hiển thị hình ảnh tài liệu
+                    docImage.setImage(doc.loadImage());
+                    // Thêm các đánh giá vào VBox
+                    doc.getRatings().forEach(this::addRatingIntoVBox);
+                    // Sau khi tải xong, hiển thị bảng thông tin và ẩn ProgressIndicator
+                    infoPane.setVisible(true);
+                    progressIndicator.setVisible(false);
+                });
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
     }
 
     private void setUpRatingHBox() {
         /** Hàm này set các sự kiện khi người dùng chọn sao trong HBox
          *  Sử dụng hàm displayRatedStar khi người dùng chọn sao
          */
+        // Lặp qua từng ImageView trong HBox (5 sao)
+        for (int i = 0; i < starRatingHBox.getChildren().size(); i++) {
+            final int starIndex = i + 1; // Vị trí sao (1 đến 5)
+
+            ImageView starImageView = (ImageView) starRatingHBox.getChildren().get(i);
+
+            starImageView.setOnMouseClicked(event -> {
+                // Cập nhật giao diện các sao đã chọn
+                displayRatedStar(starIndex, starRatingHBox);
+                selectedStar = starIndex;//lưu số sao đã đánh giá
+                // Bạn có thể thêm logic khác (ví dụ: lưu số sao đã đánh giá)
+                System.out.println("Người dùng đã đánh giá: " + starIndex + " sao");
+            });
+        }
     }
 
     private void displayRatedStar(int numberRatedStar, HBox starRatingHBox) {
         for (int i = 0; i < 5; i++) {
             ImageView imageView = (ImageView) starRatingHBox.getChildren().get(i);
-            if (i == numberRatedStar - 1) {
+            imageView.getStyleClass().clear();
+
+            if (i < numberRatedStar) {
                 imageView.getStyleClass().add("rated-star");
-                imageView.getStyleClass().clear();
             } else {
                 imageView.getStyleClass().add("un-rated-star");
-                imageView.getStyleClass().clear();
             }
         }
     }

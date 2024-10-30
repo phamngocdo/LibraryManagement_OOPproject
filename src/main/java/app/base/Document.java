@@ -4,13 +4,10 @@ import app.database.AuthorDAO;
 import app.database.CategoryDAO;
 import app.database.DocumentDAO;
 import app.database.RatingDAO;
-import app.service.GoogleBookAPI;
 import javafx.scene.image.Image;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Document {
     private String id;
