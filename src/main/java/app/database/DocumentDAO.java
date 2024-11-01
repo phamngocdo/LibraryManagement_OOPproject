@@ -109,7 +109,7 @@ public class DocumentDAO {
         StringBuilder docQuery = new StringBuilder();
         docQuery.append("INSERT INTO documents ");
         docQuery.append("(document_id, title, quantity, remaining, ratings_count, average_score, " +
-                "description, pageCount, publisher, published_date, image_url) ");
+                "description, page_count, publisher, published_date, image_url) ");
         docQuery.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         try {
             PreparedStatement preparedStatement;
