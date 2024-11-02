@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Document {
     private String id;
@@ -27,7 +28,8 @@ public class Document {
 
     public Document(String id, String title, int quantity, int remaining,
                     int ratingCount, double averageScore, int pageCount, String description,
-                    String publisher, String publishedDate, String imageUrl ) {
+                    String publisher, String publishedDate, String imageUrl,
+                    ArrayList<Author> authors, ArrayList<Category> categories, ArrayList<Rating> ratings) {
         this.id = id;
         this.title = title;
         this.quantity = quantity;
@@ -39,9 +41,9 @@ public class Document {
         this.description = description;
         this.publisher = publisher;
         this.publishedDate = publishedDate;
-        authors = AuthorDAO.getAllAuthorFromDocId(id);
-        categories = CategoryDAO.getAllCategoryFromDocId(id);
-        ratings = RatingDAO.getAllRatingFromDocId(id);
+        this.authors = Objects.requireNonNullElseGet(authors, () -> AuthorDAO.getAllAuthorFromDocId(id));
+        this.categories = Objects.requireNonNullElseGet(categories, () -> CategoryDAO.getAllCategoryFromDocId(id));
+        this.ratings = Objects.requireNonNullElseGet(ratings, () -> RatingDAO.getAllRatingFromDocId(id));
     }
 
     public Document(String id) {
@@ -179,6 +181,10 @@ public class Document {
         return categories;
     }
 
+    public void setCategories(ArrayList<Category> categories) {
+        this.categories = categories;
+    }
+
     public String getCategoriesToString() {
         //Trả về dưới dạng chuỗi cách nhau bởi dấu phẩy như: Kinh dị, Hài hước, Kỹ thuật
         StringBuilder categoriesString = new StringBuilder();
@@ -193,6 +199,10 @@ public class Document {
 
     public ArrayList<Author> getAuthors() {
         return authors;
+    }
+
+    public void setAuthors(ArrayList<Author> authors) {
+        this.authors = authors;
     }
 
     public String getAuthorsToString() {

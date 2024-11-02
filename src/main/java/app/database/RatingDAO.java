@@ -67,7 +67,9 @@ public class RatingDAO {
 
 
     public static void addRating(Rating rating) {
-        rating.setId(DatabaseManagement.createRandomIdInTable("ratings", "rating_id"));
+        if (rating.getId().isEmpty()) {
+            rating.setId(DatabaseManagement.createRandomIdInTable("ratings", "rating_id"));
+        }
         //thêm thuộc tính vào db
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ratings ");

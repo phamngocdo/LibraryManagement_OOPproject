@@ -1,12 +1,17 @@
 package app.service;
 
+import app.base.Author;
+import app.base.Category;
 import app.base.Document;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class GoogleBookAPI {
     private static final String GG_BOOK_API_URL = "https://www.googleapis.com/books/v1/volumes/";
@@ -15,8 +20,6 @@ public class GoogleBookAPI {
     public static Document getDocFromId(String id) throws Exception {
         //Không sử dụng try, catch mà sử dụng throw để class khác xử lí
         //Sử dụng thư viện java.net và org.json
-        //Truy xuất các thông tin sau và đưa vào hashmap:
-        //publisher, publishedDate, description, pageCount, language
         //Chú ý đổi hết về String, nếu thông tin rỗng thì trả về N/A
 
         String apiUrl = GG_BOOK_API_URL + id + "?key=" + API_KEY;
@@ -65,16 +68,28 @@ public class GoogleBookAPI {
         String publishedDate = volumeInfo.optString("publishedDate", "N/A");
         String description = volumeInfo.optString("description", "N/A");
         int pageCount = volumeInfo.optInt("pageCount", 0);
+        double averageScore = volumeInfo.optDouble("averageRating", 0);
+        int ratingCount = volumeInfo.optInt("ratingsCount", 0);
+
+        JSONArray authorsJSON = volumeInfo.getJSONArray("authors");
+        ArrayList<Author> authors = new ArrayList<>();
+        for (int i = 0; i < authorsJSON.length(); i++) {
+            authors.add(new Author("", authorsJSON.getString(i)));
+        }
+
+        JSONArray categoriesJSON = volumeInfo.getJSONArray("categories");
+        ArrayList<Category> categories = new ArrayList<>();
+        for (int i = 0; i < categoriesJSON.length(); i++) {
+            categories.add(new Category("", categoriesJSON.getString(i)));
+        }
 
         // Lấy ảnh bìa (thumbnail) nếu có
         String imageUrl = volumeInfo.optJSONObject("imageLinks") != null
-                ? volumeInfo.getJSONObject("imageLinks").optString("thumbnail", "N/A")
-                : "N/A";
+                ? volumeInfo.getJSONObject("imageLinks").optString("thumbnail", "")
+                : null;
 
-        return new Document(
-                id, title, 0, 0, 0, 0.0, pageCount, description,
-                publisher, publishedDate, imageUrl
-        );
+        return new Document(id, title, 0, 0, ratingCount, averageScore, pageCount,
+                description, publisher, publishedDate, imageUrl, authors, categories, null);
 
     }
 }

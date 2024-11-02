@@ -19,7 +19,7 @@ public class App extends Application {
 
     private static final String APP_NAME = "LibZone";
     private static final String LOGO_PATH = "/graphic/images/logo.png";
-    private static final String START_FXML = "/fxml/DocumentEdit.fxml";
+    private static final String START_FXML = "/fxml/Login.fxml";
     private static final String CSS_PATH = "/graphic/css/style.css";
     private static final int WIDTH = 1126;
     private static final int HEIGHT = 650;
@@ -27,9 +27,6 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         DatabaseManagement.setConnection();
-
-        // Khởi tạo currentUser là Admin
-        currentUser = new Admin("admin_id", "admin", "admin", "Admin", "User", "01/01/1990", "admin@libzone.com", "0123456789");
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(START_FXML));
         Image logo = new Image(String.valueOf(getClass().getResource(LOGO_PATH)));

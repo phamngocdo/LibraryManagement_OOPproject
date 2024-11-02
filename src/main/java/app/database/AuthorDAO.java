@@ -70,7 +70,9 @@ public class AuthorDAO {
     }
 
     public static void addAuthor(Author author) {
-        author.setId(DatabaseManagement.createRandomIdInTable("authors", "author_id"));
+        if (author.getId().isEmpty()) {
+            author.setId(DatabaseManagement.createRandomIdInTable("authors", "author_id"));
+        }
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO authors ");
         query.append("(author_id, name) ");

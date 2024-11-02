@@ -55,6 +55,9 @@ public class CategoryDAO {
     }
 
     public static void addCategory(Category category) {
+        if (category.getId().isEmpty()) {
+            category.setId(DatabaseManagement.createRandomIdInTable("categories", "category_id"));
+        }
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO categories ");
         query.append("(category_id, category) ");

@@ -1,7 +1,6 @@
 package app.controller;
 
 import app.base.*;
-import app.database.DocumentDAO;
 import app.database.RatingDAO;
 import app.database.ReceiptDAO;
 import app.run.App;
@@ -67,11 +66,6 @@ public class DocumentInfo {
         } else if (App.currentUser instanceof Member) {
             memberRatingPane.setVisible(true);
             editingButton.setVisible(false);
-            /**
-             * Kiểm tra currentDoc có được mượn không
-             * chưa mượn thì hiển thị nút mượn và ngược lại
-             */
-            // Lấy biên lai từ database
             Receipt receipt = ReceiptDAO.getReceiptFromDocAndMember(
                     currentDoc.getId(),
                     App.currentUser.getId()
@@ -95,9 +89,6 @@ public class DocumentInfo {
 
     @FXML
     private void sendRating() {
-        /**
-         * Hàm này đọc số sao + nhận xét và sử dụng (Member) App.currentUser.addRating(rating);
-         */
         try {
             String comment = memberComment.getText();
 
@@ -146,11 +137,6 @@ public class DocumentInfo {
     }
 
     private void setUpInfo() {
-        /** Hàm hiển thị các thông tin về sách, đánh giá (nhớ sử dụng hàm addRatingIntoVBox bên dưới) sử dụng đa luồng:
-         * Ban đầu: infoPane.setVisible(false), progressIndicator.setVisible(true)
-         * Khi nhận được các giá trị thì setText cho các mục và đổi ngược lại 2 cái visible ở trên
-         * Chú ý sử dụng hàm getCatogories và getAuthors
-         */
         // Ẩn bảng thông tin và hiển thị ProgressIndicator khi đang tải dữ liệu
         infoPane.setVisible(false);
         progressIndicator.setVisible(true);
@@ -192,20 +178,12 @@ public class DocumentInfo {
     }
 
     private void setUpRatingHBox() {
-        /** Hàm này set các sự kiện khi người dùng chọn sao trong HBox
-         *  Sử dụng hàm displayRatedStar khi người dùng chọn sao
-         */
-        // Lặp qua từng ImageView trong HBox (5 sao)
         for (int i = 0; i < starRatingHBox.getChildren().size(); i++) {
-            final int starIndex = i + 1; // Vị trí sao (1 đến 5)
-
+            int starIndex = i + 1;
             ImageView starImageView = (ImageView) starRatingHBox.getChildren().get(i);
-
             starImageView.setOnMouseClicked(event -> {
-                // Cập nhật giao diện các sao đã chọn
                 displayRatedStar(starIndex, starRatingHBox);
-                selectedStar = starIndex;//lưu số sao đã đánh giá
-                // Bạn có thể thêm logic khác (ví dụ: lưu số sao đã đánh giá)
+                selectedStar = starIndex;
                 System.out.println("Người dùng đã đánh giá: " + starIndex + " sao");
             });
         }
