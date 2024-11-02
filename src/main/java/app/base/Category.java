@@ -1,5 +1,9 @@
 package app.base;
 
+import app.database.DocumentDAO;
+
+import java.util.ArrayList;
+
 public class Category {
     private String id;
     private String category;
@@ -7,6 +11,10 @@ public class Category {
     public Category(String id, String category) {
         this.id = id;
         this.category = category;
+    }
+
+    public ArrayList<Document> getAllDoc() {
+        return DocumentDAO.getAllDocumentFromCategory(id);
     }
 
     public void setId(String id) {

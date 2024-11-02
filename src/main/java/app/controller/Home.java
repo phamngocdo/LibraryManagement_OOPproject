@@ -1,6 +1,8 @@
 package app.controller;
 
 import app.base.Admin;
+import app.base.Author;
+import app.base.Category;
 import app.base.Document;
 import app.run.App;
 import app.trie.AuthorNameTrie;
@@ -221,17 +223,36 @@ public class Home {
         });
     }
 
-    private void displayResultFromSearch(ArrayList<Pair<String, String>> list) {
+    private void displayResultFromSearch(ArrayList<Pair<String, String>> resultlist) {
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {
                 Platform.runLater(() -> {
                     recommenderPane.setVisible(false);
                     searchingList.setVisible(false);
+                    searchingResultScrollPane.setVisible(false);
                     progressIndicator.setVisible(true);
                 });
 
-                int listCount = list.size();
+                ArrayList<Document> docList = new ArrayList<>();
+
+                if (trie instanceof DocumentTitleTrie) {
+                    for (Pair<String, String> pair : resultlist) {
+                        docList.add(new Document(pair.getKey()));
+                    }
+                } else if (trie instanceof AuthorNameTrie) {
+                    for (Pair<String, String> pair : resultlist) {
+                        Author author = new Author(pair.getKey(), pair.getValue());
+                        docList.addAll(author.getAllDoc());
+                    }
+                } else if (trie instanceof CategoryTrie) {
+                    for (Pair<String, String> pair : resultlist) {
+                        Category category = new Category(pair.getKey(), pair.getValue());
+                        docList.addAll(category.getAllDoc());
+                    }
+                }
+
+                int listCount = docList.size();
                 int hBoxCount = (int) Math.ceil(listCount / 5.0);
                 AtomicInteger listIndex = new AtomicInteger(0);
                 ArrayList<HBox> hBoxes = new ArrayList<>();
@@ -243,8 +264,7 @@ public class Home {
                             break;
                         }
 
-                        Pair<String, String> item = list.get(listIndex.getAndIncrement());
-                        Document doc = new Document(item.getKey());
+                        Document doc = docList.get(listIndex.getAndIncrement());
 
                         Pane pane = new Pane();
                         pane.setOnMouseClicked(event -> displayDetailDoc(doc));

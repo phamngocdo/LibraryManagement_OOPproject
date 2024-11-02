@@ -48,12 +48,16 @@ public class Document {
         Document doc = DocumentDAO.getDocFromId(id);
         if (doc != null) {
             this.id = id;
-            title = doc.title;
-            quantity = doc.quantity;
-            remaining = doc.remaining;
-            ratingCount = doc.ratingCount;
-            averageScore = doc.averageScore;
-            imageUrl = doc.imageUrl;
+            title = doc.getTitle();
+            quantity = doc.getQuantity();
+            remaining = doc.getRemaining();
+            ratingCount = doc.getRatingCount();
+            averageScore = doc.getAverageScore();
+            imageUrl = doc.getImageUrl();
+            pageCount = doc.getPageCount();
+            description = doc.getDescription();
+            publisher = doc.getPublisher();
+            publishedDate = doc.getPublishedDate();
             authors = AuthorDAO.getAllAuthorFromDocId(id);
             categories = CategoryDAO.getAllCategoryFromDocId(id);
             ratings = RatingDAO.getAllRatingFromDocId(id);
@@ -73,6 +77,9 @@ public class Document {
             description = resultSet.getString("description");
             publisher = resultSet.getString("publisher");
             publishedDate = resultSet.getString("published_date");
+            authors = AuthorDAO.getAllAuthorFromDocId(id);
+            categories = CategoryDAO.getAllCategoryFromDocId(id);
+            ratings = RatingDAO.getAllRatingFromDocId(id);
         }
     }
 
@@ -200,6 +207,9 @@ public class Document {
     }
 
     public Image loadImage() {
+        if (imageUrl == null) {
+            imageUrl = String.valueOf(getClass().getResource("/graphic/images/no-image.png"));
+        }
         return new Image(imageUrl);
     }
 }

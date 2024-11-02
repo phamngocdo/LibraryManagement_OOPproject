@@ -44,7 +44,6 @@ public class App extends Application {
         networkMonitor.startMonitoring();
     }
 
-
     public static Pane getRoot() {
         return (Pane) scene.getRoot();
     }

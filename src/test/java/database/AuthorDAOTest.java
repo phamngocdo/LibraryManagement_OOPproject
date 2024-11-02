@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//All test are correct
 public class AuthorDAOTest {
 
     @BeforeEach
@@ -38,7 +39,7 @@ public class AuthorDAOTest {
 
     @Test
     void testGetAllAuthorFromDocId() {
-        String docId = "M7VT6I3XMC4C";
+        String docId = "m7vT6i3xmC4C";
 
         ArrayList<Author> authors = AuthorDAO.getAllAuthorFromDocId(docId);
 

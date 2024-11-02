@@ -46,7 +46,20 @@ public class Admin  extends User{
         return ReceiptDAO.getAllReceipt();
     }
 
-    public ArrayList<Rating> seeAllRating() {
-        return RatingDAO.getAllRating();
+    public void confirmReturnDocument(Receipt receipt) {
+        // Cập nhật trạng thái của receipt
+        receipt.setStatus("returned");
+
+        // Cộng 1 cho remaining của tài liệu
+        Document doc = DocumentDAO.getDocFromId(receipt.getDocId()); // Lấy tài liệu từ DB
+        if (doc != null) {
+            doc.setRemaining(doc.getRemaining() + 1); // Tăng số lượng tài liệu
+        }
+
+        // Cập nhật receipt và tài liệu vào cơ sở dữ liệu
+        ReceiptDAO.updateReceipt(receipt); // Cập nhật receipt
+        if (doc != null) {
+            DocumentDAO.updateDocument(doc); // Cập nhật document
+        }
     }
 }

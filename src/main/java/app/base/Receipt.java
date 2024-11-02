@@ -26,7 +26,7 @@ public class Receipt {
     public Receipt(ResultSet resultSet) throws SQLException {
         this.id = resultSet.getString("receipt_id");
         this.userId = resultSet.getString("user_id");
-        this.docId = resultSet.getString("doc_id");
+        this.docId = resultSet.getString("document_id");
         this.borrowingDate = resultSet.getString("borrowing_date");
         this.returnDate = resultSet.getString("return_date");
         this.status = resultSet.getString("status");

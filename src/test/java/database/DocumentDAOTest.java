@@ -20,7 +20,7 @@ public class DocumentDAOTest {
     @Test
     void testAddDocument() {
         Document newDocument = new Document("", "New Document", 3,5,
-                2, 5.6, 100, "description", "pulisher",
+                2, 5.0, 100, "description", "pulisher",
                 "publishDate", "https://example.com/new_image.jpg");
         DocumentDAO.addDocument(newDocument);
         Document fetchedDocument = DocumentDAO.getDocFromId(newDocument.getId());
@@ -30,10 +30,10 @@ public class DocumentDAOTest {
 
     @Test
     void testGetDocFromId() {
-        Document fetchedDocument = DocumentDAO.getDocFromId("7Q0TFMI7FIKC");
+        Document fetchedDocument = DocumentDAO.getDocFromId("nE0IPwAACAAJ");
         assertNotNull(fetchedDocument);
-        assertEquals("7Q0TFMI7FIKC", fetchedDocument.getId());
-        assertEquals("Beginning Linux?Programming", fetchedDocument.getTitle());
+        assertEquals("nE0IPwAACAAJ", fetchedDocument.getId());
+        assertEquals("Computer Organization and Architecture", fetchedDocument.getTitle());
     }
 
     @Test
@@ -51,12 +51,12 @@ public class DocumentDAOTest {
     void testGetAllDoc() {
         ArrayList<Document> documents = DocumentDAO.getAllDoc();
         assertFalse(documents.isEmpty());
-        assertTrue(documents.stream().anyMatch(doc -> doc.getId().equals("7Q0TFMI7FIKC")));
+        assertTrue(documents.stream().anyMatch(doc -> doc.getId().equals("nE0IPwAACAAJ")));
     }
 
     @Test
     void testUpdateDocument() {
-        Document testDocument = DocumentDAO.getDocFromId("7Q0TFMI7FIKC");
+        Document testDocument = DocumentDAO.getDocFromId("nE0IPwAACAAJ");
         assert testDocument != null;
         testDocument.setTitle("Updated Document");
         DocumentDAO.updateDocument(testDocument);

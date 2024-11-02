@@ -32,7 +32,7 @@ public class ReceiptDAO {
     public static Receipt getReceiptFromDocAndMember(String docId, String memberId) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM receipts ");
-        query.append("WHERE doc_id = ? AND member_id = ? AND status = ?");
+        query.append("WHERE document_id = ? AND user_id = ? AND status = ?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());

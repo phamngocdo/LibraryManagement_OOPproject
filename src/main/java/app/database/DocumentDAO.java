@@ -45,15 +45,17 @@ public class DocumentDAO {
         return documents;
     }
 
-    public static ArrayList<Document> getAllDocumentFromAuthor(String authorName) {
+    public static ArrayList<Document> getAllDocumentFromAuthor(String authorId) {
         ArrayList<Document> documents = new ArrayList<>();
         StringBuilder query = new StringBuilder();
         query.append("SELECT d.* FROM documents AS d ");
         query.append("JOIN document_author AS da ON d.document_id = da.document_id ");
         query.append("JOIN authors AS a ON da.author_id = a.author_id ");
+        query.append("WHERE da.author_id = ?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, authorId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 documents.add(new Document(resultSet));
@@ -64,15 +66,17 @@ public class DocumentDAO {
         return documents;
     }
 
-    public static ArrayList<Document> getAllDocumentFromCategory(String category) {
+    public static ArrayList<Document> getAllDocumentFromCategory(String categoryId) {
         ArrayList<Document> documents = new ArrayList<>();
         StringBuilder query = new StringBuilder();
         query.append("SELECT d.* FROM documents AS d ");
         query.append("JOIN document_category AS dc ON d.document_id = dc.document_id ");
         query.append("JOIN categories AS c ON dc.category_id = c.category_id ");
+        query.append("WHERE c.category_id = ?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, categoryId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 documents.add(new Document(resultSet));
@@ -109,7 +113,7 @@ public class DocumentDAO {
         StringBuilder docQuery = new StringBuilder();
         docQuery.append("INSERT INTO documents ");
         docQuery.append("(document_id, title, quantity, remaining, ratings_count, average_score, " +
-                "description, pageCount, publisher, published_date, image_url) ");
+                "description, page_count, publisher, published_date, image_url) ");
         docQuery.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         try {
             PreparedStatement preparedStatement;

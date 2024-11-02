@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane prefHeight="650.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" />
+
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <Pane minHeight="648.0" prefWidth="945.0">
+         <children>
+            <Label layoutX="25.0" layoutY="27.0" text="Sách đang mượn">
+               <font>
+                  <Font name="Arial Bold" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </content>
+</ScrollPane>

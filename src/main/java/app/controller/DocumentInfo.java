@@ -5,6 +5,7 @@ import app.database.DocumentDAO;
 import app.database.RatingDAO;
 import app.database.ReceiptDAO;
 import app.run.App;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,7 +44,7 @@ public class DocumentInfo {
     private TextArea memberComment;
 
     @FXML
-    private Button ratingSendingButton, borrowingButton, returnButton, editingButton;
+    private Button ratingSendingButton, borrowingButton, editingButton;
 
     @FXML
     private HBox starRatingHBox;
@@ -63,7 +64,6 @@ public class DocumentInfo {
             memberRatingPane.setVisible(false);
             editingButton.setVisible(true);
             borrowingButton.setVisible(false);
-            returnButton.setVisible(false);
         } else if (App.currentUser instanceof Member) {
             memberRatingPane.setVisible(true);
             editingButton.setVisible(false);
@@ -81,15 +81,12 @@ public class DocumentInfo {
                 if (receipt.getStatus().equals(STATUS_NOT_RETURNED)) {
                     // Nếu đã mượn, hiển thị nút trả tài liệu
                     borrowingButton.setVisible(false);
-                    returnButton.setVisible(true);
                 } else if (receipt.getStatus().equals(STATUS_RETURNED)) {
                     // Nếu chưa mượn, hiển thị nút mượn tài liệu
                     borrowingButton.setVisible(true);
-                    returnButton.setVisible(false);
                 }
             } else {
                 borrowingButton.setVisible(true);
-                returnButton.setVisible(false);
             }
         }
         setUpInfo();
@@ -129,14 +126,6 @@ public class DocumentInfo {
     private void borrowDoc() {
         ((Member) App.currentUser).borrowDocument(currentDoc);
         borrowingButton.setVisible(false);
-        returnButton.setVisible(true);
-    }
-
-    @FXML
-    private void returnDoc() {
-        ((Member) App.currentUser).returnDocument(currentDoc);
-        borrowingButton.setVisible(true);
-        returnButton.setVisible(false);
     }
 
     @FXML
@@ -170,10 +159,11 @@ public class DocumentInfo {
         new Thread(() -> {
             try {
                 // Lấy thông tin tài liệu hiện tại
-                Document doc = currentDoc = DocumentDAO.getDocFromId("R8RLniX5DNQC");
+                Document doc = currentDoc;
                 // Cập nhật giao diện trong JavaFX Application Thread
-                javafx.application.Platform.runLater(() -> {
+                Platform.runLater(() -> {
                     // Hiển thị thông tin tài liệu
+                    assert doc != null;
                     titleLabel.setText(doc.getTitle());
                     idLabel.setText(doc.getId());
                     authorsLabel.setText(doc.getAuthorsToString());
