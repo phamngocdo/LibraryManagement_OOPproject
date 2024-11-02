@@ -8,11 +8,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Member extends  User{
+public class Member extends User {
     private final ArrayList<Receipt> receipts;
 
     public Member(String id, String username, String password, String firstName,
-                  String lastName, String birthday, String email, String phoneNumber){
+                  String lastName, String birthday, String email, String phoneNumber) {
         super(id, username, password, firstName, lastName, birthday, email, phoneNumber);
         receipts = ReceiptDAO.getAllReceiptFromMemberId(id);
     }
@@ -111,7 +111,7 @@ public class Member extends  User{
     }
 
 
-    public void updateInfoToDatabase(Member member) {
+    public static void updateInfoToDatabase(Member member) {
         UserDAO.updateMember(member);
     }
 }

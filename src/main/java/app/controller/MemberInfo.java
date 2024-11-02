@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.regex.Pattern;
+
 public class MemberInfo {
     @FXML
     private Label resultLabel;
@@ -36,10 +38,22 @@ public class MemberInfo {
 
     @FXML
     private void initialize() {
+        App.currentUser = UserDAO.getMemberFromId("LL33OH5RGV30");
         _setupPersonalInfo();
     }
 
     private void _setupPersonalInfo() {
+        // Kiểm tra nếu người dùng hiện tại là một thành viên
+        if (App.currentUser instanceof Member currentMember) {
+            // Hiển thị thông tin người dùng lên các trường TextField
+            idMenberTextField.setText(currentMember.getId());
+            loginNameTextField.setText(currentMember.getUsername());
+            firstNameTextField.setText(currentMember.getFirstName());
+            lastNameTextField.setText(currentMember.getLastName());
+            birthdayTextField.setText(currentMember.getBirthday());
+            emailTextField.setText(currentMember.getEmail());
+            phoneNumberTextFiled.setText(currentMember.getPhoneNumber());
+        }
         //Hiển thị bảng thông tin cá nhân và nút chỉnh sửa
         personalInfoHBox.setVisible(true);
         idMenberTextField.setDisable(true);
@@ -69,8 +83,6 @@ public class MemberInfo {
             _setupPersonalInfo();
         } else {
             // Nếu không ở chế độ chỉnh sửa, chuyển sang chế độ chỉnh sửa
-            idMenberTextField.setDisable(false);
-            loginNameTextField.setDisable(false);
             firstNameTextField.setDisable(false);
             lastNameTextField.setDisable(false);
             birthdayTextField.setDisable(false);
@@ -113,6 +125,37 @@ public class MemberInfo {
          * resultLabel hiển thị chỉnh sửa thành công
          */
         try {
+            // Kiểm tra các trường không được để trống
+            if (firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty() ||
+                    birthdayTextField.getText().isEmpty() || emailTextField.getText().isEmpty() ||
+                    phoneNumberTextFiled.getText().isEmpty()) {
+                resultLabel.setText("Vui lòng điền đầy đủ thông tin!");
+                resultLabel.setVisible(true);
+                return;
+            }
+            
+            // Kiểm tra định dạng email hợp lệ
+            String emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+            if (!Pattern.matches(emailPattern, emailTextField.getText())) {
+                resultLabel.setText("Email không hợp lệ!");
+                resultLabel.setVisible(true);
+                return;
+            }
+
+            // Kiểm tra số điện thoại có phải là số không
+            if (!phoneNumberTextFiled.getText().matches("\\d+")) {
+                resultLabel.setText("Số điện thoại chỉ chứa chữ số!");
+                resultLabel.setVisible(true);
+                return;
+            }
+
+            // Kiểm tra định dạng ngày sinh là DD-MM-YYYY
+            String datePattern = "^\\d{2}-\\d{2}-\\d{4}$";
+            if (!Pattern.matches(datePattern, birthdayTextField.getText())) {
+                resultLabel.setText("Ngày sinh không đúng định dạng DD-MM-YYYY!");
+                resultLabel.setVisible(true);
+                return;
+            }
             // Lấy thông tin từ các TextField và tạo đối tượng Member
             if (App.currentUser instanceof Member) {
                 App.currentUser.setId(idMenberTextField.getText());
@@ -144,8 +187,8 @@ public class MemberInfo {
                 }
 
                 // Kiểm tra mật khẩu cũ có chính xác không
-                Member currentMember = UserDAO.getMemberFromId(App.currentUser.getId());
-                if (currentMember == null || !currentMember.getPassword().equals(oldPassword)) {
+                String currentPassword = App.currentUser.getPassword();
+                if (currentPassword == null || !currentPassword.equals(oldPassword)) {
                     resultLabel.setText("Mật khẩu cũ không chính xác!");
                     resultLabel.setVisible(true);
                     return;
@@ -154,7 +197,7 @@ public class MemberInfo {
             }
 
             // Gọi hàm updateMember để lưu thông tin mới vào cơ sở dữ liệu
-            UserDAO.updateMember((Member) App.currentUser);
+            Member.updateInfoToDatabase((Member) App.currentUser);
             resultLabel.setText("Chỉnh sửa thành công!");
             resultLabel.setVisible(true);
 
