@@ -1,8 +1,8 @@
 package database;
 
 import app.base.Category;
-import app.database.CategoryDAO;
-import app.database.DatabaseManagement;
+import app.dao.CategoryDAO;
+import app.dao.DatabaseManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

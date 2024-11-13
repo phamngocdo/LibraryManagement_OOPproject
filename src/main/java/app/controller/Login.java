@@ -16,7 +16,6 @@ import java.net.URL;
 
 public class Login {
 
-    //Login Pane
     @FXML
     private Pane loginPane;
 
@@ -38,7 +37,6 @@ public class Login {
     @FXML
     private Hyperlink memberRegisterLink;
 
-    //Register Pane
     @FXML
     private Pane registerPane;
 

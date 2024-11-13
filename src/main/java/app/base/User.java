@@ -1,7 +1,7 @@
 package app.base;
 
-import app.database.DocumentDAO;
-import app.database.UserDAO;
+import app.dao.DocumentDAO;
+import app.dao.UserDAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -104,8 +104,8 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public ArrayList<Document> seeTopRatingDoc() {
-        return DocumentDAO.getBestRatingDocuments(5);
+    public ArrayList<Document> seeTopRatingDoc(int number) {
+        return DocumentDAO.getBestRatingDocuments(number);
     }
 
     public static User login( String username, String password) {

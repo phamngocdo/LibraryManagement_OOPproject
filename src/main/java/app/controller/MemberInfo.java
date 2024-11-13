@@ -1,7 +1,7 @@
 package app.controller;
 
 import app.base.Member;
-import app.database.UserDAO;
+import app.dao.UserDAO;
 import app.run.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -38,22 +38,18 @@ public class MemberInfo {
 
     @FXML
     private void initialize() {
-        App.currentUser = UserDAO.getMemberFromId("LL33OH5RGV30");
-        _setupPersonalInfo();
+        setupPersonalInfo();
     }
 
-    private void _setupPersonalInfo() {
-        // Kiểm tra nếu người dùng hiện tại là một thành viên
-        if (App.currentUser instanceof Member currentMember) {
-            // Hiển thị thông tin người dùng lên các trường TextField
-            idMenberTextField.setText(currentMember.getId());
-            loginNameTextField.setText(currentMember.getUsername());
-            firstNameTextField.setText(currentMember.getFirstName());
-            lastNameTextField.setText(currentMember.getLastName());
-            birthdayTextField.setText(currentMember.getBirthday());
-            emailTextField.setText(currentMember.getEmail());
-            phoneNumberTextFiled.setText(currentMember.getPhoneNumber());
-        }
+    private void setupPersonalInfo() {
+        Member currentMember = (Member) App.currentUser;
+        idMenberTextField.setText(currentMember.getId());
+        loginNameTextField.setText(currentMember.getUsername());
+        firstNameTextField.setText(currentMember.getFirstName());
+        lastNameTextField.setText(currentMember.getLastName());
+        birthdayTextField.setText(currentMember.getBirthday());
+        emailTextField.setText(currentMember.getEmail());
+        phoneNumberTextFiled.setText(currentMember.getPhoneNumber());
         //Hiển thị bảng thông tin cá nhân và nút chỉnh sửa
         personalInfoHBox.setVisible(true);
         idMenberTextField.setDisable(true);
@@ -80,7 +76,7 @@ public class MemberInfo {
          */
         if (isEditing) {
             // Nếu đang ở chế độ chỉnh sửa, quay lại trạng thái ban đầu
-            _setupPersonalInfo();
+            setupPersonalInfo();
         } else {
             // Nếu không ở chế độ chỉnh sửa, chuyển sang chế độ chỉnh sửa
             firstNameTextField.setDisable(false);
@@ -202,7 +198,7 @@ public class MemberInfo {
             resultLabel.setVisible(true);
 
             // Quay lại trạng thái ban đầu sau khi lưu thành công
-            _setupPersonalInfo();
+            setupPersonalInfo();
 
         } catch (Exception e) {
             resultLabel.setText("Lỗi khi lưu thông tin!");

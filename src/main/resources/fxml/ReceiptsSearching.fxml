@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane prefHeight="650.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" />
+
+<Pane prefHeight="650.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="41.0" layoutY="106.0" prefHeight="504.0" prefWidth="864.0">
+        <columns>
+          <TableColumn prefWidth="144.0" text="Mã phiếu" />
+          <TableColumn prefWidth="144.0" text="Mã người mượn" />
+            <TableColumn prefWidth="144.0" text="Mã tài liệu" />
+            <TableColumn prefWidth="144.0" text="Ngày mượn" />
+            <TableColumn prefWidth="144.0" text="Hạn trả" />
+            <TableColumn prefWidth="144.0" text="Đã trả sách" />
+        </columns>
+      </TableView>
+      <TextField layoutX="41.0" layoutY="59.0" prefHeight="25.0" prefWidth="282.0" promptText="Tìm kiếm bằng mã phiếu, người dùng, sách" />
+      <ImageView fitHeight="31.0" fitWidth="37.0" layoutX="338.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphic/images/qr-code.png" />
+         </image>
+      </ImageView>
+      <JFXComboBox layoutX="827.0" layoutY="58.0" prefHeight="27.0" prefWidth="37.0" promptText="Lọc" />
+   </children>
+</Pane>

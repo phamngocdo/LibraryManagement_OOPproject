@@ -1,18 +1,17 @@
 package app.controller;
 
 import app.base.*;
-import app.database.RatingDAO;
-import app.database.ReceiptDAO;
+import app.dao.RatingDAO;
+import app.dao.ReceiptDAO;
 import app.run.App;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -21,11 +20,18 @@ import java.io.IOException;
 import java.net.URL;
 
 public class DocumentInfo {
+
+    @FXML
+    private ScrollPane scrollPane;
+
     @FXML
     private Pane functionPane, infoPane, memberRatingPane;
 
     @FXML
-    private Label authorsLabel, averageScoreLabel, categoriesLabel, idLabel, pageCountLabel;
+    private ImageView backButton;
+
+    @FXML
+    private Label authorsLabel, isbnLabel, averageScoreLabel, categoriesLabel, idLabel, pageCountLabel;
 
     @FXML
     private Label publisherLabel, remainingLabel, pulishedDateLabel, quantityLabel, ratingCountLabel, titleLabel;
@@ -59,6 +65,7 @@ public class DocumentInfo {
 
     @FXML
     private void initialize() {
+        scrollPane.setVisible(true);
         if (App.currentUser instanceof Admin) {
             memberRatingPane.setVisible(false);
             editingButton.setVisible(true);
@@ -85,6 +92,15 @@ public class DocumentInfo {
         }
         setUpInfo();
         setUpRatingHBox();
+    }
+
+    @FXML
+    private void goBackToPrevPane(MouseEvent event) {
+        Parent parent = scrollPane.getParent();
+        if (parent instanceof Pane parentPane) {
+            parentPane.getChildren().remove(scrollPane);
+        }
+        parent.setVisible(false);
     }
 
     @FXML
@@ -151,6 +167,7 @@ public class DocumentInfo {
                     // Hiển thị thông tin tài liệu
                     assert doc != null;
                     titleLabel.setText(doc.getTitle());
+                    isbnLabel.setText(doc.getIsbn());
                     idLabel.setText(doc.getId());
                     authorsLabel.setText(doc.getAuthorsToString());
                     categoriesLabel.setText(doc.getCategoriesToString());

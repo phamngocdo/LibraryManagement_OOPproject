@@ -1,8 +1,8 @@
 package database;
 
 import app.base.Receipt;
-import app.database.DatabaseManagement;
-import app.database.ReceiptDAO;
+import app.dao.DatabaseManagement;
+import app.dao.ReceiptDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

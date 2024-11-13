@@ -1,4 +1,4 @@
-package app.database;
+package app.dao;
 
 import app.base.Admin;
 import app.base.Member;
@@ -121,8 +121,22 @@ public class UserDAO {
 
     // Update a member
     public static void updateMember(Member member) {
-        removeMember(member.getId());
-        addMember(member);
+        StringBuilder query = new StringBuilder();
+        query.append("UPDATE users ");
+        query.append("SET password = ?, first_name = ?, last_name = ?, birthday = ?, email = ?, phone_number = ?");
+        query.append("WHERE user_id=?");
+        try {
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, member.getPassword());
+            preparedStatement.setString(2, member.getFirstName());
+            preparedStatement.setString(3, member.getLastName());
+            preparedStatement.setString(4, member.getBirthday());
+            preparedStatement.setString(5, member.getEmail());
+            preparedStatement.setString(6, member.getPhoneNumber());
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // Check if username exists

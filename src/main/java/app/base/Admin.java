@@ -1,13 +1,11 @@
 package app.base;
 
-import app.database.DocumentDAO;
-import app.database.RatingDAO;
-import app.database.ReceiptDAO;
-import app.database.UserDAO;
+import app.dao.DocumentDAO;
+import app.dao.ReceiptDAO;
+import app.dao.UserDAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Admin  extends User{

@@ -1,8 +1,8 @@
 package database;
 
 import app.base.Author;
-import app.database.AuthorDAO;
-import app.database.DatabaseManagement;
+import app.dao.AuthorDAO;
+import app.dao.DatabaseManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

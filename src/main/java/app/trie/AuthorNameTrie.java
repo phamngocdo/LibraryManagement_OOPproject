@@ -1,6 +1,6 @@
 package app.trie;
 
-import app.database.AuthorDAO;
+import app.dao.AuthorDAO;
 
 public class AuthorNameTrie extends Trie {
 

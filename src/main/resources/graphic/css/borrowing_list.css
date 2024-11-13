@@ -1,0 +1,4 @@
+.qrcode-icon {
+    -fx-image: url(../images/qr-code.png);
+    -fx-background-size: 32 32;
+}

@@ -1,4 +1,4 @@
-package app.database;
+package app.dao;
 import app.base.Author;
 import app.base.Category;
 import app.base.Document;
@@ -112,23 +112,24 @@ public class DocumentDAO {
         //Thêm tài liệu phải thêm cho bảng category và author
         StringBuilder docQuery = new StringBuilder();
         docQuery.append("INSERT INTO documents ");
-        docQuery.append("(document_id, title, quantity, remaining, ratings_count, average_score, " +
+        docQuery.append("(document_id, title, isbn, quantity, remaining, ratings_count, average_score, " +
                 "description, page_count, publisher, published_date, image_url) ");
-        docQuery.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        docQuery.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(docQuery.toString());
             preparedStatement.setString(1, doc.getId());
             preparedStatement.setString(2, doc.getTitle());
-            preparedStatement.setInt(3, doc.getQuantity());
-            preparedStatement.setInt(4, doc.getRemaining());
-            preparedStatement.setInt(5, doc.getRatingCount());
-            preparedStatement.setDouble(6, doc.getAverageScore());
-            preparedStatement.setString(7, doc.getDescription());
-            preparedStatement.setInt(8, doc.getPageCount());
-            preparedStatement.setString(9, doc.getPublisher());
-            preparedStatement.setString(10, doc.getPublishedDate());
-            preparedStatement.setString(11, doc.getImageUrl());
+            preparedStatement.setString(3, doc.getIsbn());
+            preparedStatement.setInt(4, doc.getQuantity());
+            preparedStatement.setInt(5, doc.getRemaining());
+            preparedStatement.setInt(6, doc.getRatingCount());
+            preparedStatement.setDouble(7, doc.getAverageScore());
+            preparedStatement.setString(8, doc.getDescription());
+            preparedStatement.setInt(9, doc.getPageCount());
+            preparedStatement.setString(10, doc.getPublisher());
+            preparedStatement.setString(11, doc.getPublishedDate());
+            preparedStatement.setString(12, doc.getImageUrl());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -243,8 +244,29 @@ public class DocumentDAO {
     }
 
     public static void updateDocument(Document document) {
-        //Xóa doc cũ tương ứng với id sau đó thêm doc mới
-        removeDocument(document.getId());
-        addDocument(document);
+        StringBuilder query = new StringBuilder();
+        query.append("UPDATE documents ");
+        query.append("SET isbn = ?, title = ?, publisher = ?, published_date = ?, description = ?, page_count = ?,");
+        query.append(" average_score = ?, quantity = ?, remaining = ?, ratings_count = ?, image_url = ?");
+        query.append("WHERE document_id = ?");
+        try {
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, document.getIsbn());
+            preparedStatement.setString(2, document.getTitle());
+            preparedStatement.setString(3, document.getPublisher());
+            preparedStatement.setString(4, document.getPublishedDate());
+            preparedStatement.setString(5, document.getDescription());
+            preparedStatement.setInt(6, document.getPageCount());
+            preparedStatement.setDouble(7, document.getAverageScore());
+            preparedStatement.setInt(8, document.getQuantity());
+            preparedStatement.setInt(9, document.getRemaining());
+            preparedStatement.setInt(10, document.getRatingCount());
+            preparedStatement.setString(11, document.getImageUrl());
+            preparedStatement.setString(12, document.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

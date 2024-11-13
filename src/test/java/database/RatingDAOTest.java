@@ -1,8 +1,8 @@
 package database;
 
 import app.base.Rating;
-import app.database.DatabaseManagement;
-import app.database.RatingDAO;
+import app.dao.DatabaseManagement;
+import app.dao.RatingDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -17,7 +17,7 @@ public class DocumentEditing {
     private Label functionLabel, resultLabel;
 
     @FXML
-    private TextField idField, titleField, publisherField, publishedDateField, authorField, imageUrlFIeld;
+    private TextField titleField, isbnField, publisherField, publishedDateField, authorField, imageUrlFIeld;
 
     @FXML
     private TextField categoryField, quantityField, ratingCountField, remainingField, averageScoreField, pageCountField;
@@ -47,8 +47,8 @@ public class DocumentEditing {
     private void populateFields() {
         if (doc != null) { // Nếu doc khác null tức là đang chỉnh sửa
             functionLabel.setText("Chỉnh sửa thông tin tài liệu");
-            idField.setText(doc.getId());
             titleField.setText(doc.getTitle());
+            isbnField.setText(doc.getIsbn());
             publisherField.setText(doc.getPublisher());
             publishedDateField.setText(doc.getPublishedDate());
             authorField.setText(doc.getAuthorsToString());
@@ -64,8 +64,8 @@ public class DocumentEditing {
 
     @FXML
     private void onSaveDocument() {
-        String id = idField.getText();
         String title = titleField.getText();
+        String isbn = isbnField.getText();
         String publisher = publisherField.getText();
         String publishedDate = publishedDateField.getText();
         String authorText = authorField.getText();
@@ -78,9 +78,10 @@ public class DocumentEditing {
         String description = descriptionArea.getText();
         String imageUrl = imageUrlFIeld.getText();
 
-        if (id.isEmpty() || title.isEmpty() || publisher.isEmpty() || publishedDate.isEmpty()
+        if (title.isEmpty() || isbn.isEmpty() || publisher.isEmpty() || publishedDate.isEmpty()
                 || authorText.isEmpty() || categoryText.isEmpty() || quantityText.isEmpty() || remainingText.isEmpty()
-                || ratingCountText.isEmpty() || averageScoreText.isEmpty() || pageCountText.isEmpty() || description.isEmpty() || imageUrl.isEmpty()) {
+                || ratingCountText.isEmpty() || averageScoreText.isEmpty() || pageCountText.isEmpty()
+                || description.isEmpty() || imageUrl.isEmpty()) {
             resultLabel.setText("Bạn cần điền đầy đủ thông tin");
             return;
         }
@@ -113,7 +114,8 @@ public class DocumentEditing {
                 categories.add(new Category("", str));
             }
 
-            Document newDoc = new Document(id, title, quantity, remaining, ratingCount,
+            String docId = doc == null ? "" : doc.getId();
+            Document newDoc = new Document(docId, title, isbn, quantity, remaining, ratingCount,
                     averageScore, pageCount, description, publisher, publishedDate,
                     imageUrl, authors, categories, null);
 
@@ -141,9 +143,9 @@ public class DocumentEditing {
 
     @FXML
     private void onGetAPIInfo() {
-        String docId = idField.getText();
-        if (docId.isEmpty()) {
-            resultLabel.setText("Vui lòng nhập ID sách.");
+        String isbn = isbnField.getText();
+        if (isbn.isEmpty()) {
+            resultLabel.setText("Vui lòng nhập mã ISBN của sách.");
             return;
         }
 
@@ -153,7 +155,7 @@ public class DocumentEditing {
         Task<Document> task = new Task<>() {
             @Override
             protected Document call() throws Exception {
-                return GoogleBookAPI.getDocFromId(docId);
+                return GoogleBookAPI.getDocFromIsbn(isbn);
             }
         };
 
@@ -162,6 +164,7 @@ public class DocumentEditing {
             if (doc != null) {
                 // Điền lại các trường thông tin từ tài liệu API
                 titleField.setText(doc.getTitle());
+                isbnField.setText(doc.getIsbn());
                 publisherField.setText(doc.getPublisher());
                 publishedDateField.setText(doc.getPublishedDate());
                 authorField.setText(doc.getAuthorsToString()); // Sử dụng phương thức getAuthorsToString

@@ -6,7 +6,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1126.0" style="-fx-background-color: white;" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
+      prefWidth="1126.0" style="-fx-background-color: white;" stylesheets="@../graphic/css/style.css"
+      xmlns="http://javafx.com/javafx/23">
    <ImageView fitHeight="94.0" fitWidth="82.0" layoutX="522.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../graphic/images/no-internet.png" />
    </ImageView>

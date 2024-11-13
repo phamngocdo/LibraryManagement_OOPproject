@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Home {
 
     @FXML
-    private Pane functionPane, recommenderPane;
+    private Pane docInfoPane, recommenderPane;
 
     @FXML
     private ScrollPane searchingResultScrollPane;
@@ -75,6 +75,7 @@ public class Home {
     private void initialize() {
         searchingResultScrollPane.setVisible(false);
         searchingList.setVisible(false);
+        docInfoPane.setVisible(false);
 
         setUpComboBox();
         setUpSearchingField();
@@ -97,7 +98,7 @@ public class Home {
             protected Void call() {
                 recommenderPane.setVisible(false);
                 progressIndicator.setVisible(true);
-                ArrayList<Document> topRatingDocs = App.currentUser.seeTopRatingDoc();
+                ArrayList<Document> topRatingDocs = App.currentUser.seeTopRatingDoc(5);
                 for (int i = 0; i < 5; i++) {
                     //
 
@@ -304,8 +305,9 @@ public class Home {
             URL url = getClass().getResource("/fxml/DocumentInfo.fxml");
             if (url != null) {
                 Parent page = FXMLLoader.load(url);
-                functionPane.getChildren().clear();
-                functionPane.getChildren().add(page);
+                docInfoPane.getChildren().clear();
+                docInfoPane.getChildren().add(page);
+                docInfoPane.setVisible(true);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

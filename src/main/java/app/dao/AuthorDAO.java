@@ -1,4 +1,4 @@
-package app.database;
+package app.dao;
 
 import app.base.Author;
 

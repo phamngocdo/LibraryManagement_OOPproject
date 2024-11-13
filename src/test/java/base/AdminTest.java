@@ -4,9 +4,9 @@ import app.base.Admin;
 import app.base.Document;
 import app.base.Member;
 import app.base.Receipt;
-import app.database.DatabaseManagement;
-import app.database.DocumentDAO;
-import app.database.UserDAO;
+import app.dao.DatabaseManagement;
+import app.dao.DocumentDAO;
+import app.dao.UserDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

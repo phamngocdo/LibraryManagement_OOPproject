@@ -1,8 +1,8 @@
 package database;
 
 import app.base.Document;
-import app.database.DatabaseManagement;
-import app.database.DocumentDAO;
+import app.dao.DatabaseManagement;
+import app.dao.DocumentDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,9 +19,10 @@ public class DocumentDAOTest {
 
     @Test
     void testAddDocument() {
-        Document newDocument = new Document("", "New Document", 3,5,
+        Document newDocument = new Document("", "New Document", "", 3 ,5,
                 2, 5.0, 100, "description", "pulisher",
-                "publishDate", "https://example.com/new_image.jpg");
+                "publishDate", "https://example.com/new_image.jpg", null,
+                null, null);
         DocumentDAO.addDocument(newDocument);
         Document fetchedDocument = DocumentDAO.getDocFromId(newDocument.getId());
         assertNotNull(fetchedDocument);
@@ -38,9 +39,10 @@ public class DocumentDAOTest {
 
     @Test
     void testRemoveDocument() {
-        Document newDocument = new Document("", "New Document", 3,5,
-                2, 5.6, 100, "description", "pulisher",
-                "publishDate", "https://example.com/new_image.jpg");
+        Document newDocument = new Document("", "New Document", "", 3 ,5,
+                2, 5.0, 100, "description", "pulisher",
+                "publishDate", "https://example.com/new_image.jpg", null,
+                null, null);
         DocumentDAO.addDocument(newDocument);
         DocumentDAO.removeDocument(newDocument.getId());
         Document fetchedDocument = DocumentDAO.getDocFromId(newDocument.getId());

@@ -1,6 +1,6 @@
 package app.base;
 
-import app.database.DocumentDAO;
+import app.dao.DocumentDAO;
 
 import java.util.ArrayList;
 
