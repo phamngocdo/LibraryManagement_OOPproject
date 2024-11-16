@@ -221,7 +221,7 @@ public class DocumentInfo {
 
     private void addRatingIntoVBox(Rating rating) {
         Pane pane = new Pane();
-        Label memberIdlabel = new Label(rating.getUserId());
+        Label memberIdlabel = new Label(rating.getMemberId());
         Label commentLabel = new Label(rating.getComment());
         HBox starHBox = new HBox();
         for (int i = 0; i < 5; i++) {

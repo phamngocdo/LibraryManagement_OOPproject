@@ -110,7 +110,7 @@
    </Pane>
    <ScrollPane fx:id="searchingResultScrollPane" layoutX="14.0" layoutY="66.0" prefHeight="575.0" prefWidth="921.0" visible="false">
       <Pane prefWidth="919.0">
-         <VBox fx:id="vBoxInScrollPane" layoutX="1.0" layoutY="35.0" prefWidth="918.0" />
+         <VBox fx:id="vBoxInScrollPane" layoutX="1.0" layoutY="35.0" prefWidth="918.0" spacing="20.0" />
          <Label fx:id="resultCount" layoutX="14.0" layoutY="1.0" text="Label">
             <font>
                <Font name="Arial Bold" size="17.0" />
@@ -120,5 +120,5 @@
    </ScrollPane>
    <JFXListView fx:id="searchingList" focusTraversable="false" layoutX="112.0" layoutY="51.0" prefHeight="0.0" prefWidth="721.0" />
    <ProgressIndicator fx:id="progressIndicator" layoutX="462.0" layoutY="320.0" prefHeight="34.0" prefWidth="26.0" visible="false" />
-   <Pane fx:id="docInfoPane" prefHeight="650.0" prefWidth="945.0" />
+   <Pane fx:id="docInfoPane" prefHeight="650.0" prefWidth="945.0" visible="false" />
 </Pane>

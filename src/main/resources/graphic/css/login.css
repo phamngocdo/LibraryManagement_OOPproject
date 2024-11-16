@@ -1,13 +1,13 @@
 .login-pane {
-    -fx-border-radius:20px;
-    -fx-background-radius: 20px;
+    -fx-border-radius:15px;
+    -fx-background-radius: 15px;
     -fx-background-color: white;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 4, 0.0, 0, 1);
 }
 
 .login-text-field {
-    -fx-border-radius:20px;
-    -fx-background-radius: 20px;
+    -fx-border-radius:15px;
+    -fx-background-radius:15px;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
     -fx-border-color: black;
@@ -18,8 +18,8 @@
 
 
 .login-button {
-    -fx-border-radius:20px;
-    -fx-background-radius:20px;
+    -fx-border-radius:15px;
+    -fx-background-radius:15px;
     -fx-background-color:black;
     -fx-text-fill:white;
     -fx-font-size:14px;

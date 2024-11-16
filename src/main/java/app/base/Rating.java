@@ -5,14 +5,14 @@ import java.sql.SQLException;
 
 public class Rating {
     private String id;
-    private final String userId;
+    private final String memberId;
     private final String docId;
     private final int ratingScore;
     private final String comment;
 
-    public Rating(String id, String userId, String docId, int ratingScore, String comment) {
+    public Rating(String id, String memberId, String docId, int ratingScore, String comment) {
         this.id = id;
-        this.userId = userId;
+        this.memberId = memberId;
         this.docId = docId;
         this.ratingScore = ratingScore;
         this.comment = comment;
@@ -20,7 +20,7 @@ public class Rating {
 
     public Rating(ResultSet resultSet) throws SQLException {
         id = resultSet.getString("rating_id");
-        userId = resultSet.getString("user_id");
+        memberId = resultSet.getString("user_id");
         docId = resultSet.getString("document_id");
         ratingScore = resultSet.getInt("rating_score");
         comment = resultSet.getString("comment");
@@ -34,8 +34,8 @@ public class Rating {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getMemberId() {
+        return memberId;
     }
 
     public String getDocId() {

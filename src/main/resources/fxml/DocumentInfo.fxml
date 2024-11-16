@@ -56,7 +56,7 @@
             </HBox>
             <HBox prefWidth="499.0">
                <Label text="Mô tả:" />
-               <TextArea fx:id="descriptionTextArea" focusTraversable="false" prefWidth="390.0" text="                                                                                                            " wrapText="true" />
+               <TextArea fx:id="descriptionTextArea" editable="false" focusTraversable="false" prefHeight="64.0" prefWidth="449.0" text="                                                                                                            " wrapText="true" />
             </HBox>
             <HBox prefWidth="499.0">
                <Label text="Số lượng đánh giá:" />

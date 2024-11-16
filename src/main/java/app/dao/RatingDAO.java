@@ -79,7 +79,7 @@ public class RatingDAO {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, rating.getId());
-            preparedStatement.setString(2, rating.getUserId());
+            preparedStatement.setString(2, rating.getMemberId());
             preparedStatement.setString(3, rating.getDocId());
             preparedStatement.setInt(4, rating.getRatingScore());
             preparedStatement.setString(5, rating.getComment());

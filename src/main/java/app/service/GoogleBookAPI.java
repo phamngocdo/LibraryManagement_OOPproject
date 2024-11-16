@@ -64,7 +64,8 @@ public class GoogleBookAPI {
         }
 
         // Lấy thông tin từ volumeInfo của cuốn sách đầu tiên
-        JSONObject volumeInfo = jsonResponse.getJSONArray("items").getJSONObject(0).getJSONObject("volumeInfo");
+        JSONObject volumeInfo = jsonResponse.getJSONArray("items")
+                .getJSONObject(0).getJSONObject("volumeInfo");
 
         // Truy xuất thông tin từ JSON và xử lý nếu thiếu giá trị
         String id = jsonResponse.getJSONArray("items").getJSONObject(0).getString("id");

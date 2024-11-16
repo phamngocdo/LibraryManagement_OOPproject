@@ -35,7 +35,7 @@ public class MemberTest {
         assertEquals(initialRemaining - 1, document.getRemaining());
         assertEquals("not returned", receipt.getStatus());
         assertEquals(date.format(formatter), receipt.getBorrowingDate());
-        assertEquals(date.plusWeeks(2).format(formatter), receipt.getReturnDate());
+        assertEquals(date.plusWeeks(2).format(formatter), receipt.getDueDate());
     }
 
     @Test

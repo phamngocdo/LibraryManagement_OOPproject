@@ -70,11 +70,11 @@ public class ReceiptInfo {
     private void qrGenerate() throws Exception {
         HashMap<String, String> map = new HashMap<>();
         map.put("receiptId", receipt.getId());
-        map.put("docId", docIdLabel.getText());
-        map.put("memberId", memberIdLabel.getText());
-        map.put("borrowingDate", borrowingDateLabel.getText());
-        map.put("dueDate", dueDateLabel.getText());
-        map.put("status", statusLabel.getText());
+        map.put("docId", receipt.getDocId());
+        map.put("memberId", receipt.getMemberId());
+        map.put("borrowingDate", receipt.getBorrowingDate());
+        map.put("dueDate", receipt.getDueDate());
+        map.put("status", receipt.getStatus());
         qrCodeImageView.setImage(QRcode.generateQRCode(map, 200));
     }
 

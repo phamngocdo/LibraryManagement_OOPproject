@@ -259,6 +259,7 @@ public class Home {
                 ArrayList<HBox> hBoxes = new ArrayList<>();
                 for (int i = 0; i < hBoxCount; i++) {
                     HBox hBox = new HBox();
+                    hBox.setSpacing(20);
 
                     for (int j = 0; j < 5; j++) {
                         if (listIndex.get() >= listCount) {

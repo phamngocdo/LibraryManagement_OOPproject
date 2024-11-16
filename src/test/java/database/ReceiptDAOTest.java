@@ -23,7 +23,7 @@ public class ReceiptDAOTest {
         Receipt receipt = ReceiptDAO.getReceiptFromId("USHXJWYOKG4N");
         assertNotNull(receipt);
         //kiểm tra user_id có đúng k
-        assertEquals("OJIK98JHNTMT", receipt.getUserId());
+        assertEquals("OJIK98JHNTMT", receipt.getMemberId());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class ReceiptDAOTest {
         ReceiptDAO.addReceipt(receipt);
         Receipt retrievedReceipt = ReceiptDAO.getReceiptFromId(receipt.getId());
         assertNotNull(retrievedReceipt);
-        assertEquals("OJIK98JHNTMT", retrievedReceipt.getUserId());
+        assertEquals("OJIK98JHNTMT", retrievedReceipt.getMemberId());
     }
 
     @Test
