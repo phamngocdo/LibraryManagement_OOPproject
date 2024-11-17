@@ -30,7 +30,7 @@ public class AdminTest {
         member.borrowDocument(document);
         Receipt receipt = member.getReceipts().getFirst();
         assert admin != null;
-        admin.confirmReturnDocument(receipt);
+        admin.confirmReturnDocument(receipt, true);
         Document updatedDocument = DocumentDAO.getDocFromId(document.getId());
         assert updatedDocument != null;
         assertEquals(initialRemaining + 1, updatedDocument.getRemaining());
