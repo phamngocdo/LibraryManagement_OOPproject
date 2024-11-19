@@ -159,30 +159,41 @@ public class ReceiptsSearching {
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {
-            //lấy docId sau khi giải mã qr
-            String qrCodeData = decodeQRCode(selectedFile);
-            if (qrCodeData != null) {
-                searchReceipts(qrCodeData);
-            }
+            // Lấy đối tượng Receipt sau khi giải mã QR code
+            Receipt decodedReceipt = decodeQRCode(selectedFile);
+            // So sánh đối tượng receipt với danh sách receiptsList
+            List<Receipt> matchedReceipts = receiptsList.stream()
+                    .filter(receipt -> receipt.equals(decodedReceipt))
+                    .collect(Collectors.toList());
+
+            // Hiển thị kết quả tìm kiếm
+            receiptsTable.setItems(FXCollections.observableArrayList(matchedReceipts));
         }
     }
 
-    private String decodeQRCode(File file) {
+    private Receipt decodeQRCode(File file) {
         try {
             // Đọc file ảnh vào BufferedImage
             BufferedImage bufferedImage = ImageIO.read(file);
-            //chuyển thành BinaryBitmap
+
+            // Chuyển thành BinaryBitmap
             BinaryBitmap binaryBitmap = new BinaryBitmap(
                     new HybridBinarizer(
                             new BufferedImageLuminanceSource(bufferedImage)));
 
             Result result = new MultiFormatReader().decode(binaryBitmap);
-            //lấy hashmap sau khi giải mã qr
+            // Lấy JSON sau khi giải mã QR
             String qrCodeData = result.getText();
-
             JSONObject jsonObject = new JSONObject(qrCodeData);
-            // Trả về giá trị docId
-            return jsonObject.getString("docId");
+            // Tạo đối tượng Receipt từ dữ liệu JSON
+            return new Receipt(
+                    jsonObject.getString("receiptId"),
+                    jsonObject.getString("memberId"),
+                    jsonObject.getString("docId"),
+                    jsonObject.getString("borrowingDate"),
+                    jsonObject.getString("dueDate"),
+                    jsonObject.getString("status")
+            );
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
