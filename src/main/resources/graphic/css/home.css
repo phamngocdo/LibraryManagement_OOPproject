@@ -39,10 +39,6 @@
     -fx-background-color: #c4c4c4;
 }
 
-.list {
-
-}
-
 .list-cell {
     -fx-background-color: white;
     -fx-text-fill: black;
@@ -53,11 +49,41 @@
     -fx-background-color: #c4c4c4;
 }
 
-.list-cell:filled:selected {
-    -fx-background-color: #4caf50;
-    -fx-text-fill: black;
+.progress-indicator{
+    -fx-pref-height: 26;
+    -fx-progress-color: #8a8a8a;
+    -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #e0e0e0;
+    -fx-background-radius: 3px;
+}
+
+.scroll-bar .increment-button:hover{
+    -fx-background-color:transparent;
+}
+
+.scroll-bar .decrement-button:hover{
+    -fx-background-color:transparent;
 }
 
 .doc-pane{
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-background-color: white;
+    -fx-pref-width: 160;
+    -fx-pref-height: 242;
+    -fx-cursor: HAND;
+    -fx-font-family: Arial;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.0, 0, 2);
+}
 
+.doc-pane:hover{
+    -fx-background-color: #c4c4c4;
 }

@@ -1,13 +1,11 @@
 package app.controller;
 
 import app.base.*;
-import app.dao.RatingDAO;
 import app.dao.ReceiptDAO;
 import app.run.App;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -105,28 +103,23 @@ public class DocumentInfo {
 
     @FXML
     private void sendRating() {
-        try {
-            String comment = memberComment.getText();
+        String comment = memberComment.getText();
+        Rating newRating = new Rating(
+                null,
+                App.currentUser.getId(),
+                currentDoc.getId(),
+                selectedStar,
+                comment
+        );
+        // Lưu đánh giá vào cơ sở dữ liệu
+        ((Member) App.currentUser).rateDocument(newRating);
+        // Thêm đánh giá mới vào giao diện
+        addRatingIntoVBox(newRating);
+        // Xóa nhận xét sau khi gửi
+        memberComment.clear();
+        displayRatedStar(0, starRatingHBox); // Đặt lại HBox về trạng thái ban đầu
+        System.out.println("Đánh giá đã được gửi thành công!");
 
-            Rating newRating = new Rating(
-                    null,
-                    App.currentUser.getId(),
-                    currentDoc.getId(),
-                    selectedStar,
-                    comment
-            );
-            // Lưu đánh giá vào cơ sở dữ liệu
-            RatingDAO.addRating(newRating);
-            // Thêm đánh giá mới vào giao diện
-            addRatingIntoVBox(newRating);
-            // Xóa nhận xét sau khi gửi
-            memberComment.clear();
-            displayRatedStar(0, starRatingHBox); // Đặt lại HBox về trạng thái ban đầu
-
-            System.out.println("Đánh giá đã được gửi thành công!");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @FXML
@@ -148,7 +141,7 @@ public class DocumentInfo {
                 controller.setDocument(currentDoc);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Không tìm thấy đường dẫn của DocumentEdit.fxml");
         }
     }
 
@@ -156,41 +149,36 @@ public class DocumentInfo {
         // Ẩn bảng thông tin và hiển thị ProgressIndicator khi đang tải dữ liệu
         infoPane.setVisible(false);
         progressIndicator.setVisible(true);
-
         // Sử dụng một luồng mới để xử lý tải thông tin tài liệu
         new Thread(() -> {
-            try {
-                // Lấy thông tin tài liệu hiện tại
-                Document doc = currentDoc;
-                // Cập nhật giao diện trong JavaFX Application Thread
-                Platform.runLater(() -> {
-                    // Hiển thị thông tin tài liệu
-                    assert doc != null;
-                    titleLabel.setText(doc.getTitle());
-                    isbnLabel.setText(doc.getIsbn());
-                    idLabel.setText(doc.getId());
-                    authorsLabel.setText(doc.getAuthorsToString());
-                    categoriesLabel.setText(doc.getCategoriesToString());
-                    descriptionTextArea.setText(doc.getDescription());
-                    pageCountLabel.setText(String.valueOf(doc.getPageCount()));
-                    publisherLabel.setText(doc.getPublisher());
-                    pulishedDateLabel.setText(doc.getPublishedDate());
-                    quantityLabel.setText(String.valueOf(doc.getQuantity()));
-                    remainingLabel.setText(String.valueOf(doc.getRemaining()));
-                    ratingCountLabel.setText(String.valueOf(doc.getRatingCount()));
-                    averageScoreLabel.setText(String.format("%.2f", doc.getAverageScore()));
+            // Lấy thông tin tài liệu hiện tại
+            Document doc = currentDoc;
+            // Cập nhật giao diện trong JavaFX Application Thread
+            Platform.runLater(() -> {
+                // Hiển thị thông tin tài liệu
+                assert doc != null;
+                titleLabel.setText(doc.getTitle());
+                isbnLabel.setText(doc.getIsbn());
+                idLabel.setText(doc.getId());
+                authorsLabel.setText(doc.getAuthorsToString());
+                categoriesLabel.setText(doc.getCategoriesToString());
+                descriptionTextArea.setText(doc.getDescription());
+                pageCountLabel.setText(String.valueOf(doc.getPageCount()));
+                publisherLabel.setText(doc.getPublisher());
+                pulishedDateLabel.setText(doc.getPublishedDate());
+                quantityLabel.setText(String.valueOf(doc.getQuantity()));
+                remainingLabel.setText(String.valueOf(doc.getRemaining()));
+                ratingCountLabel.setText(String.valueOf(doc.getRatingCount()));
+                averageScoreLabel.setText(String.format("%.2f", doc.getAverageScore()));
 
-                    // Hiển thị hình ảnh tài liệu
-                    docImage.setImage(doc.loadImage());
-                    // Thêm các đánh giá vào VBox
-                    doc.getRatings().forEach(this::addRatingIntoVBox);
-                    // Sau khi tải xong, hiển thị bảng thông tin và ẩn ProgressIndicator
-                    infoPane.setVisible(true);
-                    progressIndicator.setVisible(false);
-                });
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+                // Hiển thị hình ảnh tài liệu
+                docImage.setImage(doc.loadImage());
+                // Thêm các đánh giá vào VBox
+                doc.getRatings().forEach(this::addRatingIntoVBox);
+                // Sau khi tải xong, hiển thị bảng thông tin và ẩn ProgressIndicator
+                infoPane.setVisible(true);
+                progressIndicator.setVisible(false);
+            });
         }).start();
     }
 

@@ -213,7 +213,8 @@ public class Login {
             root.getChildren().clear();
             root.getChildren().add(page);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            String name = mainScreenPath.toString().replace("/fxml/", "");
+            throw new RuntimeException("Không tìm thấy đường dẫn của " + name);
         }
     }
 }

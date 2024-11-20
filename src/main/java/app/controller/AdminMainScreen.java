@@ -54,7 +54,7 @@ public class AdminMainScreen {
                 root.getChildren().add(loginRoot);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Không tìm thấy đường dẫn của Login.fxml");
         }
     }
 
@@ -67,7 +67,7 @@ public class AdminMainScreen {
                 functionPane.getChildren().add(page);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Không tìm thấy đường dẫn của" + name + ".fxml");
         }
     }
 }

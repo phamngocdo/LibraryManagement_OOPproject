@@ -132,7 +132,7 @@ public class ReceiptInfo {
                 ImageIO.write(bufferedImage, "png", file);
                 System.out.println("Lưu thành công vào " + file.getAbsolutePath());
             } catch (IOException e) {
-                System.out.println("Lưu thất bại");
+                System.out.println("Lưu thất bại", e);
             }
         }
         setUpFixation();

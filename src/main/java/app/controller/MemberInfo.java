@@ -1,7 +1,6 @@
 package app.controller;
 
 import app.base.Member;
-import app.dao.UserDAO;
 import app.run.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -71,9 +70,6 @@ public class MemberInfo {
 
     @FXML
     private void editInfo() {
-        /**
-         * Khi nhấn nút chỉnh sửa thì hiển thị nút thay đổi mật khẩu và nút lưu
-         */
         if (isEditing) {
             // Nếu đang ở chế độ chỉnh sửa, quay lại trạng thái ban đầu
             setupPersonalInfo();
@@ -96,9 +92,6 @@ public class MemberInfo {
 
     @FXML
     private void changePassword() {
-        /**
-         * Khi nhấn nút thay đổi mật khẩu thì hiển thị nút hủy thay đổi mật khẩu và passwordVBox
-         */
         changePasswordButton.setVisible(false);
         cancelPasswordButton.setVisible(true);
         passwordVBox.setVisible(true);
@@ -106,9 +99,6 @@ public class MemberInfo {
 
     @FXML
     private void cancelPassword() {
-        /**
-         * Khi nhấn nút hủy thay đổi mật khẩu thì hiển thị nút thay đổi mật khẩu và bỏ passwordVBox
-         */
         changePasswordButton.setVisible(true);
         cancelPasswordButton.setVisible(false);
         passwordVBox.setVisible(false);
@@ -116,10 +106,6 @@ public class MemberInfo {
 
     @FXML
     private void saveInfo() {
-        /**
-         * Khi nhấn nút lưu thì đổi mật khẩu cũ thành mật khẩu mới và
-         * resultLabel hiển thị chỉnh sửa thành công
-         */
         try {
             // Kiểm tra các trường không được để trống
             if (firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty() ||
@@ -131,7 +117,7 @@ public class MemberInfo {
             }
             
             // Kiểm tra định dạng email hợp lệ
-            String emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+            String emailPattern = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
             if (!Pattern.matches(emailPattern, emailTextField.getText())) {
                 resultLabel.setText("Email không hợp lệ!");
                 resultLabel.setVisible(true);

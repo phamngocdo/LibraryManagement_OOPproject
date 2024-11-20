@@ -25,7 +25,7 @@ public class NetworkMonitor{
             noInternetScreen = FXMLLoader.load(
                     Objects.requireNonNull(getClass().getResource("/fxml/NoInternet.fxml")));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Không tìm thấy đường dẫn của NoInternet.fxml");
         }
     }
 

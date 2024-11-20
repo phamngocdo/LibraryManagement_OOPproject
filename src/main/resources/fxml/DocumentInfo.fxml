@@ -29,10 +29,8 @@
                </Label>
             </HBox>
             <HBox prefWidth="499.0" spacing="5.0">
-               <children>
-                  <Label prefHeight="17.0" text="ISBN:" />
-                  <Label fx:id="isbnLabel" text="Label" />
-               </children>
+               <Label prefHeight="17.0" text="ISBN:"/>
+               <Label fx:id="isbnLabel" text="Label"/>
             </HBox>
             <HBox prefWidth="499.0" spacing="5.0">
                <Label prefHeight="17.0" text="Tác giả:" />
@@ -105,13 +103,12 @@
          </Pane>
          <Button fx:id="borrowingButton" layoutX="856.0" layoutY="14.0" mnemonicParsing="false" onAction="#borrowDoc" text="Mượn sách" />
          <Button fx:id="editingButton" layoutX="856.0" layoutY="60.0" mnemonicParsing="false" onAction="#editDoc" text="Chỉnh sửa" />
-         <ImageView fx:id="backButton" fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="11.0" onMouseClicked="#goBackToPrevPane" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../graphic/images/go-back-arrow.png" />
-            </image>
+         <ImageView fx:id="backButton" fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="11.0"
+                    onMouseClicked="#goBackToPrevPane" pickOnBounds="true" preserveRatio="true">
             <cursor>
-               <Cursor fx:constant="HAND" />
+               <Cursor fx:constant="HAND"/>
             </cursor>
+            <Image url="@../graphic/images/go-back-arrow.png"/>
          </ImageView>
       </Pane>
    </Pane>

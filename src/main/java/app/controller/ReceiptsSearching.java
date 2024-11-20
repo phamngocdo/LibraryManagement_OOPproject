@@ -145,7 +145,7 @@ public class ReceiptsSearching {
             // So sánh ngày hiện tại với ngày hết hạn
             return due.before(currentDate);
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Định dạng ngày không phải DD-MM-YYYY");
         }
     }
 
@@ -195,7 +195,7 @@ public class ReceiptsSearching {
                     jsonObject.getString("status")
             );
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Lỗi khi giải mã QR code từ file: " + file.getName(), e);
         }
     }
 

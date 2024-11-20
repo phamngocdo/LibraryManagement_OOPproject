@@ -1,10 +1,8 @@
 package app.controller;
 
-import app.base.Admin;
-import app.base.Author;
-import app.base.Category;
-import app.base.Document;
+import app.base.*;
 import app.run.App;
+import app.service.RecommenderSystem;
 import app.trie.AuthorNameTrie;
 import app.trie.CategoryTrie;
 import app.trie.DocumentTitleTrie;
@@ -18,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -98,34 +97,41 @@ public class Home {
             protected Void call() {
                 recommenderPane.setVisible(false);
                 progressIndicator.setVisible(true);
-                ArrayList<Document> topRatingDocs = App.currentUser.seeTopRatingDoc(5);
+                Member member = (Member) App.currentUser;
+                ArrayList<Document> recommendDocs = RecommenderSystem.getRecommendDocFromMember(member, 5);
+                ArrayList<Document> topRatingDocs = member.seeTopRatingDoc(5);
                 for (int i = 0; i < 5; i++) {
-                    //
-
-                    Document doc = topRatingDocs.get(i);
-                    Image image = doc.loadImage();
-                    int finalI = i;
-                    Platform.runLater(() -> {
-                        Node paneNode = topRatingHBox.getChildren().get(finalI);
-                        paneNode.setOnMouseClicked(event -> displayDetailDoc(doc));
-                        if (paneNode instanceof Pane) {
-                            for (Node child : ((Pane) paneNode).getChildren()) {
-                                if (child instanceof Label) {
-                                    ((Label) child).setText(doc.getTitle());
-                                } else if (child instanceof ImageView) {
-                                    ((ImageView) child).setImage(image);
-                                }
-                            }
-                        }
-                    });
+                    updateRecommendBox(recommenderHBox, recommendDocs, i);
+                    updateRecommendBox(topRatingHBox, topRatingDocs, i);
                 }
-                updateMessage("Loading completed");
                 progressIndicator.setVisible(false);
                 recommenderPane.setVisible(true);
                 return null;
             }
         };
         new Thread(task).start();
+    }
+
+    private void updateRecommendBox(HBox hBox, ArrayList<Document> docs, int i) {
+        Document doc1 = docs.get(i);
+        Image image = doc1.loadImage();
+        Platform.runLater(() -> {
+            Node paneNode = hBox.getChildren().get(i);
+            paneNode.setOnMouseClicked(event -> displayDetailDoc(doc1));
+            if (paneNode instanceof Pane) {
+                for (Node child : ((Pane) paneNode).getChildren()) {
+                    if (child instanceof Label) {
+                        ((Label) child).setText(doc1.getTitle());
+                    } else if (child instanceof ImageView) {
+                        ((ImageView) child).setImage(image);
+                        ((ImageView) child).setFitWidth(140);
+                        ((ImageView) child).setFitHeight(187);
+                        child.setLayoutX(10);
+                        child.setLayoutY(14);
+                    }
+                }
+            }
+        });
     }
 
     private void setUpComboBox() {
@@ -269,16 +275,20 @@ public class Home {
                         Document doc = docList.get(listIndex.getAndIncrement());
 
                         Pane pane = new Pane();
+                        pane.getStyleClass().add("doc-pane");
                         pane.setOnMouseClicked(event -> displayDetailDoc(doc));
+
                         ImageView imageView = new ImageView(doc.loadImage());
                         imageView.setFitWidth(140);
                         imageView.setFitHeight(187);
-                        Label label = new Label(doc.getTitle());
-
                         imageView.setLayoutX(10);
                         imageView.setLayoutY(14);
+
+                        Label label = new Label(doc.getTitle());
+                        label.setPrefWidth(140);
+                        label.setAlignment(Pos.CENTER);
+                        label.setLayoutY(207);
                         label.setLayoutX(10);
-                        label.setLayoutY(201);
 
                         pane.getChildren().addAll(imageView, label);
                         hBox.getChildren().add(pane);
@@ -311,7 +321,7 @@ public class Home {
                 docInfoPane.setVisible(true);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Không tìm thấy đường dẫn của DocumentInfo.fxml");
         }
     }
 }

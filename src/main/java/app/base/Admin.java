@@ -40,6 +40,10 @@ public class Admin extends User {
         return UserDAO.getAllMember();
     }
 
+    public void removeMember(String memberId) {
+        UserDAO.removeMember(memberId);
+    }
+
     public ArrayList<Receipt> seeAllReceipts() {
         return ReceiptDAO.getAllReceipt();
     }
@@ -60,8 +64,6 @@ public class Admin extends User {
                 doc.setRemaining(doc.getRemaining() - 1); // Giảm số lượng tài liệu
             }
         }
-        System.out.println("Số lượng sách còn lại: " + doc.getRemaining());
-        // Cập nhật receipt và tài liệu vào cơ sở dữ liệu
         ReceiptDAO.updateReceipt(receipt); // Cập nhật receipt
         if (doc != null) {
             DocumentDAO.updateDocument(doc); // Cập nhật document

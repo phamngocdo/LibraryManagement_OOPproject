@@ -4,13 +4,17 @@ import app.base.Admin;
 import app.base.Member;
 import app.run.App;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MembersSearching {
@@ -45,8 +49,7 @@ public class MembersSearching {
 
     private void setUpSearchField() {
         // Lắng nghe sự kiện Enter trong thanh tìm kiếm
-        searchingField.setOnAction(event -> {
-            String searchText = searchingField.getText().trim().toLowerCase();
+        searchingField.setOnAction(event -> {String searchText = searchingField.getText().trim().toLowerCase();
 
             // Lọc danh sách thành viên theo ID hoặc tên
             ArrayList<Member> filteredMembers = filterMembers(searchText);
@@ -88,7 +91,6 @@ public class MembersSearching {
                 hBox.getChildren().add(memberPane);
                 memberIndex++;
             }
-
             vBox.getChildren().add(hBox);
         }
     }
@@ -113,14 +115,35 @@ public class MembersSearching {
 
         Label emailLabel = new Label("Email: " + member.getEmail());
         emailLabel.setLayoutX(14);
-        emailLabel.setLayoutY(92);
+        emailLabel.setLayoutY(90);
 
         Label phoneLabel = new Label("Số Điện Thoại: " + member.getPhoneNumber());
         phoneLabel.setLayoutX(14);
-        phoneLabel.setLayoutY(121);
+        phoneLabel.setLayoutY(116);
 
-        pane.getChildren().addAll(nameLabel, idLabel, birthdayLabel, emailLabel, phoneLabel);
+        ImageView trashImage = new ImageView();
+        trashImage.getStyleClass().add("trash-icon");
+        trashImage.setLayoutX(243);
+        trashImage.setLayoutY(133);
+        trashImage.setFitWidth(20);
+        trashImage.setFitHeight(20);
+        trashImage.setOnMouseClicked(event -> removeMember(member.getId(), pane));
 
+        pane.getChildren().addAll(nameLabel, idLabel, birthdayLabel, emailLabel, phoneLabel, trashImage);
         return pane;
+    }
+
+    private void removeMember(String memberId, Pane pane) {
+        ButtonType buttonType = new ButtonType("OK");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Xóa thành viên");
+        alert.setHeaderText(null);
+        alert.setContentText("Bạn có chắc muốn xóa thành viên có số ID là " + memberId + " không?");
+        alert.getButtonTypes().setAll(buttonType);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == buttonType) {
+            ((Admin) App.currentUser).removeMember(memberId);
+        }
+        vBox.getChildren().remove(pane);
     }
 }

@@ -54,25 +54,44 @@
    </Pane>
    <Pane fx:id="recommenderPane" layoutX="12.0" layoutY="66.0" prefHeight="575.0" prefWidth="921.0">
       <HBox fx:id="recommenderHBox" layoutX="20.0" layoutY="34.0" prefHeight="235.0" prefWidth="881.0" spacing="20.0">
-         <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
+         <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" />
+            <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Label>
          </Pane>
-         <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
+         <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
+               <font>
+                  <Font name="Arial" size="12.0"/>
+               </font>
+            </Label>
          </Pane>
-         <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
+         <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
+               <font>
+                  <Font name="Arial" size="12.0"/>
+               </font>
+            </Label>
          </Pane>
-         <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
+         <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
+               <font>
+                  <Font name="Arial" size="12.0"/>
+               </font>
+            </Label>
          </Pane>
-         <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
+         <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
+               <font>
+                  <Font name="Arial" size="12.0"/>
+               </font>
+            </Label>
          </Pane>
       </HBox>
       <Label layoutX="20.0" layoutY="1.0" text="Tài liệu đề xuất">
@@ -86,30 +105,50 @@
          </font>
       </Label>
       <HBox fx:id="topRatingHBox" layoutX="20.0" layoutY="323.0" prefHeight="235.0" prefWidth="881.0" spacing="20.0">
-         <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
+         <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
+               <font>
+                  <Font name="Arial" size="12.0"/>
+               </font>
+            </Label>
          </Pane>
-         <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
+         <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
+               <font>
+                  <Font name="Arial" size="12.0"/>
+               </font>
+            </Label>
          </Pane>
-         <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
+         <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
+               <font>
+                  <Font name="Arial" size="12.0"/>
+               </font>
+            </Label>
          </Pane>
-         <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
+         <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
+               <font>
+                  <Font name="Arial" size="12.0"/>
+               </font>
+            </Label>
          </Pane>
-         <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
+         <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
+               <font>
+                  <Font name="Arial" size="12.0"/>
+               </font>
+            </Label>
          </Pane>
       </HBox>
    </Pane>
-   <ScrollPane fx:id="searchingResultScrollPane" layoutX="14.0" layoutY="66.0" prefHeight="575.0" prefWidth="921.0" visible="false">
-      <Pane prefWidth="919.0">
+   <ScrollPane fx:id="searchingResultScrollPane" hbarPolicy="NEVER" layoutX="14.0" layoutY="66.0" prefHeight="575.0" prefWidth="921.0" styleClass="function-pane" visible="false">
+      <Pane minHeight="573.0" prefWidth="919.0" styleClass="function-pane">
          <VBox fx:id="vBoxInScrollPane" layoutX="1.0" layoutY="35.0" prefWidth="918.0" spacing="20.0" />
          <Label fx:id="resultCount" layoutX="14.0" layoutY="1.0" text="Label">
             <font>
