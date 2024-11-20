@@ -105,7 +105,7 @@ public class DocumentInfo {
     private void sendRating() {
         String comment = memberComment.getText();
         Rating newRating = new Rating(
-                null,
+                "",
                 App.currentUser.getId(),
                 currentDoc.getId(),
                 selectedStar,

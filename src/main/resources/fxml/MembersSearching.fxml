@@ -7,20 +7,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="650.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="app.controller.MembersSearching">
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MembersSearching">
    <Pane minHeight="648.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css">
-      <TextField fx:id="searchingField" layoutX="74.0" layoutY="49.0" prefHeight="25.0" prefWidth="339.0"
-                 promptText="Tìm kiếm theo mã hoặc tên">
+      <TextField fx:id="searchingField" layoutX="74.0" layoutY="49.0" prefHeight="25.0" prefWidth="339.0" promptText="Tìm kiếm theo mã hoặc tên">
          <font>
-            <Font name="Arial" size="13.0"/>
+            <Font name="Arial" size="13.0" />
          </font>
       </TextField>
-      <VBox fx:id="vBox" layoutX="35.0" layoutY="112.0" prefWidth="876.0"/>
+      <VBox fx:id="vBox" layoutX="35.0" layoutY="112.0" prefWidth="876.0" />
       <Label fx:id="notFoundLabel" layoutX="374.0" layoutY="135.0" text="Không tìm thấy thông tin người dùng">
          <font>
-            <Font name="Arial Bold" size="14.0"/>
+            <Font name="Arial Bold" size="14.0" />
          </font>
       </Label>
    </Pane>

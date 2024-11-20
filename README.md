@@ -1,1 +1,1 @@
-# LibraryManagement_OOPproject
+# LibZone - Library Mangement App

@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
@@ -60,10 +59,11 @@ public class ReceiptInfo {
     }
 
     private void setUpFixation() {
-        String s = "1. Người mụơn phải trả sách đúng hạn." + "\n" +
-                "2. Người mượn phải giữ gìn sách nguyên vẹn." + "\n" +
-                "3. Nếu trả sách không đúng hạn hoặc hư hỏng thì phải bồi thường theo quy định." + "\n" +
-                "4. Khi trả hoặc mượn sách phải mang phiếu và sách đến quầy để xác nhận.";
+        String s = """
+                1. Người mụơn phải trả sách đúng hạn.
+                2. Người mượn phải giữ gìn sách nguyên vẹn.
+                3. Nếu trả sách không đúng hạn hoặc hư hỏng thì phải bồi thường theo quy định.
+                4. Khi trả hoặc mượn sách phải mang phiếu và sách đến quầy để xác nhận.""";
         fixation.setText(s);
     }
 
@@ -79,7 +79,7 @@ public class ReceiptInfo {
     }
 
     @FXML
-    private void onPrinterImageView(MouseEvent event) {
+    private void onPrinterImageView() {
         printerImageView.setVisible(false);
         infoSavingImageView.setVisible(false);
         signature.setVisible(true);
@@ -105,7 +105,7 @@ public class ReceiptInfo {
     }
 
     @FXML
-    private void onSaveInfo(MouseEvent event) {
+    private void onSaveInfo() {
         printerImageView.setVisible(false);
         infoSavingImageView.setVisible(false);
         signature.setVisible(true);
