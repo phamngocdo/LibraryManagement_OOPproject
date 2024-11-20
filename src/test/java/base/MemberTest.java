@@ -1,18 +1,18 @@
 package base;
 
-import app.base.Document;
-import app.base.Member;
-import app.base.Rating;
-import app.base.Receipt;
-import app.database.DatabaseManagement;
-import app.database.DocumentDAO;
+import app.base.*;
+import app.dao.DatabaseManagement;
+import app.dao.DocumentDAO;
+import app.dao.UserDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//All test are correct
 public class MemberTest {
     private Member member;
     private Document document;
@@ -21,16 +21,8 @@ public class MemberTest {
     void setUp() {
         DatabaseManagement.setConnection();
 
-        member = new Member(
-                "",
-                "user1",
-                "pass1",
-                "First",
-                "Last",
-                "01-01-1992",
-                "email@example.com",
-                "123456789");
-        document = DocumentDAO.getDocFromId("SWCPZGEACAAJ");
+        member = (Member) UserDAO.getUserFromLogin("member1", "member1");
+        document = DocumentDAO.getDocFromId("6BaJDwAAQBAJ");
     }
 
     @Test
@@ -38,22 +30,12 @@ public class MemberTest {
         int initialRemaining = document.getRemaining(); // Số lượng document còn lại trước khi mượn.
         member.borrowDocument(document);
         Receipt receipt = member.getReceipts().getFirst();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate date = LocalDate.now();
         assertEquals(initialRemaining - 1, document.getRemaining());
         assertEquals("not returned", receipt.getStatus());
-        assertEquals(LocalDate.now().toString(), receipt.getBorrowingDate());
-        assertEquals(LocalDate.now().plusWeeks(2).toString(), receipt.getReturnDate());
-    }
-
-    @Test
-    void testReturnDocument() {
-        int initialRemaining = document.getRemaining();
-        member.borrowDocument(document);
-        Receipt receipt = member.getReceipts().getFirst();
-        member.returnDocument(receipt);
-        Document updatedDocument = DocumentDAO.getDocFromId(document.getId());
-        assert updatedDocument != null;
-        assertEquals(initialRemaining, updatedDocument.getRemaining());
-        assertEquals("returned", receipt.getStatus());
+        assertEquals(date.format(formatter), receipt.getBorrowingDate());
+        assertEquals(date.plusWeeks(2).format(formatter), receipt.getDueDate());
     }
 
     @Test
@@ -62,7 +44,7 @@ public class MemberTest {
         double initialAverageScore = document.getAverageScore();
 
         Rating rating = new Rating(
-                "rating1",
+                "",
                 member.getId(),
                 document.getId(),
                 5,

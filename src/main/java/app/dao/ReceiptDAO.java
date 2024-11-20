@@ -1,4 +1,4 @@
-package app.database;
+package app.dao;
 
 import app.base.Receipt;
 
@@ -32,7 +32,7 @@ public class ReceiptDAO {
     public static Receipt getReceiptFromDocAndMember(String docId, String memberId) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM receipts ");
-        query.append("WHERE doc_id = ? AND member_id = ? AND status = ?");
+        query.append("WHERE document_id = ? AND user_id = ? AND status = ?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
@@ -94,16 +94,16 @@ public class ReceiptDAO {
         }
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO receipts ");
-        query.append("(receipt_id, user_id, document_id, borrowing_date, return_date, status) ");
+        query.append("(receipt_id, user_id, document_id, borrowing_date, due_date, status) ");
         query.append(" VALUES(?, ?, ?, ?, ?, ?)");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, receipt.getId());
-            preparedStatement.setString(2, receipt.getUserId());
+            preparedStatement.setString(2, receipt.getMemberId());
             preparedStatement.setString(3, receipt.getDocId());
             preparedStatement.setString(4, receipt.getBorrowingDate());
-            preparedStatement.setString(5, receipt.getReturnDate());
+            preparedStatement.setString(5, receipt.getDueDate());
             preparedStatement.setString(6, receipt.getStatus());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

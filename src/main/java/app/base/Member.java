@@ -1,6 +1,6 @@
 package app.base;
 
-import app.database.*;
+import app.dao.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,11 +8,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Member extends  User{
+public class Member extends User {
     private final ArrayList<Receipt> receipts;
 
     public Member(String id, String username, String password, String firstName,
-                  String lastName, String birthday, String email, String phoneNumber){
+                  String lastName, String birthday, String email, String phoneNumber) {
         super(id, username, password, firstName, lastName, birthday, email, phoneNumber);
         receipts = ReceiptDAO.getAllReceiptFromMemberId(id);
     }
@@ -42,7 +42,7 @@ public class Member extends  User{
         LocalDate returnDate = borrowDate.plusWeeks(2);
 
         // Định dạng ngày thành DD/MM/YYYY
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String formattedBorrowDate = borrowDate.format(formatter);
         String formattedReturnDate = returnDate.format(formatter);
 
@@ -62,29 +62,6 @@ public class Member extends  User{
 
         // Cập nhật vào cơ sở dữ liệu
         ReceiptDAO.addReceipt(receipt); // Thêm receipt vào DB
-    }
-
-    public void returnDocument(Receipt receipt) {
-        // Cập nhật trạng thái của receipt
-        receipt.setStatus("returned");
-
-        // Cộng 1 cho remaining của tài liệu
-        Document doc = DocumentDAO.getDocFromId(receipt.getDocId()); // Lấy tài liệu từ DB
-        if (doc != null) {
-            doc.setRemaining(doc.getRemaining() + 1); // Tăng số lượng tài liệu
-        }
-
-        // Cập nhật receipt và tài liệu vào cơ sở dữ liệu
-        ReceiptDAO.updateReceipt(receipt); // Cập nhật receipt
-        if (doc != null) {
-            DocumentDAO.updateDocument(doc); // Cập nhật document
-        }
-    }
-
-    public void returnDocument(Document doc) {
-        Receipt receipt = ReceiptDAO.getReceiptFromDocAndMember(doc.getId(), getId());
-        assert receipt != null;
-        returnDocument(receipt);
     }
 
     public void rateDocument(Rating rating) {
@@ -110,8 +87,7 @@ public class Member extends  User{
         RatingDAO.addRating(rating);
     }
 
-
-    public void updateInfoToDatabase(Member member) {
+    public static void updateInfoToDatabase(Member member) {
         UserDAO.updateMember(member);
     }
 }

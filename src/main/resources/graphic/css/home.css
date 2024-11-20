@@ -39,20 +39,25 @@
     -fx-background-color: #c4c4c4;
 }
 
-.search-list{
+.list {
 
 }
 
 .list-cell {
-    -fx-background-color: #424242;
-    -fx-text-fill: white;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-family: Arial;
 }
 
 .list-cell:hover {
-    -fx-background-color: #4caf50;
+    -fx-background-color: #c4c4c4;
 }
 
 .list-cell:filled:selected {
     -fx-background-color: #4caf50;
     -fx-text-fill: black;
+}
+
+.doc-pane{
+
 }

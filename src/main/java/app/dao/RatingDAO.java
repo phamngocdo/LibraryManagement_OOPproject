@@ -1,4 +1,4 @@
-package app.database;
+package app.dao;
 
 import app.base.Rating;
 
@@ -67,7 +67,9 @@ public class RatingDAO {
 
 
     public static void addRating(Rating rating) {
-        rating.setId(DatabaseManagement.createRandomIdInTable("ratings", "rating_id"));
+        if (rating.getId().isEmpty()) {
+            rating.setId(DatabaseManagement.createRandomIdInTable("ratings", "rating_id"));
+        }
         //thêm thuộc tính vào db
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ratings ");
@@ -77,7 +79,7 @@ public class RatingDAO {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, rating.getId());
-            preparedStatement.setString(2, rating.getUserId());
+            preparedStatement.setString(2, rating.getMemberId());
             preparedStatement.setString(3, rating.getDocId());
             preparedStatement.setInt(4, rating.getRatingScore());
             preparedStatement.setString(5, rating.getComment());

@@ -8,93 +8,78 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="650.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MemberInfo">
-   <children>
-      <Label layoutX="28.0" layoutY="33.0" text="Thông tin cá nhân">
-         <font>
-            <Font name="Arial Bold" size="19.0" />
-         </font>
-      </Label>
-      <Button layoutX="838.0" layoutY="32.0" mnemonicParsing="false" text="Chỉnh sửa" />
-      <HBox layoutX="28.0" layoutY="81.0" prefHeight="296.0" prefWidth="890.0">
-         <children>
-            <VBox prefHeight="200.0" prefWidth="445.0" spacing="20.0">
-               <children>
-                  <Pane prefHeight="56.0" prefWidth="320.0">
-                     <children>
-                        <Label layoutX="7.0" layoutY="6.0" text="ID thành viên" />
-                        <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="312.0" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="56.0" prefWidth="320.0">
-                     <children>
-                        <Label layoutX="7.0" layoutY="6.0" text="Họ" />
-                        <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="312.0" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="56.0" prefWidth="320.0">
-                     <children>
-                        <Label layoutX="7.0" layoutY="6.0" text="Ngày sinh" />
-                        <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="312.0" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="56.0" prefWidth="320.0">
-                     <children>
-                        <Label layoutX="7.0" layoutY="6.0" text="Số điện thoại" />
-                        <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="312.0" />
-                     </children>
-                  </Pane>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="445.0" spacing="20.0">
-               <children>
-                  <Pane prefHeight="56.0" prefWidth="320.0">
-                     <children>
-                        <Label layoutX="7.0" layoutY="6.0" text="Tên đăng nhập" />
-                        <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="312.0" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="56.0" prefWidth="320.0">
-                     <children>
-                        <Label layoutX="7.0" layoutY="6.0" text="Tên" />
-                        <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="312.0" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="56.0" prefWidth="320.0">
-                     <children>
-                        <Label layoutX="7.0" layoutY="6.0" text="Email" />
-                        <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="312.0" />
-                     </children>
-                  </Pane>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <VBox layoutX="28.0" layoutY="416.0" prefHeight="184.0" prefWidth="890.0">
-         <children>
-            <Pane prefHeight="56.0" prefWidth="320.0">
-               <children>
-                  <Label layoutX="7.0" layoutY="6.0" text="Mật khẩu cũ" />
-                  <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="312.0" />
-               </children>
-            </Pane>
-            <Pane prefHeight="56.0" prefWidth="320.0">
-               <children>
-                  <Label layoutX="7.0" layoutY="6.0" text="Mật khẩu mới" />
-                  <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="312.0" />
-               </children>
-            </Pane>
-            <Pane prefHeight="56.0" prefWidth="320.0">
-               <children>
-                  <Label layoutX="7.0" layoutY="6.0" text="Nhập lại mật khẩu mới" />
-                  <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="312.0" />
-               </children>
-            </Pane>
-         </children>
+<Pane prefHeight="650.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css"
+      xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MemberInfo">
+   <Label layoutX="28.0" layoutY="33.0" text="Thông tin cá nhân">
+      <font>
+         <Font name="Arial Bold" size="19.0"/>
+      </font>
+   </Label>
+   <Button fx:id="editingButton" layoutX="838.0" layoutY="32.0" mnemonicParsing="false" onAction="#editInfo"
+           text="Chỉnh sửa"/>
+   <HBox fx:id="personalInfoHBox" layoutX="28.0" layoutY="81.0" prefHeight="296.0" prefWidth="890.0">
+      <VBox prefHeight="200.0" prefWidth="445.0" spacing="20.0">
+         <Pane prefHeight="56.0" prefWidth="320.0">
+            <Label layoutX="7.0" layoutY="6.0" text="ID thành viên"/>
+            <TextField fx:id="idMenberTextField" layoutX="4.0" layoutY="30.0" prefHeight="25.0"
+                       prefWidth="312.0"/>
+         </Pane>
+         <Pane prefHeight="56.0" prefWidth="320.0">
+            <Label layoutX="7.0" layoutY="6.0" text="Họ"/>
+            <TextField fx:id="firstNameTextField" layoutX="4.0" layoutY="30.0" prefHeight="25.0"
+                       prefWidth="312.0"/>
+         </Pane>
+         <Pane prefHeight="56.0" prefWidth="320.0">
+            <Label layoutX="7.0" layoutY="6.0" text="Ngày sinh"/>
+            <TextField fx:id="birthdayTextField" layoutX="4.0" layoutY="30.0" prefHeight="25.0"
+                       prefWidth="312.0"/>
+         </Pane>
+         <Pane prefHeight="56.0" prefWidth="320.0">
+            <Label layoutX="7.0" layoutY="6.0" text="Số điện thoại"/>
+            <TextField fx:id="phoneNumberTextFiled" layoutX="4.0" layoutY="30.0" prefHeight="25.0"
+                       prefWidth="312.0"/>
+         </Pane>
       </VBox>
-      <Button layoutX="437.0" layoutY="616.0" mnemonicParsing="false" text="Lưu" />
-      <Button layoutX="28.0" layoutY="391.0" mnemonicParsing="false" text="Thay đổi mật khẩu" visible="false" />
-      <Button layoutX="157.0" layoutY="391.0" mnemonicParsing="false" text="Hủy thay đổi mật khẩu" />
-      <Label layoutX="441.0" layoutY="600.0" text="Kết quả" />
-   </children>
+      <VBox prefHeight="200.0" prefWidth="445.0" spacing="20.0">
+         <Pane prefHeight="56.0" prefWidth="320.0">
+            <Label layoutX="7.0" layoutY="6.0" text="Tên đăng nhập"/>
+            <TextField fx:id="loginNameTextField" layoutX="4.0" layoutY="30.0" prefHeight="25.0"
+                       prefWidth="312.0"/>
+         </Pane>
+         <Pane prefHeight="56.0" prefWidth="320.0">
+            <Label layoutX="7.0" layoutY="6.0" text="Tên"/>
+            <TextField fx:id="lastNameTextField" layoutX="4.0" layoutY="30.0" prefHeight="25.0"
+                       prefWidth="312.0"/>
+         </Pane>
+         <Pane prefHeight="56.0" prefWidth="320.0">
+            <Label layoutX="7.0" layoutY="6.0" text="Email"/>
+            <TextField fx:id="emailTextField" layoutX="4.0" layoutY="30.0" prefHeight="25.0"
+                       prefWidth="312.0"/>
+         </Pane>
+      </VBox>
+   </HBox>
+   <VBox fx:id="passwordVBox" layoutX="28.0" layoutY="416.0" prefHeight="184.0" prefWidth="890.0">
+      <Pane prefHeight="56.0" prefWidth="320.0">
+         <Label layoutX="7.0" layoutY="6.0" text="Mật khẩu cũ"/>
+         <TextField fx:id="oldPasswordTextField" layoutX="4.0" layoutY="30.0" prefHeight="25.0"
+                    prefWidth="312.0"/>
+      </Pane>
+      <Pane prefHeight="56.0" prefWidth="320.0">
+         <Label layoutX="7.0" layoutY="6.0" text="Mật khẩu mới"/>
+         <TextField fx:id="newPasswordTextField" layoutX="4.0" layoutY="30.0" prefHeight="25.0"
+                    prefWidth="312.0"/>
+      </Pane>
+      <Pane prefHeight="56.0" prefWidth="320.0">
+         <Label layoutX="7.0" layoutY="6.0" text="Nhập lại mật khẩu mới"/>
+         <TextField fx:id="reEnterNewPasswordTextField" layoutX="4.0" layoutY="30.0" prefHeight="25.0"
+                    prefWidth="312.0"/>
+      </Pane>
+   </VBox>
+   <Button fx:id="saveButton" layoutX="437.0" layoutY="616.0" mnemonicParsing="false" onAction="#saveInfo" text="Lưu"/>
+   <Button layoutX="28.0" layoutY="391.0" mnemonicParsing="false" text="Thay đổi mật khẩu" visible="false"/>
+   <Button fx:id="cancelPasswordButton" layoutX="192.0" layoutY="391.0" mnemonicParsing="false"
+           onAction="#cancelPassword" text="Hủy thay đổi mật khẩu"/>
+   <Label fx:id="resultLabel" layoutX="434.0" layoutY="600.0" text="Kết quả"/>
+   <Button fx:id="changePasswordButton" layoutX="41.0" layoutY="391.0" mnemonicParsing="false"
+           onAction="#changePassword" text="Thay đổi mật khẩu"/>
 </Pane>

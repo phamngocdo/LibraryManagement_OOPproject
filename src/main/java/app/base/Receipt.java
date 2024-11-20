@@ -1,34 +1,32 @@
 package app.base;
 
-import javax.xml.transform.Result;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class Receipt {
     private String id;
     private String status;
-    private final String userId;
+    private final String memberId;
     private final String docId;
     private final String borrowingDate;
-    private final String returnDate;
+    private final String dueDate;
 
-    public Receipt(String id, String userId, String docId, String borrowingDate,
-                   String returnDate, String status){
+    public Receipt(String id, String memberId, String docId, String borrowingDate,
+                   String dueDate, String status){
         this.id = id;
-        this.userId = userId;
+        this.memberId = memberId;
         this.docId = docId;
         this.borrowingDate = borrowingDate;
-        this.returnDate = returnDate;
+        this.dueDate = dueDate;
         this.status = status;
     }
 
     public Receipt(ResultSet resultSet) throws SQLException {
         this.id = resultSet.getString("receipt_id");
-        this.userId = resultSet.getString("user_id");
-        this.docId = resultSet.getString("doc_id");
+        this.memberId = resultSet.getString("user_id");
+        this.docId = resultSet.getString("document_id");
         this.borrowingDate = resultSet.getString("borrowing_date");
-        this.returnDate = resultSet.getString("return_date");
+        this.dueDate = resultSet.getString("due_date");
         this.status = resultSet.getString("status");
     }
 
@@ -44,8 +42,8 @@ public class Receipt {
         this.status = status;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getMemberId() {
+        return memberId;
     }
 
     public String getStatus() {
@@ -60,7 +58,7 @@ public class Receipt {
         return borrowingDate;
     }
 
-    public String getReturnDate() {
-        return returnDate;
+    public String getDueDate() {
+        return dueDate;
     }
 }

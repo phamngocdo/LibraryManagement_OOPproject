@@ -1,6 +1,8 @@
 package app.controller;
 
 import app.base.Admin;
+import app.base.Author;
+import app.base.Category;
 import app.base.Document;
 import app.run.App;
 import app.trie.AuthorNameTrie;
@@ -37,7 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Home {
 
     @FXML
-    private Pane functionPane, recommenderPane;
+    private Pane docInfoPane, recommenderPane;
 
     @FXML
     private ScrollPane searchingResultScrollPane;
@@ -73,6 +75,7 @@ public class Home {
     private void initialize() {
         searchingResultScrollPane.setVisible(false);
         searchingList.setVisible(false);
+        docInfoPane.setVisible(false);
 
         setUpComboBox();
         setUpSearchingField();
@@ -95,7 +98,7 @@ public class Home {
             protected Void call() {
                 recommenderPane.setVisible(false);
                 progressIndicator.setVisible(true);
-                ArrayList<Document> topRatingDocs = App.currentUser.seeTopRatingDoc();
+                ArrayList<Document> topRatingDocs = App.currentUser.seeTopRatingDoc(5);
                 for (int i = 0; i < 5; i++) {
                     //
 
@@ -221,30 +224,49 @@ public class Home {
         });
     }
 
-    private void displayResultFromSearch(ArrayList<Pair<String, String>> list) {
+    private void displayResultFromSearch(ArrayList<Pair<String, String>> resultlist) {
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {
                 Platform.runLater(() -> {
                     recommenderPane.setVisible(false);
                     searchingList.setVisible(false);
+                    searchingResultScrollPane.setVisible(false);
                     progressIndicator.setVisible(true);
                 });
 
-                int listCount = list.size();
+                ArrayList<Document> docList = new ArrayList<>();
+
+                if (trie instanceof DocumentTitleTrie) {
+                    for (Pair<String, String> pair : resultlist) {
+                        docList.add(new Document(pair.getKey()));
+                    }
+                } else if (trie instanceof AuthorNameTrie) {
+                    for (Pair<String, String> pair : resultlist) {
+                        Author author = new Author(pair.getKey(), pair.getValue());
+                        docList.addAll(author.getAllDoc());
+                    }
+                } else if (trie instanceof CategoryTrie) {
+                    for (Pair<String, String> pair : resultlist) {
+                        Category category = new Category(pair.getKey(), pair.getValue());
+                        docList.addAll(category.getAllDoc());
+                    }
+                }
+
+                int listCount = docList.size();
                 int hBoxCount = (int) Math.ceil(listCount / 5.0);
                 AtomicInteger listIndex = new AtomicInteger(0);
                 ArrayList<HBox> hBoxes = new ArrayList<>();
                 for (int i = 0; i < hBoxCount; i++) {
                     HBox hBox = new HBox();
+                    hBox.setSpacing(20);
 
                     for (int j = 0; j < 5; j++) {
                         if (listIndex.get() >= listCount) {
                             break;
                         }
 
-                        Pair<String, String> item = list.get(listIndex.getAndIncrement());
-                        Document doc = new Document(item.getKey());
+                        Document doc = docList.get(listIndex.getAndIncrement());
 
                         Pane pane = new Pane();
                         pane.setOnMouseClicked(event -> displayDetailDoc(doc));
@@ -284,8 +306,9 @@ public class Home {
             URL url = getClass().getResource("/fxml/DocumentInfo.fxml");
             if (url != null) {
                 Parent page = FXMLLoader.load(url);
-                functionPane.getChildren().clear();
-                functionPane.getChildren().add(page);
+                docInfoPane.getChildren().clear();
+                docInfoPane.getChildren().add(page);
+                docInfoPane.setVisible(true);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -1,5 +1,9 @@
 package app.base;
 
+import app.dao.DocumentDAO;
+
+import java.util.ArrayList;
+
 public class Author {
     private String id;
     private String name;
@@ -7,6 +11,10 @@ public class Author {
     public Author(String id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public ArrayList<Document> getAllDoc() {
+        return DocumentDAO.getAllDocumentFromAuthor(id);
     }
 
     public String getId() {

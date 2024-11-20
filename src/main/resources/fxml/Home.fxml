@@ -16,127 +16,109 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="functionPane" prefHeight="650.0" prefWidth="945.0" styleClass="function-pane"
-      stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="app.controller.Home">
+<Pane prefHeight="650.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.Home">
    <Pane focusTraversable="true" layoutX="112.0" layoutY="14.0" prefHeight="38.0" prefWidth="721.0">
       <TextField fx:id="searchingField" layoutY="-1.0" prefHeight="36.0" prefWidth="577.0" styleClass="search-field">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
          <padding>
-            <Insets left="40.0" right="30.0"/>
+            <Insets left="40.0" right="30.0" />
          </padding>
          <cursor>
-            <Cursor fx:constant="TEXT"/>
+            <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
       <Button layoutY="7.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="24.0" styleClass="seach-button">
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../graphic/images/search.png"/>
+               <Image url="@../graphic/images/search.png" />
             </ImageView>
          </graphic>
          <cursor>
-            <Cursor fx:constant="HAND"/>
+            <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <JFXComboBox fx:id="typeChoosingBox" focusColor="#c4c4c4" layoutX="582.0" layoutY="-1.0" prefHeight="34.0"
-                   prefWidth="136.0" promptText="  Chọn mục tìm kiếm" styleClass="combo-box" unFocusColor="#c4c4c4">
+      <JFXComboBox fx:id="typeChoosingBox" focusColor="#c4c4c4" layoutX="582.0" layoutY="-1.0" prefHeight="34.0" prefWidth="136.0" promptText="  Chọn mục tìm kiếm" styleClass="combo-box" unFocusColor="#c4c4c4">
          <cursor>
-            <Cursor fx:constant="HAND"/>
+            <Cursor fx:constant="HAND" />
          </cursor>
       </JFXComboBox>
-      <Button fx:id="removingSearchText" focusTraversable="false" layoutX="541.0" layoutY="5.0"
-              mnemonicParsing="false" onAction="#onRemoveSearchingText" prefHeight="17.0" prefWidth="24.0"
-              styleClass="backspace">
+      <Button fx:id="removingSearchText" focusTraversable="false" layoutX="541.0" layoutY="5.0" mnemonicParsing="false" onAction="#onRemoveSearchingText" prefHeight="17.0" prefWidth="24.0" styleClass="backspace">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../graphic/images/backspace.png"/>
+               <Image url="@../graphic/images/backspace.png" />
             </ImageView>
          </graphic>
       </Button>
    </Pane>
    <Pane fx:id="recommenderPane" layoutX="12.0" layoutY="66.0" prefHeight="575.0" prefWidth="921.0">
-      <HBox fx:id="recommenderHBox" layoutX="20.0" layoutY="34.0" prefHeight="235.0" prefWidth="881.0"
-            spacing="20.0">
+      <HBox fx:id="recommenderHBox" layoutX="20.0" layoutY="34.0" prefHeight="235.0" prefWidth="881.0" spacing="20.0">
          <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"
-                       preserveRatio="true"/>
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"
-                       preserveRatio="true"/>
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"
-                       preserveRatio="true"/>
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"
-                       preserveRatio="true"/>
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"
-                       preserveRatio="true"/>
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
          </Pane>
       </HBox>
       <Label layoutX="20.0" layoutY="1.0" text="Tài liệu đề xuất">
          <font>
-            <Font name="System Bold" size="17.0"/>
+            <Font name="System Bold" size="17.0" />
          </font>
       </Label>
       <Label layoutX="20.0" layoutY="297.0" text="Các tài liệu đánh giá cao">
          <font>
-            <Font name="System Bold" size="17.0"/>
+            <Font name="System Bold" size="17.0" />
          </font>
       </Label>
       <HBox fx:id="topRatingHBox" layoutX="20.0" layoutY="323.0" prefHeight="235.0" prefWidth="881.0" spacing="20.0">
          <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"
-                       preserveRatio="true"/>
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"
-                       preserveRatio="true"/>
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"
-                       preserveRatio="true"/>
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"
-                       preserveRatio="true"/>
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"
-                       preserveRatio="true"/>
-            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="10.0" layoutY="201.0" prefHeight="17.0" prefWidth="140.0" />
          </Pane>
       </HBox>
    </Pane>
-   <ScrollPane fx:id="searchingResultScrollPane" layoutX="14.0" layoutY="66.0" prefHeight="575.0" prefWidth="921.0"
-               visible="false">
+   <ScrollPane fx:id="searchingResultScrollPane" layoutX="14.0" layoutY="66.0" prefHeight="575.0" prefWidth="921.0" visible="false">
       <Pane prefWidth="919.0">
-         <VBox fx:id="vBoxInScrollPane" layoutX="1.0" layoutY="35.0" prefWidth="918.0"/>
+         <VBox fx:id="vBoxInScrollPane" layoutX="1.0" layoutY="35.0" prefWidth="918.0" spacing="20.0" />
          <Label fx:id="resultCount" layoutX="14.0" layoutY="1.0" text="Label">
             <font>
-               <Font name="Arial Bold" size="17.0"/>
+               <Font name="Arial Bold" size="17.0" />
             </font>
          </Label>
       </Pane>
    </ScrollPane>
-   <JFXListView fx:id="searchingList" focusTraversable="false" layoutX="112.0" layoutY="51.0" prefHeight="0.0"
-                prefWidth="721.0"/>
-   <ProgressIndicator fx:id="progressIndicator" layoutX="462.0" layoutY="320.0" prefHeight="34.0" prefWidth="26.0"
-                      visible="false"/>
+   <JFXListView fx:id="searchingList" focusTraversable="false" layoutX="112.0" layoutY="51.0" prefHeight="0.0" prefWidth="721.0" />
+   <ProgressIndicator fx:id="progressIndicator" layoutX="462.0" layoutY="320.0" prefHeight="34.0" prefWidth="26.0" visible="false" />
+   <Pane fx:id="docInfoPane" prefHeight="650.0" prefWidth="945.0" visible="false" />
 </Pane>

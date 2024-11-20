@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane prefHeight="650.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" />
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="650.0" prefWidth="945.0" style="-fx-background-color: transparent;"
+            xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="app.controller.BorrowingList">
+   <Pane minHeight="648.0" prefWidth="945.0">
+      <Label layoutX="32.0" layoutY="27.0" text="Sách đang mượn">
+         <font>
+            <Font name="Arial Bold" size="17.0"/>
+         </font>
+      </Label>
+      <Label layoutX="32.0" layoutY="336.0" text="Sách đã trả">
+         <font>
+            <Font name="Arial Bold" size="17.0"/>
+         </font>
+      </Label>
+      <VBox fx:id="notReturnedDocVBox" layoutX="32.0" layoutY="55.0" minHeight="265.0" prefWidth="881.0"
+            spacing="20.0"/>
+      <VBox fx:id="returnedDocVBox" layoutX="32.0" layoutY="369.0" minHeight="265.0" prefWidth="881.0"
+            spacing="20.0"/>
+      <Pane fx:id="docInfoPane" minHeight="648.0" prefWidth="945.0" visible="false"/>
+   </Pane>
+</ScrollPane>

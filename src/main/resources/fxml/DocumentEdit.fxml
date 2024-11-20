@@ -10,89 +10,73 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="650.0" prefWidth="945.0" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.DocumentEditing">
-   <Label fx:id="functionLabel" layoutX="46.0" layoutY="24.0" text="Label">
+<Pane prefHeight="650.0" prefWidth="945.0" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.DocumentEditing">
+   <Label fx:id="functionLabel" layoutX="46.0" layoutY="24.0">
       <font>
          <Font name="Arial Bold" size="18.0" />
       </font>
    </Label>
-   <HBox layoutX="33.0" layoutY="125.0" prefHeight="251.0" prefWidth="879.0" spacing="15.0">
-      <children>
-         <VBox prefHeight="287.0" prefWidth="283.0">
-            <children>
-               <Pane prefHeight="73.0" prefWidth="283.0">
-                  <children>
-                     <Label layoutX="14.0" layoutY="6.0" text="Tiêu đề" />
-                     <TextField fx:id="titleField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
-                  </children>
-               </Pane>
-               <Pane prefHeight="73.0" prefWidth="283.0">
-                  <children>
-                     <Label layoutX="14.0" layoutY="6.0" text="Nhà xuất bản" />
-                     <TextField fx:id="publisherField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
-                  </children>
-               </Pane>
-               <Pane prefHeight="73.0" prefWidth="283.0">
-                  <children>
-                     <Label layoutX="14.0" layoutY="6.0" text="Ngày xuất bản" />
-                     <TextField fx:id="publishedDateField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
-                  </children>
-               </Pane>
-            </children>
-         </VBox>
-         <VBox prefHeight="200.0" prefWidth="283.0">
-            <children>
-               <Pane prefHeight="73.0" prefWidth="283.0">
-                  <children>
-                     <Label layoutX="14.0" layoutY="6.0" text="Tác giả" />
-                     <TextField fx:id="authorField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
-                  </children>
-               </Pane>
-               <Pane prefHeight="73.0" prefWidth="283.0">
-                  <children>
-                     <Label layoutX="14.0" layoutY="6.0" text="Số lượng sách" />
-                     <TextField fx:id="quantityField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
-                  </children>
-               </Pane>
-               <Pane prefHeight="73.0" prefWidth="283.0">
-                  <children>
-                     <Label layoutX="14.0" layoutY="6.0" text="Số trang" />
-                     <TextField fx:id="pageCountField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
-                  </children>
-               </Pane>
-               <TextField fx:id="averageScoreField" prefHeight="25.0" prefWidth="251.0" />
-            </children>
-         </VBox>
-         <VBox prefHeight="200.0" prefWidth="283.0">
-            <children>
-               <Pane prefHeight="73.0" prefWidth="283.0">
-                  <children>
-                     <Label layoutX="14.0" layoutY="6.0" text="Thể loại" />
-                     <TextField fx:id="categoryField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
-                  </children>
-               </Pane>
-               <Pane prefHeight="73.0" prefWidth="283.0">
-                  <children>
-                     <Label layoutX="14.0" layoutY="6.0" text="Số sách còn lại" />
-                     <TextField fx:id="remainingField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
-                  </children>
-               </Pane>
-            </children>
-         </VBox>
-      </children>
-   </HBox>
-   <Pane layoutX="37.0" layoutY="52.0" prefHeight="73.0" prefWidth="879.0">
-      <children>
-         <Label layoutX="14.0" layoutY="6.0" text="ID sách" />
-         <TextField fx:id="idField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
-         <Button layoutX="304.0" layoutY="37.0" mnemonicParsing="false" onAction="#onGetAPIInfo" text="Lấy dữ liệu từ API" />
-         <ProgressIndicator fx:id="progressIndicator" layoutX="424.0" layoutY="37.0" prefHeight="25.0" prefWidth="31.0" />
-      </children>
-   </Pane>
-   <Label layoutX="37.0" layoutY="368.0" text="Mô tả" />
-   <TextArea fx:id="descriptionArea" layoutX="37.0" layoutY="393.0" prefHeight="139.0" prefWidth="879.0" />
-   <Button layoutX="374.0" layoutY="580.0" mnemonicParsing="false" onAction="#onSaveDocument" text="Lưu các thay đổi" />
-   <Button layoutX="494.0" layoutY="580.0" mnemonicParsing="false" onAction="#onDeleteDocument" text="Xóa tài liệu" />
-   <Label fx:id="resultLabel" layoutX="459.0" layoutY="556.0" text="Kết quả" />
-   <Button layoutX="289.0" layoutY="580.0" mnemonicParsing="false" onAction="#onCancel" text="Hủy" />
+   <Label layoutX="61.0" layoutY="440.0" text="Mô tả" />
+   <TextArea fx:id="descriptionArea" focusTraversable="false" layoutX="61.0" layoutY="462.0" prefHeight="107.0" prefWidth="863.0" wrapText="true" />
+   <Button fx:id="savingButton" layoutX="376.0" layoutY="599.0" mnemonicParsing="false" onAction="#onSaveDocument" text="Lưu các thay đổi" />
+   <Button fx:id="deletingButton" layoutX="500.0" layoutY="599.0" mnemonicParsing="false" onAction="#onDeleteDocument" text="Xóa tài liệu" />
+   <Label fx:id="resultLabel" layoutX="458.0" layoutY="574.0" text="Kết quả" />
+   <VBox layoutX="46.0" layoutY="60.0" prefHeight="376.0" prefWidth="879.0">
+      <Pane prefHeight="73.0" prefWidth="879.0">
+         <Label layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="55.0" text="ISBN" />
+         <TextField fx:id="isbnField" focusTraversable="false" layoutX="12.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
+         <Button layoutX="310.0" layoutY="37.0" mnemonicParsing="false" onAction="#onGetAPIInfo" text="Lấy dữ liệu từ API" />
+         <ProgressIndicator fx:id="progressIndicator" layoutX="440.0" layoutY="37.0" prefHeight="25.0" prefWidth="31.0" />
+      </Pane>
+      <Pane prefHeight="73.0" prefWidth="283.0">
+         <Label layoutX="14.0" layoutY="6.0" text="Tiêu đề" />
+         <TextField fx:id="titleField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="863.0" />
+      </Pane>
+      <HBox prefHeight="72.0" prefWidth="200.0" spacing="15.0">
+         <Pane prefHeight="73.0" prefWidth="283.0">
+            <Label layoutX="14.0" layoutY="6.0" text="Tác giả" />
+            <TextField fx:id="authorField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
+         </Pane>
+         <Pane prefHeight="73.0" prefWidth="283.0">
+            <Label layoutX="14.0" layoutY="6.0" text="Thể loại" />
+            <TextField fx:id="categoryField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
+         </Pane>
+         <Pane prefHeight="73.0" prefWidth="283.0">
+            <Label layoutX="14.0" layoutY="6.0" text="Số trang" />
+            <TextField fx:id="pageCountField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
+         </Pane>
+      </HBox>
+      <HBox prefHeight="72.0" prefWidth="200.0" spacing="15.0">
+         <Pane prefHeight="73.0" prefWidth="283.0">
+            <Label layoutX="14.0" layoutY="6.0" text="Nhà xuất bản" />
+            <TextField fx:id="publisherField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
+         </Pane>
+         <Pane prefHeight="73.0" prefWidth="283.0">
+            <Label layoutX="14.0" layoutY="6.0" text="Ngày xuất bản" />
+            <TextField fx:id="publishedDateField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
+         </Pane>
+         <Pane prefHeight="73.0" prefWidth="283.0">
+            <Label layoutX="14.0" layoutY="6.0" text="Số lượng đánh giá" />
+            <TextField fx:id="ratingCountField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
+         </Pane>
+      </HBox>
+      <HBox prefHeight="72.0" prefWidth="879.0" spacing="15.0">
+         <Pane prefHeight="42.0" prefWidth="283.0">
+            <Label layoutX="14.0" layoutY="6.0" text="Điểm trung bình" />
+            <TextField fx:id="averageScoreField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
+         </Pane>
+         <Pane prefHeight="73.0" prefWidth="283.0">
+            <Label layoutX="14.0" layoutY="6.0" text="Số sách còn lại" />
+            <TextField fx:id="remainingField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
+         </Pane>
+         <Pane prefHeight="73.0" prefWidth="283.0">
+            <Label layoutX="14.0" layoutY="6.0" text="Số lượng sách" />
+            <TextField fx:id="quantityField" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="265.0" />
+         </Pane>
+      </HBox>
+      <Pane prefHeight="72.0" prefWidth="879.0">
+         <Label layoutX="14.0" layoutY="6.0" text="Đường dẫn ảnh" />
+         <TextField fx:id="imageUrlFIeld" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="863.0" />
+      </Pane>
+   </VBox>
 </Pane>

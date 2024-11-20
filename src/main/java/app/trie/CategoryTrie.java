@@ -1,6 +1,6 @@
 package app.trie;
 
-import app.database.CategoryDAO;
+import app.dao.CategoryDAO;
 
 public class CategoryTrie extends Trie {
 

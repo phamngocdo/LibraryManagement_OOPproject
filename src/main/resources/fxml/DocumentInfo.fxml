@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
@@ -12,141 +13,106 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane focusTraversable="false" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.DocumentInfo">
-   <content>
-      <Pane fx:id="functionPane" minHeight="650.0" prefWidth="945.0">
-         <children>
-            <ProgressIndicator fx:id="progressIndicator" layoutX="458.0" layoutY="285.0" prefHeight="39.0" prefWidth="29.0" />
-            <Pane fx:id="infoPane" minHeight="647.0" prefWidth="945.0" styleClass="detail-vbox" stylesheets="@../graphic/css/style.css">
+<ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.DocumentInfo">
+   <Pane fx:id="functionPane" minHeight="650.0" prefWidth="945.0">
+      <ProgressIndicator fx:id="progressIndicator" layoutX="458.0" layoutY="285.0" prefHeight="39.0" prefWidth="29.0" />
+      <Pane fx:id="infoPane" minHeight="647.0" prefWidth="945.0" stylesheets="@../graphic/css/style.css">
+         <Pane layoutX="78.0" layoutY="39.0" prefHeight="290.0" prefWidth="220.0" style="-fx-background-color: #cecece;">
+            <ImageView fx:id="docImage" fitHeight="280.0" fitWidth="210.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+         </Pane>
+         <VBox layoutX="342.0" layoutY="34.0" prefHeight="393.0" prefWidth="501.0" spacing="10.0">
+            <HBox prefWidth="499.0">
+               <Label fx:id="titleLabel" text="Tiêu đề">
+                  <font>
+                     <Font name="Arial Bold" size="19.0" />
+                  </font>
+               </Label>
+            </HBox>
+            <HBox prefWidth="499.0" spacing="5.0">
                <children>
-                  <Pane layoutX="61.0" layoutY="34.0" prefHeight="290.0" prefWidth="220.0" style="-fx-background-color: #cecece;">
-                     <children>
-                        <ImageView fx:id="docImage" fitHeight="280.0" fitWidth="210.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </Pane>
-                  <VBox layoutX="342.0" layoutY="34.0" prefHeight="393.0" prefWidth="501.0" spacing="10.0" styleClass="det">
-                     <children>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label fx:id="titleLabel" text="Tiêu đề">
-                                 <font>
-                                    <Font name="Arial Bold" size="19.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0" spacing="5.0">
-                           <children>
-                              <Label prefHeight="17.0" text="Tác giả:" />
-                              <Label fx:id="authorsLabel" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label text="Nhà xuất bản:" />
-                              <Label fx:id="publisherLabel" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label text="Ngày xuất bản:" />
-                              <Label fx:id="pulishedDateLabel" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label text="Thể loại:" />
-                              <Label fx:id="categoriesLabel" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label text="Số trang:" />
-                              <Label fx:id="pageCountLabel" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label text="Mô tả:" />
-                              <TextArea fx:id="descriptionTextArea" focusTraversable="false" prefWidth="390.0" text="                                                                                                            " wrapText="true" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label text="Số lượng đánh giá:" />
-                              <Label fx:id="ratingCountLabel" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label text="Điểm đánh giá trung bình:" />
-                              <Label fx:id="averageScoreLabel" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label text="Số lượng tài liệu:" />
-                              <Label fx:id="quantityLabel" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label text="Số tài liệu còn lại:" />
-                              <Label fx:id="remainingLabel" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox prefWidth="499.0">
-                           <children>
-                              <Label text="ID sách:" />
-                              <Label fx:id="idLabel" text="Label" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="otherRatingVBox" layoutX="26.0" layoutY="598.0" prefHeight="34.0" prefWidth="894.0" />
-                  <Label layoutX="30.0" layoutY="581.0" text="Các đánh giá khác" />
-                  <Pane fx:id="memberRatingPane" layoutX="12.0" layoutY="425.0" prefHeight="152.0" prefWidth="922.0">
-                     <children>
-                        <Label layoutX="12.0" layoutY="29.0" text="Đánh giá của bạn" />
-                        <HBox fx:id="starRatingHBox" layoutX="9.0" layoutY="46.0" prefHeight="13.0" prefWidth="90.0" spacing="2.0">
-                           <children>
-                              <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../graphic/images/un-rate-star.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../graphic/images/un-rate-star.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../graphic/images/un-rate-star.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../graphic/images/un-rate-star.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../graphic/images/un-rate-star.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <TextArea fx:id="memberComment" layoutX="14.0" layoutY="75.0" prefHeight="13.0" prefWidth="893.0" />
-                        <Button fx:id="ratingSendingButton" layoutX="16.0" layoutY="124.0" mnemonicParsing="false" onAction="#sendRating" text="Gửi đánh giá" />
-                     </children>
-                  </Pane>
-                  <Button fx:id="borrowingButton" layoutX="856.0" layoutY="14.0" mnemonicParsing="false" onAction="#borrowDoc" text="Mượn sách" />
-                  <Button fx:id="returnButton" layoutX="867.0" layoutY="50.0" mnemonicParsing="false" onAction="#returnDoc" text="Trả sách" />
-                  <Button fx:id="editingButton" layoutX="859.0" layoutY="81.0" mnemonicParsing="false" onAction="#editDoc" text="Chỉnh sửa" />
+                  <Label prefHeight="17.0" text="ISBN:" />
+                  <Label fx:id="isbnLabel" text="Label" />
                </children>
-            </Pane>
-         </children>
+            </HBox>
+            <HBox prefWidth="499.0" spacing="5.0">
+               <Label prefHeight="17.0" text="Tác giả:" />
+               <Label fx:id="authorsLabel" text="Label" />
+            </HBox>
+            <HBox prefWidth="499.0">
+               <Label text="Nhà xuất bản:" />
+               <Label fx:id="publisherLabel" text="Label" />
+            </HBox>
+            <HBox prefWidth="499.0">
+               <Label text="Ngày xuất bản:" />
+               <Label fx:id="pulishedDateLabel" text="Label" />
+            </HBox>
+            <HBox prefWidth="499.0">
+               <Label text="Thể loại:" />
+               <Label fx:id="categoriesLabel" text="Label" />
+            </HBox>
+            <HBox prefWidth="499.0">
+               <Label text="Số trang:" />
+               <Label fx:id="pageCountLabel" text="Label" />
+            </HBox>
+            <HBox prefWidth="499.0">
+               <Label text="Mô tả:" />
+               <TextArea fx:id="descriptionTextArea" editable="false" focusTraversable="false" prefHeight="64.0" prefWidth="449.0" text="                                                                                                            " wrapText="true" />
+            </HBox>
+            <HBox prefWidth="499.0">
+               <Label text="Số lượng đánh giá:" />
+               <Label fx:id="ratingCountLabel" text="Label" />
+            </HBox>
+            <HBox prefWidth="499.0">
+               <Label text="Điểm đánh giá trung bình:" />
+               <Label fx:id="averageScoreLabel" text="Label" />
+            </HBox>
+            <HBox prefWidth="499.0">
+               <Label text="Số lượng tài liệu:" />
+               <Label fx:id="quantityLabel" text="Label" />
+            </HBox>
+            <HBox prefWidth="499.0">
+               <Label text="Số tài liệu còn lại:" />
+               <Label fx:id="remainingLabel" text="Label" />
+            </HBox>
+            <HBox prefWidth="499.0">
+               <Label text="ID sách:" />
+               <Label fx:id="idLabel" text="Label" />
+            </HBox>
+         </VBox>
+         <VBox fx:id="otherRatingVBox" layoutX="26.0" layoutY="598.0" prefWidth="894.0" />
+         <Label layoutX="30.0" layoutY="581.0" text="Các đánh giá khác" />
+         <Pane fx:id="memberRatingPane" layoutX="12.0" layoutY="425.0" prefHeight="152.0" prefWidth="922.0">
+            <Label layoutX="12.0" layoutY="29.0" text="Đánh giá của bạn" />
+            <HBox fx:id="starRatingHBox" layoutX="9.0" layoutY="46.0" prefHeight="13.0" prefWidth="90.0" spacing="2.0">
+               <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../graphic/images/un-rate-star.png" />
+               </ImageView>
+               <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../graphic/images/un-rate-star.png" />
+               </ImageView>
+               <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../graphic/images/un-rate-star.png" />
+               </ImageView>
+               <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../graphic/images/un-rate-star.png" />
+               </ImageView>
+               <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../graphic/images/un-rate-star.png" />
+               </ImageView>
+            </HBox>
+            <TextArea fx:id="memberComment" focusTraversable="false" layoutX="14.0" layoutY="75.0" prefHeight="13.0" prefWidth="893.0" />
+            <Button fx:id="ratingSendingButton" layoutX="16.0" layoutY="124.0" mnemonicParsing="false" onAction="#sendRating" text="Gửi đánh giá" />
+         </Pane>
+         <Button fx:id="borrowingButton" layoutX="856.0" layoutY="14.0" mnemonicParsing="false" onAction="#borrowDoc" text="Mượn sách" />
+         <Button fx:id="editingButton" layoutX="856.0" layoutY="60.0" mnemonicParsing="false" onAction="#editDoc" text="Chỉnh sửa" />
+         <ImageView fx:id="backButton" fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="11.0" onMouseClicked="#goBackToPrevPane" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../graphic/images/go-back-arrow.png" />
+            </image>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </ImageView>
       </Pane>
-   </content>
+   </Pane>
 </ScrollPane>

@@ -1,4 +1,4 @@
-package app.database;
+package app.dao;
 import app.base.Author;
 import app.base.Category;
 import app.base.Document;
@@ -45,15 +45,17 @@ public class DocumentDAO {
         return documents;
     }
 
-    public static ArrayList<Document> getAllDocumentFromAuthor(String authorName) {
+    public static ArrayList<Document> getAllDocumentFromAuthor(String authorId) {
         ArrayList<Document> documents = new ArrayList<>();
         StringBuilder query = new StringBuilder();
         query.append("SELECT d.* FROM documents AS d ");
         query.append("JOIN document_author AS da ON d.document_id = da.document_id ");
         query.append("JOIN authors AS a ON da.author_id = a.author_id ");
+        query.append("WHERE da.author_id = ?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, authorId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 documents.add(new Document(resultSet));
@@ -64,15 +66,17 @@ public class DocumentDAO {
         return documents;
     }
 
-    public static ArrayList<Document> getAllDocumentFromCategory(String category) {
+    public static ArrayList<Document> getAllDocumentFromCategory(String categoryId) {
         ArrayList<Document> documents = new ArrayList<>();
         StringBuilder query = new StringBuilder();
         query.append("SELECT d.* FROM documents AS d ");
         query.append("JOIN document_category AS dc ON d.document_id = dc.document_id ");
         query.append("JOIN categories AS c ON dc.category_id = c.category_id ");
+        query.append("WHERE c.category_id = ?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, categoryId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 documents.add(new Document(resultSet));
@@ -108,23 +112,24 @@ public class DocumentDAO {
         //Thêm tài liệu phải thêm cho bảng category và author
         StringBuilder docQuery = new StringBuilder();
         docQuery.append("INSERT INTO documents ");
-        docQuery.append("(document_id, title, quantity, remaining, ratings_count, average_score, " +
+        docQuery.append("(document_id, title, isbn, quantity, remaining, ratings_count, average_score, " +
                 "description, page_count, publisher, published_date, image_url) ");
-        docQuery.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        docQuery.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(docQuery.toString());
             preparedStatement.setString(1, doc.getId());
             preparedStatement.setString(2, doc.getTitle());
-            preparedStatement.setInt(3, doc.getQuantity());
-            preparedStatement.setInt(4, doc.getRemaining());
-            preparedStatement.setInt(5, doc.getRatingCount());
-            preparedStatement.setDouble(6, doc.getAverageScore());
-            preparedStatement.setString(7, doc.getDescription());
-            preparedStatement.setInt(8, doc.getPageCount());
-            preparedStatement.setString(9, doc.getPublisher());
-            preparedStatement.setString(10, doc.getPublishedDate());
-            preparedStatement.setString(11, doc.getImageUrl());
+            preparedStatement.setString(3, doc.getIsbn());
+            preparedStatement.setInt(4, doc.getQuantity());
+            preparedStatement.setInt(5, doc.getRemaining());
+            preparedStatement.setInt(6, doc.getRatingCount());
+            preparedStatement.setDouble(7, doc.getAverageScore());
+            preparedStatement.setString(8, doc.getDescription());
+            preparedStatement.setInt(9, doc.getPageCount());
+            preparedStatement.setString(10, doc.getPublisher());
+            preparedStatement.setString(11, doc.getPublishedDate());
+            preparedStatement.setString(12, doc.getImageUrl());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -239,8 +244,29 @@ public class DocumentDAO {
     }
 
     public static void updateDocument(Document document) {
-        //Xóa doc cũ tương ứng với id sau đó thêm doc mới
-        removeDocument(document.getId());
-        addDocument(document);
+        StringBuilder query = new StringBuilder();
+        query.append("UPDATE documents ");
+        query.append("SET isbn = ?, title = ?, publisher = ?, published_date = ?, description = ?, page_count = ?,");
+        query.append(" average_score = ?, quantity = ?, remaining = ?, ratings_count = ?, image_url = ?");
+        query.append("WHERE document_id = ?");
+        try {
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, document.getIsbn());
+            preparedStatement.setString(2, document.getTitle());
+            preparedStatement.setString(3, document.getPublisher());
+            preparedStatement.setString(4, document.getPublishedDate());
+            preparedStatement.setString(5, document.getDescription());
+            preparedStatement.setInt(6, document.getPageCount());
+            preparedStatement.setDouble(7, document.getAverageScore());
+            preparedStatement.setInt(8, document.getQuantity());
+            preparedStatement.setInt(9, document.getRemaining());
+            preparedStatement.setInt(10, document.getRatingCount());
+            preparedStatement.setString(11, document.getImageUrl());
+            preparedStatement.setString(12, document.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

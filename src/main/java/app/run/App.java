@@ -1,9 +1,8 @@
 package app.run;
 
-import app.base.Admin;
 import app.base.User;
 import app.controller.NetworkMonitor;
-import app.database.DatabaseManagement;
+import app.dao.DatabaseManagement;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,22 +13,18 @@ import java.io.IOException;
 
 public class App extends Application {
     public static User currentUser;
+    public static final String APP_NAME = "LibZone";
+    public static final String LOGO_PATH = "/graphic/images/logo.png";
+    public static final String START_FXML = "/fxml/Login.fxml";
+    public static final String CSS_PATH = "/graphic/css/style.css";
+    public static final int WIDTH = 1126;
+    public static final int HEIGHT = 650;
 
     private static Scene scene;
 
-    private static final String APP_NAME = "LibZone";
-    private static final String LOGO_PATH = "/graphic/images/logo.png";
-    private static final String START_FXML = "/fxml/DocumentEdit.fxml";
-    private static final String CSS_PATH = "/graphic/css/style.css";
-    private static final int WIDTH = 1126;
-    private static final int HEIGHT = 650;
-
     @Override
     public void start(Stage stage) throws IOException {
-        DatabaseManagement.setConnection();
-
-        // Khởi tạo currentUser là Admin
-        currentUser = new Admin("admin_id", "admin", "admin", "Admin", "User", "01/01/1990", "admin@libzone.com", "0123456789");
+        new Thread(DatabaseManagement::setConnection).start();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(START_FXML));
         Image logo = new Image(String.valueOf(getClass().getResource(LOGO_PATH)));

@@ -1,8 +1,8 @@
 package database;
 
 import app.base.Author;
-import app.database.AuthorDAO;
-import app.database.DatabaseManagement;
+import app.dao.AuthorDAO;
+import app.dao.DatabaseManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//All test are correct
 public class AuthorDAOTest {
 
     @BeforeEach
@@ -38,7 +39,7 @@ public class AuthorDAOTest {
 
     @Test
     void testGetAllAuthorFromDocId() {
-        String docId = "M7VT6I3XMC4C";
+        String docId = "m7vT6i3xmC4C";
 
         ArrayList<Author> authors = AuthorDAO.getAllAuthorFromDocId(docId);
 

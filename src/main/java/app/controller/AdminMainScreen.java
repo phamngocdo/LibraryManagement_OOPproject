@@ -30,7 +30,7 @@ public class AdminMainScreen {
 
     @FXML
     private void onDocEdit() {
-        goToFunction("DocEdit");
+        goToFunction("DocumentEdit");
     }
 
     @FXML

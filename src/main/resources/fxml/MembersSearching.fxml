@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<Pane prefHeight="650.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" />
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="945.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23" fx:controller="app.controller.MembersSearching">
+   <content>
+      <Pane minHeight="648.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css">
+         <children>
+            <TextField fx:id="searchingField" layoutX="74.0" layoutY="49.0" prefHeight="25.0" prefWidth="339.0" promptText="Tìm kiếm theo mã hoặc tên" />
+            <VBox fx:id="vBox" layoutX="35.0" layoutY="112.0" prefWidth="876.0" />
+            <Label fx:id="notFoundLabel" layoutX="374.0" layoutY="135.0" text="Không tìm thấy thông tin người dùng" />
+         </children>
+      </Pane>
+   </content>
+</ScrollPane>

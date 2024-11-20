@@ -1,7 +1,7 @@
 package app.trie;
 
-import app.database.DatabaseManagement;
-import app.database.DocumentDAO;
+import app.dao.DatabaseManagement;
+import app.dao.DocumentDAO;
 import javafx.util.Pair;
 
 public class DocumentTitleTrie extends Trie{

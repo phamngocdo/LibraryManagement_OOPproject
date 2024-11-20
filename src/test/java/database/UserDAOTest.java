@@ -2,8 +2,8 @@ package database;
 
 import app.base.Admin;
 import app.base.Member;
-import app.database.DatabaseManagement;
-import app.database.UserDAO;
+import app.dao.DatabaseManagement;
+import app.dao.UserDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

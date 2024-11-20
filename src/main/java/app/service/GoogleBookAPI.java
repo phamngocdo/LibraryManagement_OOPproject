@@ -1,25 +1,25 @@
 package app.service;
 
+import app.base.Author;
+import app.base.Category;
 import app.base.Document;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class GoogleBookAPI {
     private static final String GG_BOOK_API_URL = "https://www.googleapis.com/books/v1/volumes/";
-    private static final String API_KEY = "AIzaSyApmeiKeZsc5BFbGFqAHJa3kAUybkoQVjY";
 
-    public static Document getDocFromId(String id) throws Exception {
-        //Không sử dụng try, catch mà sử dụng throw để class khác xử lí
-        //Sử dụng thư viện java.net và org.json
-        //Truy xuất các thông tin sau và đưa vào hashmap:
-        //publisher, publishedDate, description, pageCount, language
-        //Chú ý đổi hết về String, nếu thông tin rỗng thì trả về N/A
+    public static Document getDocFromIsbn(String isbn) throws Exception {
+        // Không sử dụng try-catch mà sử dụng throw để lớp khác xử lý
+        // Sử dụng thư viện java.net và org.json
 
-        String apiUrl = GG_BOOK_API_URL + id + "?key=" + API_KEY;
+        String apiUrl = GG_BOOK_API_URL + "?q=isbn:" + isbn;
         URL url = new URL(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
@@ -57,24 +57,51 @@ public class GoogleBookAPI {
 
         // Chuyển đổi chuỗi JSON thành đối tượng JSONObject
         JSONObject jsonResponse = new JSONObject(response.toString());
-        JSONObject volumeInfo = jsonResponse.getJSONObject("volumeInfo");
+
+        // Kiểm tra nếu có tài liệu nào trả về
+        if (!jsonResponse.has("items")) {
+            throw new Exception("Không tìm thấy tài liệu với ISBN: " + isbn);
+        }
+
+        // Lấy thông tin từ volumeInfo của cuốn sách đầu tiên
+        JSONObject volumeInfo = jsonResponse.getJSONArray("items")
+                .getJSONObject(0).getJSONObject("volumeInfo");
 
         // Truy xuất thông tin từ JSON và xử lý nếu thiếu giá trị
+        String id = jsonResponse.getJSONArray("items").getJSONObject(0).getString("id");
         String title = volumeInfo.optString("title", "N/A");
         String publisher = volumeInfo.optString("publisher", "N/A");
         String publishedDate = volumeInfo.optString("publishedDate", "N/A");
         String description = volumeInfo.optString("description", "N/A");
         int pageCount = volumeInfo.optInt("pageCount", 0);
+        double averageScore = volumeInfo.optDouble("averageRating", 0);
+        int ratingCount = volumeInfo.optInt("ratingsCount", 0);
+
+        // Lấy danh sách tác giả
+        JSONArray authorsJSON = volumeInfo.optJSONArray("authors");
+        ArrayList<Author> authors = new ArrayList<>();
+        if (authorsJSON != null) {
+            for (int i = 0; i < authorsJSON.length(); i++) {
+                authors.add(new Author("", authorsJSON.getString(i)));
+            }
+        }
+
+        // Lấy danh sách thể loại
+        JSONArray categoriesJSON = volumeInfo.optJSONArray("categories");
+        ArrayList<Category> categories = new ArrayList<>();
+        if (categoriesJSON != null) {
+            for (int i = 0; i < categoriesJSON.length(); i++) {
+                categories.add(new Category("", categoriesJSON.getString(i)));
+            }
+        }
 
         // Lấy ảnh bìa (thumbnail) nếu có
         String imageUrl = volumeInfo.optJSONObject("imageLinks") != null
-                ? volumeInfo.getJSONObject("imageLinks").optString("thumbnail", "N/A")
+                ? volumeInfo.getJSONObject("imageLinks").optString("thumbnail", "")
                 : "N/A";
 
-        return new Document(
-                id, title, 0, 0, 0, 0.0, pageCount, description,
-                publisher, publishedDate, imageUrl
-        );
-
+        // Tạo đối tượng Document và trả về
+        return new Document(id, title, isbn, 0, 0, ratingCount, averageScore, pageCount,
+                description, publisher, publishedDate, imageUrl, authors, categories, null);
     }
 }

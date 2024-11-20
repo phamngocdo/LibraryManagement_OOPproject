@@ -1,13 +1,13 @@
 package service;
 
 import app.base.Document;
-import app.database.DatabaseManagement;
+import app.dao.DatabaseManagement;
 import app.service.GoogleBookAPI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+//All test are correct
 public class GoogleBookAPITest {
 
     @BeforeEach
@@ -16,17 +16,14 @@ public class GoogleBookAPITest {
     }
 
     @Test
-    public void testGetDocFromId_Valid() throws Exception {
-        String validId = "XdMBTKWSfeMC";  // ID hợp lệ
-        Document result = GoogleBookAPI.getDocFromId(validId);
-        // Kiểm tra kết quả không null
+    public void testGetDocFromIsbn_Valid() throws Exception {
+        String validIsbn = "9780521679824";  // Isbn hợp lệ
+        Document result = GoogleBookAPI.getDocFromIsbn(validIsbn);
         assertNotNull(result);
-        // Kiểm tra các thuộc tính của Document
-        assertEquals("Taras Bulba", result.getTitle());
-        assertEquals("Ediciones AKAL", result.getPublisher());
-        assertEquals("2006-12-19", result.getPublishedDate());
-        assertTrue(result.getDescription().startsWith("Feroces, crueles"));
-        assertEquals(160, result.getPageCount());
+        assertEquals("Environmental Biology", result.getTitle());
+        assertEquals("Cambridge University Press", result.getPublisher());
+        assertEquals("2009", result.getPublishedDate());
+        assertEquals(689, result.getPageCount());
     }
-
+    
 }
