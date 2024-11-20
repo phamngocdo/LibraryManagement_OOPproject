@@ -9,8 +9,6 @@ import app.dao.ReceiptDAO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
 
 public class RecommenderSystem {
 
