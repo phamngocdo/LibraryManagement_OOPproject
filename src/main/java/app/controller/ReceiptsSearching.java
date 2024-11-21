@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.FileChooser;
 import org.json.JSONObject;
 
@@ -77,7 +78,7 @@ public class ReceiptsSearching {
         receiptsTable.setPlaceholder(new Label("Không tìm thấy thông tin"));
 
         //tìm kiếm ký tự bắt đầu
-        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> searchReceipts(newValue));
+        setupSearchTextField();
 
         //lọc receipt
         setupFilterComboBox();
@@ -91,6 +92,15 @@ public class ReceiptsSearching {
             receiptsList.setAll(admin.seeAllReceipts());
         }
         receiptsTable.setItems(receiptsList);
+    }
+
+    private void setupSearchTextField() {
+        searchTextField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                String keyword = searchTextField.getText().trim(); //lấy từ khóa từ TextField
+                searchReceipts(keyword); //gọi searchReceipts
+            }
+        });
     }
 
     private void searchReceipts(String keyword) {
