@@ -104,13 +104,15 @@ public class ReceiptsSearching {
     }
 
     private void searchReceipts(String keyword) {
+        String lowerCaseKeyword = keyword.toLowerCase();
         List<Receipt> filteredReceipts = receiptsList.stream()
-                .filter(receipt -> receipt.getId().startsWith(keyword) ||
-                        receipt.getMemberId().startsWith(keyword) ||
-                        receipt.getDocId().startsWith(keyword))
+                .filter(receipt -> receipt.getId().toLowerCase().startsWith(lowerCaseKeyword) ||
+                        receipt.getMemberId().toLowerCase().startsWith(lowerCaseKeyword) ||
+                        receipt.getDocId().toLowerCase().startsWith(lowerCaseKeyword))
                 .collect(Collectors.toList());
         receiptsTable.setItems(FXCollections.observableArrayList(filteredReceipts));
     }
+
 
     private void setupFilterComboBox() {
         filterComboBox.setItems(FXCollections.observableArrayList("Tất cả", "Đã trả", "Chưa trả", "Quá hạn"));
