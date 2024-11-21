@@ -79,9 +79,11 @@
 .er-result-label{
     -fx-font-family: Arial;
     -fx-text-fill:red;
+    -fx-font-size: 13;
 }
 
 .suc-result-label {
     -fx-font-family: Arial;
     -fx-text-fill: green;
+    -fx-font-size: 13;
 }

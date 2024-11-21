@@ -1,0 +1,29 @@
+.edit-button {
+    -fx-border-radius:5px;
+    -fx-background-radius:5px;
+    -fx-background-color:black;
+    -fx-text-fill:white;
+    -fx-font-size:14px;
+    -fx-cursor:HAND;
+    -fx-font-family:"Arial";
+    -fx-font-weight:bold;
+}
+
+.edit-button:hover {
+    -fx-background-color:#8a8a8a;
+}
+
+.info-field {
+    -fx-border-color: #b5b5b5;
+    -fx-border-radius: 3;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-family: Arial;
+    -fx-font-size: 13;
+}
+
+.member-info-pane {
+    -fx-background-color: white;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.0, 0, 1);
+}

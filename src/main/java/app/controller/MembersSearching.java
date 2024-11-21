@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -80,7 +81,7 @@ public class MembersSearching {
         int memberIndex = 0;
         for (int i = 0; i < rowCount; i++) {
             HBox hBox = new HBox();
-            hBox.setSpacing(10);
+            hBox.setSpacing(15);
 
             for (int j = 0; j < 3; j++) {
                 if (memberIndex >= members.size()) break;
@@ -98,39 +99,66 @@ public class MembersSearching {
     private Pane createMemberPane(Member member) {
         // Tạo Pane hiển thị thông tin của một thành viên
         Pane pane = new Pane();
-        pane.setPrefSize(282, 166);
+        pane.setPrefSize(282, 200);
         pane.getStyleClass().add("member-pane"); // Có thể thêm CSS class
 
-        Label nameLabel = new Label("Họ và Tên: " + member.getFirstName() + " " + member.getLastName());
-        nameLabel.setLayoutX(14);
-        nameLabel.setLayoutY(14);
+        TextFlow nameFlow = getTextFlow("Họ và tên: ", member.getFirstName()+ " " + member.getLastName());
+        nameFlow.setLayoutX(14);
+        nameFlow.setLayoutY(14);
 
-        Label idLabel = new Label("Mã Thành Viên: " + member.getId());
-        idLabel.setLayoutX(14);
-        idLabel.setLayoutY(38);
+        TextFlow idFlow = getTextFlow("Mã thành viên: ", member.getId());
+        idFlow.setLayoutX(14);
+        idFlow.setLayoutY(38);
 
-        Label birthdayLabel = new Label("Ngày Sinh: " + member.getBirthday());
-        birthdayLabel.setLayoutX(14);
-        birthdayLabel.setLayoutY(64);
+        TextFlow birthdayFlow = getTextFlow("Ngày sinh: ", member.getBirthday());
+        birthdayFlow.setLayoutX(14);
+        birthdayFlow.setLayoutY(64);
 
-        Label emailLabel = new Label("Email: " + member.getEmail());
-        emailLabel.setLayoutX(14);
-        emailLabel.setLayoutY(90);
+        TextFlow emailFlow = getTextFlow("Email: ", member.getEmail());
+        emailFlow.setLayoutX(14);
+        emailFlow.setLayoutY(90);
 
-        Label phoneLabel = new Label("Số Điện Thoại: " + member.getPhoneNumber());
-        phoneLabel.setLayoutX(14);
-        phoneLabel.setLayoutY(116);
+        TextFlow phoneFlow = getTextFlow("Số điện thoại: ", member.getPhoneNumber());
+        phoneFlow.setLayoutX(14);
+        phoneFlow.setLayoutY(116);
+
+        TextFlow numberOfBorrowedDocFlow = getTextFlow("Số sách đã mượn: ",
+                String.valueOf(member.getReceipts().size()));
+        numberOfBorrowedDocFlow.setLayoutX(14);
+        numberOfBorrowedDocFlow.setLayoutY(142);
+
+        int numberOfReturnedDoc = member.getReceipts().stream()
+                                .filter(receipt -> "returned".equals(receipt.getStatus()))
+                                .toList().size();
+        TextFlow numberOfReturnedDocFlow = getTextFlow("Số sách đã trả: ", String.valueOf(numberOfReturnedDoc));
+        numberOfReturnedDocFlow.setLayoutX(14);
+        numberOfReturnedDocFlow.setLayoutY(168);
 
         ImageView trashImage = new ImageView();
         trashImage.getStyleClass().add("trash-icon");
-        trashImage.setLayoutX(243);
-        trashImage.setLayoutY(133);
+        trashImage.setLayoutX(253);
+        trashImage.setLayoutY(170);
         trashImage.setFitWidth(20);
         trashImage.setFitHeight(20);
         trashImage.setOnMouseClicked(event -> removeMember(member.getId(), pane));
 
-        pane.getChildren().addAll(nameLabel, idLabel, birthdayLabel, emailLabel, phoneLabel, trashImage);
+        pane.getChildren().addAll(nameFlow, idFlow, emailFlow, birthdayFlow, phoneFlow,
+                numberOfReturnedDocFlow, numberOfBorrowedDocFlow, trashImage);
+        pane.getStyleClass().add("member-info-pane");
         return pane;
+    }
+
+    private TextFlow getTextFlow(String title, String content) {
+        TextFlow textFlow = new TextFlow();
+        textFlow.setStyle("-fx-font-size: 13");
+
+        Label titleLabel = new Label(title);
+        titleLabel.setStyle("-fx-font-weight: bold");
+
+        Label contentLabel = new Label(content);
+
+        textFlow.getChildren().addAll(titleLabel, contentLabel);
+        return textFlow;
     }
 
     private void removeMember(String memberId, Pane pane) {

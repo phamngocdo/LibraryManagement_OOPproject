@@ -112,26 +112,27 @@ public class UserDAOTest {
 
     @Test
     public void testUpdateMember() {
-        //lấy id member2 từ db
-        Member member = new Member("61K9MOF2IWG9", "member4", "member4",
-                "null", "null",
-                "09/09/2004",
+        Member member = new Member("OJIK98JHNTMT", "member2", "member2",
+                "Do", "Pham",
+                "09-09-2004",
                 "null", "null");
+
         UserDAO.updateMember(member);
-        Member updatedMember = UserDAO.getMemberFromId("61K9MOF2IWG9");
+        Member updatedMember = UserDAO.getMemberFromId("OJIK98JHNTMT");
         assertNotNull(updatedMember);
-        assertEquals("member4", updatedMember.getUsername());
+        assertEquals("Do", updatedMember.getFirstName());
+        assertEquals("Pham", updatedMember.getLastName());
     }
 
     @Test
     public void testCheckUsernameExist_ExistingUsername() {
         boolean exists = UserDAO.checkUsernameExist("member1");
-        assertTrue(exists); //true vì username đã tồn tại
+        assertTrue(exists);
     }
 
     @Test
     public void testCheckUsernameExist_NonExistingUsername() {
         boolean exists = UserDAO.checkUsernameExist("non-username");
-        assertFalse(exists); // Kết quả phải là false vì username không tồn tại
+        assertFalse(exists);
     }
 }

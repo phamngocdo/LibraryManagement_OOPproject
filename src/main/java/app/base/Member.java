@@ -66,24 +66,15 @@ public class Member extends User {
 
     public void rateDocument(Rating rating) {
         Document doc = DocumentDAO.getDocFromId(rating.getDocId());
-
-        // Cộng 1 cho số lượng người vote và tính lại điểm trung bình
         if (doc != null) {
             double totalRating = doc.getRatingCount() * doc.getAverageScore();
             totalRating += rating.getRatingScore();
             int newRatingCount = doc.getRatingCount() + 1;
-
             double newAverageRating = totalRating / newRatingCount;
-
-            // Cập nhật lại tài liệu
             doc.setRatingCount(newRatingCount);
             doc.setAverageScore(newAverageRating);
-
-            // Cập nhật tài liệu vào cơ sở dữ liệu
             DocumentDAO.updateDocument(doc);
         }
-
-        // Thêm rating mới vào cơ sở dữ liệu
         RatingDAO.addRating(rating);
     }
 

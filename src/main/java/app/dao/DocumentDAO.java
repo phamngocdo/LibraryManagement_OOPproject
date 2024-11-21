@@ -109,7 +109,6 @@ public class DocumentDAO {
         if (doc.getId().isEmpty()) {
             doc.setId(DatabaseManagement.createRandomIdInTable("documents", "document_id"));
         }
-        //Thêm tài liệu phải thêm cho bảng category và author
         StringBuilder docQuery = new StringBuilder();
         docQuery.append("INSERT INTO documents ");
         docQuery.append("(document_id, title, isbn, quantity, remaining, ratings_count, average_score, " +
@@ -135,7 +134,6 @@ public class DocumentDAO {
             throw new RuntimeException(e);
         }
 
-        // Thêm vào bảng document_category
         for (Category category : doc.getCategories()) {
             StringBuilder categoryDocQuery = new StringBuilder();
             categoryDocQuery.append("INSERT INTO document_category (document_id, category_id)");

@@ -35,7 +35,6 @@ public class UserDAO {
         return null;
     }
 
-    // Get Member by ID
     public static Member getMemberFromId(String id) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM users ");
@@ -54,8 +53,6 @@ public class UserDAO {
         return null;
     }
 
-
-    // Retrieve all members
     public static ArrayList<Member> getAllMember() {
         ArrayList<Member> members = new ArrayList<>();
         StringBuilder query = new StringBuilder();
@@ -74,7 +71,6 @@ public class UserDAO {
         return members;
     }
 
-    // Add a new member
     public static void addMember(Member member) {
         if (member.getId().isEmpty()){
             member.setId(DatabaseManagement.createRandomIdInTable("users", "user_id"));
@@ -102,7 +98,6 @@ public class UserDAO {
         }
     }
 
-    // Remove a member
     public static void removeMember(String memberId) {
         StringBuilder query = new StringBuilder();
         query.append("DELETE FROM users ");
@@ -119,12 +114,11 @@ public class UserDAO {
         }
     }
 
-    // Update a member
     public static void updateMember(Member member) {
         StringBuilder query = new StringBuilder();
         query.append("UPDATE users ");
         query.append("SET password = ?, first_name = ?, last_name = ?, birthday = ?, email = ?, phone_number = ?");
-        query.append("WHERE user_id=?");
+        query.append("WHERE user_id = ?");
         try {
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
@@ -134,12 +128,13 @@ public class UserDAO {
             preparedStatement.setString(4, member.getBirthday());
             preparedStatement.setString(5, member.getEmail());
             preparedStatement.setString(6, member.getPhoneNumber());
+            preparedStatement.setString(7, member.getId());
+            preparedStatement.executeUpdate();
         } catch(SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    // Check if username exists
     public static boolean checkUsernameExist(String username) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM users ");
@@ -149,7 +144,7 @@ public class UserDAO {
             preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next(); // Return true if username exists
+            return resultSet.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

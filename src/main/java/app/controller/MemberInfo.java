@@ -2,8 +2,8 @@ package app.controller;
 
 import app.base.Member;
 import app.run.App;
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -28,10 +28,7 @@ public class MemberInfo {
     private TextField oldPasswordTextField, newPasswordTextField, reEnterNewPasswordTextField;
 
     @FXML
-    private Button editingButton, cancelPasswordButton, changePasswordButton, saveButton;
-
-    @FXML
-    private HBox personalInfoHBox;
+    private JFXButton editingButton, cancelPasswordButton, changePasswordButton, saveButton;
 
     private boolean isEditing = false; // Biến để kiểm tra trạng thái chỉnh sửa
 
@@ -50,14 +47,13 @@ public class MemberInfo {
         emailTextField.setText(currentMember.getEmail());
         phoneNumberTextFiled.setText(currentMember.getPhoneNumber());
         //Hiển thị bảng thông tin cá nhân và nút chỉnh sửa
-        personalInfoHBox.setVisible(true);
-        idMenberTextField.setDisable(true);
-        loginNameTextField.setDisable(true);
-        firstNameTextField.setDisable(true);
-        lastNameTextField.setDisable(true);
-        birthdayTextField.setDisable(true);
-        emailTextField.setDisable(true);
-        phoneNumberTextFiled.setDisable(true);
+        idMenberTextField.setEditable(false);
+        loginNameTextField.setEditable(false);
+        firstNameTextField.setEditable(false);
+        lastNameTextField.setEditable(false);
+        birthdayTextField.setEditable(false);
+        emailTextField.setEditable(false);
+        phoneNumberTextFiled.setEditable(false);
 
         editingButton.setVisible(true);
         saveButton.setVisible(false);
@@ -75,11 +71,11 @@ public class MemberInfo {
             setupPersonalInfo();
         } else {
             // Nếu không ở chế độ chỉnh sửa, chuyển sang chế độ chỉnh sửa
-            firstNameTextField.setDisable(false);
-            lastNameTextField.setDisable(false);
-            birthdayTextField.setDisable(false);
-            emailTextField.setDisable(false);
-            phoneNumberTextFiled.setDisable(false);
+            firstNameTextField.setEditable(true);
+            lastNameTextField.setEditable(true);
+            birthdayTextField.setEditable(true);
+            emailTextField.setEditable(true);
+            phoneNumberTextFiled.setEditable(true);
 
             editingButton.setVisible(true);
             saveButton.setVisible(true);
@@ -88,6 +84,7 @@ public class MemberInfo {
 
             isEditing = true; // Đặt trạng thái thành đang chỉnh sửa
         }
+        editingButton.setVisible(false);
     }
 
     @FXML
@@ -107,6 +104,8 @@ public class MemberInfo {
     @FXML
     private void saveInfo() {
         try {
+            resultLabel.getStyleClass().clear();
+            resultLabel.getStyleClass().add("er-result-label");
             // Kiểm tra các trường không được để trống
             if (firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty() ||
                     birthdayTextField.getText().isEmpty() || emailTextField.getText().isEmpty() ||
@@ -175,11 +174,12 @@ public class MemberInfo {
                     resultLabel.setVisible(true);
                     return;
                 }
-                App.currentUser.setPassword(newPassword); // Đặt mật khẩu mới
+                App.currentUser.setPassword(newPassword);
             }
 
-            // Gọi hàm updateMember để lưu thông tin mới vào cơ sở dữ liệu
             Member.updateInfoToDatabase((Member) App.currentUser);
+            resultLabel.getStyleClass().clear();
+            resultLabel.getStyleClass().add("suc-result-label");
             resultLabel.setText("Chỉnh sửa thành công!");
             resultLabel.setVisible(true);
 
