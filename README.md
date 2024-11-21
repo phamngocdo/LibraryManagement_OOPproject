@@ -41,14 +41,14 @@ Our team:
 
 - **For Readers (Members)**:
   - Register an account and update personal information if needed.
-  - Borrow books when viewing detailed book information.
+  - Borrow and rate when viewing detailed book information.
   - View borrowing history through borrowing receipts.
   - Save and print borrowing receipts.
 ---
 ## Diagrams
 - Use cases:
 <div align="center">
-  <img src="/src/main/java/app/Use%20case%20Diagram.png" alt="UseCases">
+  <img src="/src/main/java/app/Use%20cases%20Diagram.png" alt="UseCases">
 </div>
 
 - Database:
