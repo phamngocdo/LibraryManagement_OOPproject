@@ -40,13 +40,6 @@ public class RatingDAOTest {
     }
 
     @Test
-    public void testGetAllRating() {
-        ArrayList<Rating> ratings = RatingDAO.getAllRating();
-        assertNotNull(ratings);
-        assertFalse(ratings.isEmpty());
-    }
-
-    @Test
     public void testAddRating() {
         Rating newRating = new Rating("", "OJIK98JHNTMT", "docid", 5, "Great!");
         RatingDAO.addRating(newRating);

@@ -1,7 +1,6 @@
 package app.controller;
 
 import app.base.*;
-import app.dao.ReceiptDAO;
 import app.run.App;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -9,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -26,10 +24,7 @@ public class DocumentInfo {
     private Pane functionPane, infoPane, memberRatingPane;
 
     @FXML
-    private ImageView backButton;
-
-    @FXML
-    private Label authorsLabel, isbnLabel, averageScoreLabel, categoriesLabel, idLabel, pageCountLabel;
+    private Label authorsLabel, isbnLabel, averageScoreLabel, categoriesLabel, pageCountLabel;
 
     @FXML
     private Label publisherLabel, remainingLabel, pulishedDateLabel, quantityLabel, ratingCountLabel, titleLabel;
@@ -47,7 +42,7 @@ public class DocumentInfo {
     private TextArea memberComment;
 
     @FXML
-    private Button ratingSendingButton, borrowingButton, editingButton;
+    private Button borrowingButton, editingButton;
 
     @FXML
     private HBox starRatingHBox;
@@ -65,17 +60,17 @@ public class DocumentInfo {
     private void initialize() {
         scrollPane.setVisible(true);
         if (App.currentUser instanceof Admin) {
-            memberRatingPane.setVisible(false);
+            memberRatingPane.setDisable(true);
             editingButton.setVisible(true);
             borrowingButton.setVisible(false);
         } else if (App.currentUser instanceof Member) {
-            memberRatingPane.setVisible(true);
+            memberRatingPane.setDisable(false);
             editingButton.setVisible(false);
-            Receipt receipt = ReceiptDAO.getReceiptFromDocAndMember(
-                    currentDoc.getId(),
-                    App.currentUser.getId()
-            );
-
+            Receipt receipt = ((Member) App.currentUser).getReceipts()
+                    .stream()
+                    .filter(r -> r.getDocId().equals(currentDoc.getId()))
+                    .findFirst()
+                    .orElse(null);
             if (receipt != null) {
                 if (receipt.getStatus().equals(STATUS_NOT_RETURNED)) {
                     // Nếu đã mượn, hiển thị nút trả tài liệu
@@ -93,7 +88,7 @@ public class DocumentInfo {
     }
 
     @FXML
-    private void goBackToPrevPane(MouseEvent event) {
+    private void goBackToPrevPane() {
         Parent parent = scrollPane.getParent();
         if (parent instanceof Pane parentPane) {
             parentPane.getChildren().remove(scrollPane);
@@ -118,8 +113,6 @@ public class DocumentInfo {
         // Xóa nhận xét sau khi gửi
         memberComment.clear();
         displayRatedStar(0, starRatingHBox); // Đặt lại HBox về trạng thái ban đầu
-        System.out.println("Đánh giá đã được gửi thành công!");
-
     }
 
     @FXML
@@ -159,7 +152,6 @@ public class DocumentInfo {
                 assert doc != null;
                 titleLabel.setText(doc.getTitle());
                 isbnLabel.setText(doc.getIsbn());
-                idLabel.setText(doc.getId());
                 authorsLabel.setText(doc.getAuthorsToString());
                 categoriesLabel.setText(doc.getCategoriesToString());
                 descriptionTextArea.setText(doc.getDescription());
@@ -189,7 +181,6 @@ public class DocumentInfo {
             starImageView.setOnMouseClicked(event -> {
                 displayRatedStar(starIndex, starRatingHBox);
                 selectedStar = starIndex;
-                System.out.println("Người dùng đã đánh giá: " + starIndex + " sao");
             });
         }
     }
@@ -209,14 +200,37 @@ public class DocumentInfo {
 
     private void addRatingIntoVBox(Rating rating) {
         Pane pane = new Pane();
-        Label memberIdlabel = new Label(rating.getMemberId());
-        Label commentLabel = new Label(rating.getComment());
+        pane.getStyleClass().add("rating-pane");
+        pane.setPrefWidth(911);
+
+        Member member = Member.loadFromId(rating.getMemberId());
+        Label memberUserNameLabel = new Label(member.getUsername());
+        memberUserNameLabel.getStyleClass().add("gen-label");
+        memberUserNameLabel.setLayoutX(16);
+        memberUserNameLabel.setLayoutY(14);
+
+        TextArea commentArea = new TextArea(rating.getComment());
+        commentArea.getStyleClass().add("rating-text-area");
+        commentArea.setEditable(false);
+        commentArea.setWrapText(true);
+        commentArea.setLayoutX(6);
+        commentArea.setLayoutY(65);
+        commentArea.setPrefHeight(computeTextAreaHeight(commentArea));
+
         HBox starHBox = new HBox();
+        starHBox.setLayoutX(16);
+        starHBox.setLayoutY(37);
         for (int i = 0; i < 5; i++) {
             starHBox.getChildren().add(new ImageView());
         }
         displayRatedStar(rating.getRatingScore(), starHBox);
         otherRatingVBox.getChildren().add(pane);
-        pane.getChildren().addAll(memberIdlabel, commentLabel, starHBox);
+        pane.getChildren().addAll(memberUserNameLabel, commentArea, starHBox);
+    }
+
+    private double computeTextAreaHeight(TextArea textArea) {
+        double fontHeight = textArea.getFont().getSize();
+        int lineCount = textArea.getText().split("\n").length;
+        return Math.max(50, fontHeight * lineCount + 20);
     }
 }

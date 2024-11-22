@@ -5,3 +5,45 @@
 .un-rated-star{
     -fx-image: url(../images/un-rate-star.png);
 }
+
+.gen-label {
+    -fx-font-size: 13;
+    -fx-font-family: Arial;
+}
+
+.des-area {
+    -fx-background-color: #f0f1f4;
+    -fx-border-width: 0 0 0 0;
+    -fx-font-family: Arial;
+    -fx-font-size: 13;
+    -fx-text-alignment: justify;
+}
+
+.des-area .scroll-pane .content{
+    -fx-background-color: #f0f1f4;
+}
+
+.des-area .scroll-pane .view-port {
+    -fx-background-color: #f0f1f4;
+}
+
+.rating-pane {
+    -fx-background-color: white;
+    -fx-border-radius: 5;
+}
+
+.rating-text-area {
+    -fx-background-color:white;
+    -fx-border-width: 0 0 0 0;
+    -fx-font-family: Arial;
+    -fx-font-size: 13;
+    -fx-text-alignment: justify;
+}
+
+.rating-text-area .scroll-pane .content{
+    -fx-background-color: white;
+}
+
+.rating-text-area .scroll-pane .view-port {
+    -fx-background-color: white;
+}

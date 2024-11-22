@@ -67,7 +67,7 @@ public class AdminMainScreen {
                 functionPane.getChildren().add(page);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Không tìm thấy đường dẫn của" + name + ".fxml");
+            throw new RuntimeException("Không tìm thấy đường dẫn của " + name + ".fxml");
         }
     }
 }

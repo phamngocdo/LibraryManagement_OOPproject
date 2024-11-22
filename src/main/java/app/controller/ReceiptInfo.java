@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.base.Document;
 import app.base.Receipt;
 import app.service.QRcode;
 import com.jfoenix.controls.JFXTextArea;
@@ -24,7 +25,7 @@ public class ReceiptInfo {
     private Pane infoPane;
 
     @FXML
-    private Label receiptIdLabel, docIdLabel, memberIdLabel, borrowingDateLabel, dueDateLabel, statusLabel;
+    private Label receiptIdLabel,isbnLabel, memberIdLabel, borrowingDateLabel, dueDateLabel, statusLabel;
 
     @FXML
     private JFXTextArea fixation;
@@ -41,7 +42,7 @@ public class ReceiptInfo {
     private void initialize() {
         if (receipt != null) {
             receiptIdLabel.setText(receipt.getId());
-            docIdLabel.setText(receipt.getDocId());
+            isbnLabel.setText((new Document(receipt.getDocId())).getIsbn());
             memberIdLabel.setText(receipt.getMemberId());
             borrowingDateLabel.setText(receipt.getBorrowingDate());
             dueDateLabel.setText(receipt.getDueDate());
@@ -70,7 +71,7 @@ public class ReceiptInfo {
     private void qrGenerate() throws Exception {
         HashMap<String, String> map = new HashMap<>();
         map.put("receiptId", receipt.getId());
-        map.put("docId", receipt.getDocId());
+        map.put("isbn", ((new Document(receipt.getDocId())).getIsbn()));
         map.put("memberId", receipt.getMemberId());
         map.put("borrowingDate", receipt.getBorrowingDate());
         map.put("dueDate", receipt.getDueDate());

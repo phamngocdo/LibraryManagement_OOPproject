@@ -33,6 +33,7 @@
     -fx-text-fill: black;
     -fx-cursor:HAND;
     -fx-font-family:"Arial";
+    -fx-alignment: CENTER;
 }
 
 .radio-button .radio {

@@ -11,9 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<Pane fx:id="infoPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity" prefHeight="600.0" prefWidth="533.0" stylesheets="@../graphic/css/style.css"
-      xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.ReceiptInfo">
+<Pane fx:id="infoPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="533.0" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.ReceiptInfo">
    <ImageView fx:id="qrCodeImageView" fitHeight="150.0" fitWidth="150.0" layoutX="198.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" />
    <ImageView fx:id="infoSavingImageView" fitHeight="28.0" fitWidth="28.0" layoutX="158.0" layoutY="500.0" onMouseClicked="#onSaveInfo" pickOnBounds="true" preserveRatio="true">
       <cursor>
@@ -30,12 +28,12 @@
    <TextFlow fx:id="signature" layoutX="41.0" layoutY="484.0" prefHeight="32.0" prefWidth="478.0" visible="false">
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="210.0" text="Chữ ký thủ thư">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="210.0" text="Chữ ký thủ thư">
          <font>
-            <Font name="Arial" size="14.0"/>
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
    </TextFlow>
@@ -44,36 +42,36 @@
          <TextFlow prefHeight="20.0" prefWidth="271.0">
             <Label text="Mã phiếu             :">
                <font>
-                  <Font name="Arial Bold" size="15.0"/>
+                  <Font name="Arial Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="receiptIdLabel" text="Label">
+            <Label fx:id="receiptIdLabel">
                <font>
-                  <Font name="Arial" size="15.0"/>
+                  <Font name="Arial" size="15.0" />
                </font>
             </Label>
          </TextFlow>
          <TextFlow prefHeight="20.0" prefWidth="271.0">
             <Label text="Mã người mượn:">
                <font>
-                  <Font name="Arial Bold" size="15.0"/>
+                  <Font name="Arial Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="memberIdLabel" text="Label">
+            <Label fx:id="memberIdLabel">
                <font>
-                  <Font name="Arial" size="15.0"/>
+                  <Font name="Arial" size="15.0" />
                </font>
             </Label>
          </TextFlow>
          <TextFlow prefHeight="20.0" prefWidth="271.0">
-            <Label text="Mã tài liệu           :">
+            <Label text="Mã ISBN tài liệu :">
                <font>
-                  <Font name="Arial Bold" size="15.0"/>
+                  <Font name="Arial Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="docIdLabel" text="Label">
+            <Label fx:id="isbnLabel">
                <font>
-                  <Font name="Arial" size="15.0"/>
+                  <Font name="Arial" size="15.0" />
                </font>
             </Label>
          </TextFlow>
@@ -82,36 +80,36 @@
          <TextFlow prefHeight="20.0" prefWidth="271.0">
             <Label text="Ngày mượn        :">
                <font>
-                  <Font name="Arial Bold" size="15.0"/>
+                  <Font name="Arial Bold" size="15.0" />
                </font>
             </Label>
             <Label fx:id="borrowingDateLabel">
                <font>
-                  <Font name="Arial" size="15.0"/>
+                  <Font name="Arial" size="15.0" />
                </font>
             </Label>
          </TextFlow>
          <TextFlow prefHeight="20.0" prefWidth="271.0">
             <Label text="Hạn trả                :">
                <font>
-                  <Font name="Arial Bold" size="15.0"/>
+                  <Font name="Arial Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="dueDateLabel" text="Label">
+            <Label fx:id="dueDateLabel">
                <font>
-                  <Font name="Arial" size="15.0"/>
+                  <Font name="Arial" size="15.0" />
                </font>
             </Label>
          </TextFlow>
          <TextFlow prefHeight="20.0" prefWidth="271.0">
             <Label text="Trạng thái           :">
                <font>
-                  <Font name="Arial Bold" size="15.0"/>
+                  <Font name="Arial Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="statusLabel" text="Label">
+            <Label fx:id="statusLabel">
                <font>
-                  <Font name="Arial" size="15.0"/>
+                  <Font name="Arial" size="15.0" />
                </font>
             </Label>
          </TextFlow>

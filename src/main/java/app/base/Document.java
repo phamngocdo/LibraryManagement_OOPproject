@@ -48,6 +48,26 @@ public class Document {
         this.ratings = Objects.requireNonNullElseGet(ratings, () -> RatingDAO.getAllRatingFromDocId(id));
     }
 
+    public Document(ResultSet resultSet) throws SQLException {
+        if (resultSet != null) {
+            id = resultSet.getString("document_id");
+            title = resultSet.getString("title");
+            isbn = resultSet.getString("isbn");
+            quantity = resultSet.getInt("quantity");
+            remaining = resultSet.getInt("remaining");
+            ratingCount = resultSet.getInt("ratings_count");
+            averageScore = resultSet.getDouble("average_score");
+            imageUrl = resultSet.getString("image_url");
+            pageCount = resultSet.getInt("page_count");
+            description = resultSet.getString("description");
+            publisher = resultSet.getString("publisher");
+            publishedDate = resultSet.getString("published_date");
+            authors = AuthorDAO.getAllAuthorFromDocId(id);
+            categories = CategoryDAO.getAllCategoryFromDocId(id);
+            ratings = RatingDAO.getAllRatingFromDocId(id);
+        }
+    }
+
     public Document(String id) {
         Document doc = DocumentDAO.getDocFromId(id);
         if (doc != null) {
@@ -63,26 +83,6 @@ public class Document {
             description = doc.getDescription();
             publisher = doc.getPublisher();
             publishedDate = doc.getPublishedDate();
-            authors = AuthorDAO.getAllAuthorFromDocId(id);
-            categories = CategoryDAO.getAllCategoryFromDocId(id);
-            ratings = RatingDAO.getAllRatingFromDocId(id);
-        }
-    }
-
-    public Document(ResultSet resultSet) throws SQLException {
-        if (resultSet != null) {
-            id = resultSet.getString("document_id");
-            title = resultSet.getString("title");
-            isbn = resultSet.getString("isbn");
-            quantity = resultSet.getInt("quantity");
-            remaining = resultSet.getInt("remaining");
-            ratingCount = resultSet.getInt("ratings_count");
-            averageScore = resultSet.getDouble("average_score");
-            imageUrl = resultSet.getString("image_url");
-            pageCount = resultSet.getInt("page_count");
-            description = resultSet.getString("description");
-            publisher = resultSet.getString("publisher");
-            publishedDate = resultSet.getString("published_date");
             authors = AuthorDAO.getAllAuthorFromDocId(id);
             categories = CategoryDAO.getAllCategoryFromDocId(id);
             ratings = RatingDAO.getAllRatingFromDocId(id);
@@ -198,7 +198,6 @@ public class Document {
     }
 
     public String getCategoriesToString() {
-        //Trả về dưới dạng chuỗi cách nhau bởi dấu phẩy như: Kinh dị, Hài hước, Kỹ thuật
         StringBuilder categoriesString = new StringBuilder();
         for (int i = 0; i < categories.size(); i++) {
             categoriesString.append(categories.get(i).getCategory());

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -9,19 +10,26 @@
 <?import javafx.scene.layout.Pane?>
 
 <Pane prefHeight="650.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.ReceiptsSearching">
-    <TableView fx:id="receiptsTable" layoutX="41.0" layoutY="106.0" prefHeight="504.0" prefWidth="864.0">
+    <TableView fx:id="receiptsTable" layoutX="40.0" layoutY="106.0" prefHeight="504.0" prefWidth="870.0" styleClass="receipt-table">
         <columns>
-            <TableColumn fx:id="idReceiptColumn" prefWidth="144.0" text="Mã phiếu" />
-            <TableColumn fx:id="memberIdColumn" prefWidth="144.0" text="Mã người mượn" />
-            <TableColumn fx:id="docIdColumn" prefWidth="144.0" text="Mã tài liệu" />
-            <TableColumn fx:id="borrowingDateColumn" prefWidth="144.0" text="Ngày mượn" />
-            <TableColumn fx:id="dueDateColumn" prefWidth="144.0" text="Hạn trả" />
-            <TableColumn fx:id="statusColumn" prefWidth="144.0" text="Đã trả sách" />
+            <TableColumn fx:id="idReceiptColumn" prefWidth="145.0" resizable="false" text="Mã phiếu" />
+            <TableColumn fx:id="memberIdColumn" prefWidth="145.0" resizable="false" text="Mã người mượn" />
+            <TableColumn fx:id="isbnColumn" prefWidth="145.0" resizable="false" text="Mã ISBN tài liệu" />
+            <TableColumn fx:id="borrowingDateColumn" prefWidth="145.0" resizable="false" text="Ngày mượn" />
+            <TableColumn fx:id="dueDateColumn" prefWidth="145.0" resizable="false" text="Hạn trả" />
+            <TableColumn fx:id="statusColumn" prefWidth="145.0" resizable="false" text="Đã trả sách" />
         </columns>
     </TableView>
-    <TextField fx:id="searchTextField" layoutX="41.0" layoutY="59.0" prefHeight="25.0" prefWidth="282.0" promptText="Tìm kiếm bằng mã phiếu, người dùng, sách" />
-    <ImageView fx:id="qrCodeSearch" fitHeight="31.0" fitWidth="37.0" layoutX="338.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+    <TextField fx:id="searchTextField" layoutX="41.0" layoutY="59.0" prefHeight="25.0" prefWidth="403.0" promptText="Tìm kiếm bằng mã phiếu, người dùng, sách" styleClass="info-field" />
+    <ImageView fx:id="qrCodeSearch" fitHeight="26.0" fitWidth="31.0" layoutX="457.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../graphic/images/qr-code.png" />
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
     </ImageView>
-    <JFXComboBox fx:id="filterComboBox" focusColor="WHITE" layoutX="799.0" layoutY="58.0" prefHeight="27.0" prefWidth="78.0" promptText="Lọc" unFocusColor="WHITE" />
+   <JFXComboBox fx:id="filterComboBox" focusColor="#c4c4c4" layoutX="817.0" layoutY="55.0" prefHeight="34.0" prefWidth="88.0" promptText="   Lọc" styleClass="combo-box" unFocusColor="#c4c4c4">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </JFXComboBox>
 </Pane>

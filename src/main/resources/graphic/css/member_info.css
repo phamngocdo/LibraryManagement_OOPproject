@@ -17,9 +17,9 @@
     -fx-border-color: #b5b5b5;
     -fx-border-radius: 3;
     -fx-background-color: white;
-    -fx-text-fill: black;
     -fx-font-family: Arial;
     -fx-font-size: 13;
+    -fx-text-alignment: justify;
 }
 
 .member-info-pane {

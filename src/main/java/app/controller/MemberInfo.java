@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.regex.Pattern;
@@ -103,9 +102,9 @@ public class MemberInfo {
 
     @FXML
     private void saveInfo() {
+        resultLabel.getStyleClass().clear();
+        resultLabel.getStyleClass().add("er-result-label");
         try {
-            resultLabel.getStyleClass().clear();
-            resultLabel.getStyleClass().add("er-result-label");
             // Kiểm tra các trường không được để trống
             if (firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty() ||
                     birthdayTextField.getText().isEmpty() || emailTextField.getText().isEmpty() ||

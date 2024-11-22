@@ -22,6 +22,10 @@ public class Member extends User {
         receipts = ReceiptDAO.getAllReceiptFromMemberId(id);
     }
 
+    public static Member loadFromId(String id) {
+        return UserDAO.getMemberFromId(id);
+    }
+
     public ArrayList<Receipt> getReceipts() {
         return receipts;
     }

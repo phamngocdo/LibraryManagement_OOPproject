@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.base.Admin;
+import app.base.Document;
 import app.base.Receipt;
 import app.run.App;
 import com.google.zxing.BinaryBitmap;
@@ -38,7 +39,7 @@ public class ReceiptsSearching {
     private TableView<Receipt> receiptsTable;
 
     @FXML
-    private TableColumn<Receipt, String> idReceiptColumn, memberIdColumn, docIdColumn, borrowingDateColumn, dueDateColumn;
+    private TableColumn<Receipt, String> idReceiptColumn, memberIdColumn, isbnColumn, borrowingDateColumn, dueDateColumn;
 
     @FXML
     private TableColumn<Receipt, JFXCheckBox> statusColumn;
@@ -61,7 +62,11 @@ public class ReceiptsSearching {
         // Gán các cột với các thuộc tính của Receipt
         idReceiptColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         memberIdColumn.setCellValueFactory(new PropertyValueFactory<>("memberId"));
-        docIdColumn.setCellValueFactory(new PropertyValueFactory<>("docId"));
+        isbnColumn.setCellValueFactory(data -> {
+            Receipt receipt = data.getValue();
+            String isbn = (new Document(receipt.getDocId())).getIsbn();
+            return new javafx.beans.property.SimpleStringProperty(isbn);
+        });
         borrowingDateColumn.setCellValueFactory(new PropertyValueFactory<>("borrowingDate"));
         dueDateColumn.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         statusColumn.setCellValueFactory(data -> {
@@ -69,6 +74,7 @@ public class ReceiptsSearching {
             JFXCheckBox checkBox = new JFXCheckBox();
             checkBox.setSelected(STATUS_RETURNED.equals(receipt.getStatus()));
             checkBox.setOnAction(event -> confirmReturn(receipt, checkBox.isSelected()));
+            checkBox.setStyle("-fx-cursor: HAND");
             return new javafx.beans.property.SimpleObjectProperty<>(checkBox);
         });
 
@@ -104,13 +110,15 @@ public class ReceiptsSearching {
     }
 
     private void searchReceipts(String keyword) {
+        String lowerCaseKeyword = keyword.toLowerCase();
         List<Receipt> filteredReceipts = receiptsList.stream()
-                .filter(receipt -> receipt.getId().startsWith(keyword) ||
-                        receipt.getMemberId().startsWith(keyword) ||
-                        receipt.getDocId().startsWith(keyword))
+                .filter(receipt -> receipt.getId().toLowerCase().startsWith(lowerCaseKeyword) ||
+                        receipt.getMemberId().toLowerCase().startsWith(lowerCaseKeyword) ||
+                        (new Document(receipt.getDocId())).getIsbn().toLowerCase().startsWith(lowerCaseKeyword))
                 .collect(Collectors.toList());
         receiptsTable.setItems(FXCollections.observableArrayList(filteredReceipts));
     }
+
 
     private void setupFilterComboBox() {
         filterComboBox.setItems(FXCollections.observableArrayList("Tất cả", "Đã trả", "Chưa trả", "Quá hạn"));
@@ -184,7 +192,7 @@ public class ReceiptsSearching {
             return new Receipt(
                     jsonObject.getString("receiptId"),
                     jsonObject.getString("memberId"),
-                    jsonObject.getString("docId"),
+                    jsonObject.getString("isbn"),
                     jsonObject.getString("borrowingDate"),
                     jsonObject.getString("dueDate"),
                     jsonObject.getString("status")

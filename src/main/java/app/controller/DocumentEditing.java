@@ -6,10 +6,12 @@ import app.base.Category;
 import app.base.Document;
 import app.run.App;
 import app.service.GoogleBookAPI;
+import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.concurrent.Task;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class DocumentEditing {
 
@@ -23,10 +25,7 @@ public class DocumentEditing {
     private TextField categoryField, quantityField, ratingCountField, remainingField, averageScoreField, pageCountField;
 
     @FXML
-    private TextArea descriptionArea;
-
-    @FXML
-    private Button savingButton, deletingButton;
+    private JFXTextArea descriptionArea;
 
     @FXML
     private ProgressIndicator progressIndicator;
@@ -41,6 +40,7 @@ public class DocumentEditing {
     @FXML
     void initialize() {
         functionLabel.setText("Thêm tài liệu");
+        resultLabel.setText("");
         progressIndicator.setVisible(false);
     }
 
@@ -64,6 +64,7 @@ public class DocumentEditing {
 
     @FXML
     private void onSaveDocument() {
+        setStyleForResultLabel("error");
         String title = titleField.getText();
         String isbn = isbnField.getText();
         String publisher = publisherField.getText();
@@ -123,6 +124,7 @@ public class DocumentEditing {
                 resultLabel.setText(((Admin) App.currentUser).addDocument(newDoc));
                 if(resultLabel.getText().equals("Thêm tài liệu thành công")) {
                     doc = newDoc;
+                    setStyleForResultLabel("success");
                 }
             } else {
                 resultLabel.setText(((Admin) App.currentUser).updateDocument(doc));
@@ -134,10 +136,20 @@ public class DocumentEditing {
 
     @FXML
     private void onDeleteDocument() {
-        if (doc != null) {
-            resultLabel.setText(((Admin) App.currentUser).removeDocument(doc.getId()));
-        } else {
-            resultLabel.setText("Tài liệu không tồn tại để xóa.");
+        ButtonType buttonType = new ButtonType("OK");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Xóa tài liệu");
+        alert.setContentText("Bạn có chắc muốn xóa tài liệu " + doc.getTitle() + " có mã ISBN " + doc.getIsbn());
+        alert.setHeaderText(null);
+        alert.getButtonTypes().setAll(buttonType);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == buttonType) {
+            if (doc != null) {
+                resultLabel.setText(((Admin) App.currentUser).removeDocument(doc.getId()));
+            } else {
+                resultLabel.setText("Tài liệu không tồn tại để xóa");
+                setStyleForResultLabel("error");
+            }
         }
     }
 
@@ -145,7 +157,8 @@ public class DocumentEditing {
     private void onGetAPIInfo() {
         String isbn = isbnField.getText();
         if (isbn.isEmpty()) {
-            resultLabel.setText("Vui lòng nhập mã ISBN của sách.");
+            resultLabel.setText("Vui lòng nhập mã ISBN của sách");
+            setStyleForResultLabel("error");
             return;
         }
 
@@ -176,18 +189,31 @@ public class DocumentEditing {
                 pageCountField.setText(String.valueOf(doc.getPageCount()));
                 descriptionArea.setText(doc.getDescription());
                 imageUrlFIeld.setText(doc.getImageUrl());
-                resultLabel.setText("Đã lấy dữ liệu từ API.");
+                resultLabel.setText("Đã lấy dữ liệu từ API");
+                setStyleForResultLabel("success");
             } else {
-                resultLabel.setText("Không có kết quả tương ứng từ API.");
+                resultLabel.setText("Không có kết quả tương ứng từ API");
+                setStyleForResultLabel("error");
             }
             progressIndicator.setVisible(false);
         });
 
         task.setOnFailed(event -> {
-            resultLabel.setText("Lỗi khi lấy dữ liệu từ API.");
+            resultLabel.setText("Lỗi khi lấy dữ liệu từ API");
+            setStyleForResultLabel("error");
             progressIndicator.setVisible(false);
         });
 
         new Thread(task).start();
+    }
+
+    private void setStyleForResultLabel(String result) {
+        if ("success".equals(result)) {
+            resultLabel.getStyleClass().clear();
+            resultLabel.getStyleClass().add("suc-result-label");
+        } else if ("error".equals(result)) {
+            resultLabel.getStyleClass().clear();
+            resultLabel.getStyleClass().add("er-result-label");
+        }
     }
 }

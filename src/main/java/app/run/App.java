@@ -15,7 +15,7 @@ public class App extends Application {
     public static User currentUser;
     public static final String APP_NAME = "LibZone";
     public static final String LOGO_PATH = "/graphic/images/logo.png";
-    public static final String START_FXML = "/fxml/AdminMainScreen.fxml";
+    public static final String START_FXML = "/fxml/MemberMainScreen.fxml";
     public static final String CSS_PATH = "/graphic/css/style.css";
     public static final int WIDTH = 1126;
     public static final int HEIGHT = 650;
@@ -25,7 +25,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         DatabaseManagement.setConnection();
-        App.currentUser = User.login("admin", "admin");
+        App.currentUser = User.login("member1", "member1");
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(START_FXML));

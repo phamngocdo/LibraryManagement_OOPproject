@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
@@ -13,14 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.DocumentInfo">
-   <Pane fx:id="functionPane" minHeight="650.0" prefWidth="945.0">
+<ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="945.0" style="-fx-background-color: transparent;" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.DocumentInfo">
+   <Pane fx:id="functionPane" minHeight="650.0" prefWidth="945.0" styleClass="function-pane">
       <ProgressIndicator fx:id="progressIndicator" layoutX="458.0" layoutY="285.0" prefHeight="39.0" prefWidth="29.0" />
-      <Pane fx:id="infoPane" minHeight="647.0" prefWidth="945.0" stylesheets="@../graphic/css/style.css">
-         <Pane layoutX="78.0" layoutY="39.0" prefHeight="290.0" prefWidth="220.0" style="-fx-background-color: #cecece;">
-            <ImageView fx:id="docImage" fitHeight="280.0" fitWidth="210.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-         </Pane>
-         <VBox layoutX="342.0" layoutY="34.0" prefHeight="393.0" prefWidth="501.0" spacing="10.0">
+      <Pane fx:id="infoPane" minHeight="647.0" prefWidth="945.0" styleClass="function-pane">
+         <VBox layoutX="342.0" layoutY="34.0" prefHeight="479.0" prefWidth="501.0" spacing="15.0">
             <HBox prefWidth="499.0">
                <Label fx:id="titleLabel" text="Tiêu đề">
                   <font>
@@ -29,59 +26,100 @@
                </Label>
             </HBox>
             <HBox prefWidth="499.0" spacing="5.0">
-               <Label prefHeight="17.0" text="ISBN:"/>
-               <Label fx:id="isbnLabel" text="Label"/>
+               <Label prefHeight="17.0" text="ISBN:">
+                  <font>
+                     <Font name="Arial Bold" size="13.0" />
+                  </font></Label>
+               <Label fx:id="isbnLabel" styleClass="gen-label" text="Label">
+                  <font>
+                     <Font name="Arial" size="13.0" />
+                  </font></Label>
             </HBox>
             <HBox prefWidth="499.0" spacing="5.0">
-               <Label prefHeight="17.0" text="Tác giả:" />
-               <Label fx:id="authorsLabel" text="Label" />
+               <Label prefHeight="17.0" text="Tác giả:">
+                  <font>
+                     <Font name="Arial Bold" size="13.0" />
+                  </font></Label>
+               <Label fx:id="authorsLabel" styleClass="gen-label" text="Label">
+                  <font>
+                     <Font size="13.0" />
+                  </font></Label>
             </HBox>
             <HBox prefWidth="499.0">
-               <Label text="Nhà xuất bản:" />
-               <Label fx:id="publisherLabel" text="Label" />
+               <Label text="Nhà xuất bản:  ">
+                  <font>
+                     <Font name="Arial Bold" size="13.0" />
+                  </font></Label>
+               <Label fx:id="publisherLabel" styleClass="gen-label" text="Label">
+                  <font>
+                     <Font name="Arial" size="13.0" />
+                  </font></Label>
             </HBox>
             <HBox prefWidth="499.0">
-               <Label text="Ngày xuất bản:" />
-               <Label fx:id="pulishedDateLabel" text="Label" />
+               <Label text="Ngày xuất bản:  ">
+                  <font>
+                     <Font name="Arial Bold" size="13.0" />
+                  </font></Label>
+               <Label fx:id="pulishedDateLabel" styleClass="gen-label" text="Label" />
             </HBox>
             <HBox prefWidth="499.0">
-               <Label text="Thể loại:" />
-               <Label fx:id="categoriesLabel" text="Label" />
+               <Label text="Thể loại:  ">
+                  <font>
+                     <Font name="Arial Bold" size="13.0" />
+                  </font></Label>
+               <Label fx:id="categoriesLabel" styleClass="gen-label" text="Label" />
             </HBox>
             <HBox prefWidth="499.0">
-               <Label text="Số trang:" />
-               <Label fx:id="pageCountLabel" text="Label" />
+               <Label text="Số trang:  ">
+                  <font>
+                     <Font name="Arial Bold" size="13.0" />
+                  </font></Label>
+               <Label fx:id="pageCountLabel" styleClass="gen-label" text="Label" />
             </HBox>
             <HBox prefWidth="499.0">
-               <Label text="Mô tả:" />
-               <TextArea fx:id="descriptionTextArea" editable="false" focusTraversable="false" prefHeight="64.0" prefWidth="449.0" text="                                                                                                            " wrapText="true" />
+               <Label text="Số lượng đánh giá:  ">
+                  <font>
+                     <Font name="Arial Bold" size="13.0" />
+                  </font></Label>
+               <Label fx:id="ratingCountLabel" styleClass="gen-label" text="Label" />
             </HBox>
             <HBox prefWidth="499.0">
-               <Label text="Số lượng đánh giá:" />
-               <Label fx:id="ratingCountLabel" text="Label" />
+               <Label text="Điểm đánh giá trung bình:  ">
+                  <font>
+                     <Font name="Arial Bold" size="13.0" />
+                  </font></Label>
+               <Label fx:id="averageScoreLabel" styleClass="gen-label" text="Label" />
             </HBox>
             <HBox prefWidth="499.0">
-               <Label text="Điểm đánh giá trung bình:" />
-               <Label fx:id="averageScoreLabel" text="Label" />
+               <Label text="Số lượng tài liệu:  ">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+               <Label fx:id="quantityLabel" styleClass="gen-label" text="Label" />
             </HBox>
             <HBox prefWidth="499.0">
-               <Label text="Số lượng tài liệu:" />
-               <Label fx:id="quantityLabel" text="Label" />
+               <Label text="Số tài liệu còn lại:  ">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+               <Label fx:id="remainingLabel" styleClass="gen-label" text="Label" />
             </HBox>
-            <HBox prefWidth="499.0">
-               <Label text="Số tài liệu còn lại:" />
-               <Label fx:id="remainingLabel" text="Label" />
-            </HBox>
-            <HBox prefWidth="499.0">
-               <Label text="ID sách:" />
-               <Label fx:id="idLabel" text="Label" />
+            <HBox prefHeight="128.0" prefWidth="501.0">
+               <Label prefHeight="16.0" prefWidth="56.0" text="Mô tả:   ">
+                  <font>
+                     <Font name="Arial Bold" size="13.0" />
+                  </font></Label>
+               <TextArea fx:id="descriptionTextArea" editable="false" focusTraversable="false" prefHeight="127.0" prefWidth="453.0" styleClass="des-area" text="                                                                                                            " wrapText="true" />
             </HBox>
          </VBox>
-         <VBox fx:id="otherRatingVBox" layoutX="26.0" layoutY="598.0" prefWidth="894.0" />
-         <Label layoutX="30.0" layoutY="581.0" text="Các đánh giá khác" />
-         <Pane fx:id="memberRatingPane" layoutX="12.0" layoutY="425.0" prefHeight="152.0" prefWidth="922.0">
-            <Label layoutX="12.0" layoutY="29.0" text="Đánh giá của bạn" />
-            <HBox fx:id="starRatingHBox" layoutX="9.0" layoutY="46.0" prefHeight="13.0" prefWidth="90.0" spacing="2.0">
+         <VBox fx:id="otherRatingVBox" layoutX="12.0" layoutY="715.0" minHeight="0.0" prefWidth="911.0" spacing="15.0" style="-fx-background-color: white;" />
+         <Pane fx:id="memberRatingPane" layoutX="12.0" layoutY="522.0" prefHeight="186.0" prefWidth="911.0" styleClass="rating-pane">
+            <Label layoutX="16.0" layoutY="14.0" text="Đánh giá">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <HBox fx:id="starRatingHBox" layoutX="16.0" layoutY="37.0" prefHeight="13.0" prefWidth="90.0" spacing="2.0">
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../graphic/images/un-rate-star.png" />
                </ImageView>
@@ -98,18 +136,22 @@
                   <Image url="@../graphic/images/un-rate-star.png" />
                </ImageView>
             </HBox>
-            <TextArea fx:id="memberComment" focusTraversable="false" layoutX="14.0" layoutY="75.0" prefHeight="13.0" prefWidth="893.0" />
-            <Button fx:id="ratingSendingButton" layoutX="16.0" layoutY="124.0" mnemonicParsing="false" onAction="#sendRating" text="Gửi đánh giá" />
+            <TextArea fx:id="memberComment" focusTraversable="false" layoutX="16.0" layoutY="65.0" prefHeight="79.0" prefWidth="886.0" promptText="Chia sẻ ý kiến của bạn" styleClass="info-field">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextArea>
+            <JFXButton fx:id="ratingSendingButton" layoutX="15.0" layoutY="151.0" onAction="#sendRating" styleClass="edit-button" text="Gửi đánh giá" />
          </Pane>
-         <Button fx:id="borrowingButton" layoutX="856.0" layoutY="14.0" mnemonicParsing="false" onAction="#borrowDoc" text="Mượn sách" />
-         <Button fx:id="editingButton" layoutX="856.0" layoutY="60.0" mnemonicParsing="false" onAction="#editDoc" text="Chỉnh sửa" />
-         <ImageView fx:id="backButton" fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="11.0"
-                    onMouseClicked="#goBackToPrevPane" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="backButton" fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="11.0" onMouseClicked="#goBackToPrevPane" pickOnBounds="true" preserveRatio="true">
             <cursor>
-               <Cursor fx:constant="HAND"/>
+               <Cursor fx:constant="HAND" />
             </cursor>
-            <Image url="@../graphic/images/go-back-arrow.png"/>
+            <Image url="@../graphic/images/go-back-arrow.png" />
          </ImageView>
+         <JFXButton fx:id="borrowingButton" layoutX="816.0" layoutY="34.0" onAction="#borrowDoc" prefHeight="28.0" prefWidth="104.0" styleClass="edit-button" text="Mượn sách" />
+         <JFXButton fx:id="editingButton" layoutX="819.0" layoutY="35.0" onAction="#editDoc" prefHeight="26.0" prefWidth="99.0" styleClass="edit-button" text="Chỉnh sửa" />
+         <ImageView fx:id="docImage" fitHeight="280.0" fitWidth="210.0" layoutX="68.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
       </Pane>
    </Pane>
 </ScrollPane>
