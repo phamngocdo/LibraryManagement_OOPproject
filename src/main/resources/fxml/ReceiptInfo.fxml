@@ -25,13 +25,13 @@
       </cursor>
       <Image url="@../graphic/images/printer.png" />
    </ImageView>
-   <TextFlow fx:id="signature" layoutX="41.0" layoutY="484.0" prefHeight="32.0" prefWidth="478.0" visible="false">
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="210.0" text="Chữ ký thủ thư">
+   <TextFlow fx:id="signature" layoutX="28.0" layoutY="498.0" prefHeight="32.0" prefWidth="478.0" visible="false">
+      <Label prefHeight="16.0" prefWidth="239.0" text="Chữ ký thủ thư">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="210.0" text="Chữ ký thủ thư">
+      <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="16.0" prefWidth="239.0" text="Chữ ký thủ thư">
          <font>
             <Font name="Arial" size="14.0" />
          </font>

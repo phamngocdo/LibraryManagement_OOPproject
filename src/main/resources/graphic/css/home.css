@@ -39,6 +39,10 @@
     -fx-background-color: #c4c4c4;
 }
 
+-combo-box .list-cell:selected{
+    -fx-background-color: #c4c4c4;
+}
+
 .list-cell {
     -fx-background-color: white;
     -fx-text-fill: black;
