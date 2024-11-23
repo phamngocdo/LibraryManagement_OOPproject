@@ -119,7 +119,6 @@ public class ReceiptsSearching {
         receiptsTable.setItems(FXCollections.observableArrayList(filteredReceipts));
     }
 
-
     private void setupFilterComboBox() {
         filterComboBox.setItems(FXCollections.observableArrayList("Tất cả", "Đã trả", "Chưa trả", "Quá hạn"));
         filterComboBox.setOnAction(event -> {
@@ -162,19 +161,19 @@ public class ReceiptsSearching {
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {
-            // Lấy đối tượng Receipt sau khi giải mã QR code
-            Receipt decodedReceipt = decodeQRCode(selectedFile);
-            // So sánh đối tượng receipt với danh sách receiptsList
-            List<Receipt> matchedReceipts = receiptsList.stream()
-                    .filter(receipt -> receipt.equals(decodedReceipt))
-                    .collect(Collectors.toList());
-
-            // Hiển thị kết quả tìm kiếm
-            receiptsTable.setItems(FXCollections.observableArrayList(matchedReceipts));
+            JSONObject decodedQR = decodeQRCode(selectedFile);
+            for (Receipt receipt : receiptsList) {
+                if (receipt.getId().equals(decodedQR.getString("receiptId"))
+                        && receipt.getStatus().equals(decodedQR.getString("status"))) {
+                    receiptsTable.getItems().clear();
+                    receiptsTable.getItems().add(receipt);
+                    break;
+                }
+            }
         }
     }
 
-    private Receipt decodeQRCode(File file) {
+    private JSONObject decodeQRCode(File file) {
         try {
             // Đọc file ảnh vào BufferedImage
             BufferedImage bufferedImage = ImageIO.read(file);
@@ -187,16 +186,8 @@ public class ReceiptsSearching {
             Result result = new MultiFormatReader().decode(binaryBitmap);
             // Lấy JSON sau khi giải mã QR
             String qrCodeData = result.getText();
-            JSONObject jsonObject = new JSONObject(qrCodeData);
+            return new JSONObject(qrCodeData);
             // Tạo đối tượng Receipt từ dữ liệu JSON
-            return new Receipt(
-                    jsonObject.getString("receiptId"),
-                    jsonObject.getString("memberId"),
-                    jsonObject.getString("isbn"),
-                    jsonObject.getString("borrowingDate"),
-                    jsonObject.getString("dueDate"),
-                    jsonObject.getString("status")
-            );
         } catch (Exception e) {
             throw new RuntimeException("Lỗi khi giải mã QR code từ file: " + file.getName(), e);
         }

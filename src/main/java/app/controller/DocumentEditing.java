@@ -59,6 +59,9 @@ public class DocumentEditing {
             pageCountField.setText(String.valueOf(doc.getPageCount()));
             descriptionArea.setText(doc.getDescription());
             imageUrlFIeld.setText(doc.getImageUrl());
+        } else {
+            ratingCountField.setText("0");
+            remainingField.setText("0");
         }
     }
 

@@ -18,13 +18,13 @@
       </font>
    </Label>
    <Label layoutX="62.0" layoutY="452.0" text="Mô tả" />
-   <Label fx:id="resultLabel" layoutX="458.0" layoutY="574.0" />
+   <Label fx:id="resultLabel" alignment="CENTER" layoutX="374.0" layoutY="584.0" prefHeight="17.0" prefWidth="283.0" />
    <VBox layoutX="46.0" layoutY="60.0" prefHeight="376.0" prefWidth="879.0">
       <Pane prefHeight="73.0" prefWidth="879.0">
          <Label layoutX="14.0" layoutY="16.0" prefHeight="17.0" prefWidth="55.0" text="ISBN" />
          <TextField fx:id="isbnField" focusTraversable="false" layoutX="12.0" layoutY="37.0" prefHeight="32.0" prefWidth="265.0" styleClass="info-field" />
          <ProgressIndicator fx:id="progressIndicator" layoutX="477.0" layoutY="37.0" prefHeight="25.0" prefWidth="31.0" />
-         <JFXButton layoutX="317.0" layoutY="37.0" onAction="#onGetAPIInfo" prefHeight="26.0" prefWidth="139.0" styleClass="edit-button" text="Lấy dữ liệu từ API" />
+         <JFXButton layoutX="317.0" layoutY="37.0" onAction="#onGetAPIInfo" prefHeight="32.0" prefWidth="139.0" styleClass="edit-button" text="Lấy dữ liệu từ API" />
       </Pane>
       <Pane prefHeight="73.0" prefWidth="283.0">
          <Label layoutX="14.0" layoutY="16.0" text="Tiêu đề" />
@@ -55,13 +55,13 @@
          </Pane>
          <Pane prefHeight="73.0" prefWidth="283.0">
             <Label layoutX="14.0" layoutY="16.0" text="Số lượng đánh giá" />
-            <TextField fx:id="ratingCountField" layoutX="14.0" layoutY="37.0" prefHeight="32.0" prefWidth="265.0" styleClass="info-field" />
+            <TextField fx:id="ratingCountField" disable="true" layoutX="14.0" layoutY="37.0" prefHeight="32.0" prefWidth="265.0" styleClass="info-field" />
          </Pane>
       </HBox>
       <HBox prefHeight="72.0" prefWidth="879.0" spacing="15.0">
          <Pane prefHeight="42.0" prefWidth="283.0">
             <Label layoutX="14.0" layoutY="16.0" text="Điểm trung bình" />
-            <TextField fx:id="averageScoreField" layoutX="14.0" layoutY="37.0" prefHeight="32.0" prefWidth="265.0" styleClass="info-field" />
+            <TextField fx:id="averageScoreField" disable="true" layoutX="14.0" layoutY="37.0" prefHeight="32.0" prefWidth="265.0" styleClass="info-field" />
          </Pane>
          <Pane prefHeight="73.0" prefWidth="283.0">
             <Label layoutX="14.0" layoutY="16.0" text="Số sách còn lại" />
@@ -82,6 +82,6 @@
          <Insets left="8.0" right="8.0" />
       </padding>
    </JFXTextArea>
-   <JFXButton layoutX="354.0" layoutY="598.0" onAction="#onSaveDocument" prefHeight="26.0" prefWidth="139.0" styleClass="edit-button" text="Lưu các thay đổi" />
-   <JFXButton layoutX="499.0" layoutY="598.0" onAction="#onDeleteDocument" prefHeight="26.0" prefWidth="97.0" styleClass="edit-button" text="Xóa tài liệu" />
+   <JFXButton layoutX="376.0" layoutY="611.0" onAction="#onSaveDocument" prefHeight="26.0" prefWidth="139.0" styleClass="edit-button" text="Lưu các thay đổi" />
+   <JFXButton layoutX="541.0" layoutY="611.0" onAction="#onDeleteDocument" prefHeight="26.0" prefWidth="97.0" styleClass="edit-button" text="Xóa tài liệu" />
 </Pane>

@@ -5,11 +5,11 @@
     -fx-border-width: 1px;
     -fx-font-family: Arial;
     -fx-font-size: 14px;
+    -fx-text-fill: black;
 }
 
 .receipt-table .column-header {
     -fx-font-weight: bold;
-    -fx-font-size: 14px;
     -fx-background-color: white;
     -fx-border-width: 0 0 1 0;
     -fx-border-color: #c4c4c4;

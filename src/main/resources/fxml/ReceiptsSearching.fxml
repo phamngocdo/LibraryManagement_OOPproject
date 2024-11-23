@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 
 <Pane prefHeight="650.0" prefWidth="945.0" styleClass="function-pane" stylesheets="@../graphic/css/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.ReceiptsSearching">
-    <TableView fx:id="receiptsTable" layoutX="40.0" layoutY="106.0" prefHeight="504.0" prefWidth="870.0" styleClass="receipt-table">
+    <TableView fx:id="receiptsTable" focusTraversable="false" layoutX="40.0" layoutY="106.0" prefHeight="504.0" prefWidth="870.0" styleClass="receipt-table">
         <columns>
             <TableColumn fx:id="idReceiptColumn" prefWidth="145.0" resizable="false" text="Mã phiếu" />
             <TableColumn fx:id="memberIdColumn" prefWidth="145.0" resizable="false" text="Mã người mượn" />

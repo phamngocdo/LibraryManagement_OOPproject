@@ -16,9 +16,6 @@ public class GoogleBookAPI {
     private static final String GG_BOOK_API_URL = "https://www.googleapis.com/books/v1/volumes/";
 
     public static Document getDocFromIsbn(String isbn) throws Exception {
-        // Không sử dụng try-catch mà sử dụng throw để lớp khác xử lý
-        // Sử dụng thư viện java.net và org.json
-
         String apiUrl = GG_BOOK_API_URL + "?q=isbn:" + isbn;
         URL url = new URL(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -45,8 +42,7 @@ public class GoogleBookAPI {
 
             throw new Exception("Error: " + responseCode + " - " + errorMessage);
         }
-
-        // Đọc dữ liệu từ API
+        
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         StringBuilder response = new StringBuilder();
         String line;

@@ -112,7 +112,7 @@
                <TextArea fx:id="descriptionTextArea" editable="false" focusTraversable="false" prefHeight="127.0" prefWidth="453.0" styleClass="des-area" text="                                                                                                            " wrapText="true" />
             </HBox>
          </VBox>
-         <VBox fx:id="otherRatingVBox" layoutX="12.0" layoutY="715.0" minHeight="0.0" prefWidth="911.0" spacing="15.0" style="-fx-background-color: white;" />
+         <VBox fx:id="otherRatingVBox" layoutX="12.0" layoutY="723.0" minHeight="0.0" prefWidth="911.0" spacing="15.0" />
          <Pane fx:id="memberRatingPane" layoutX="12.0" layoutY="522.0" prefHeight="186.0" prefWidth="911.0" styleClass="rating-pane">
             <Label layoutX="16.0" layoutY="14.0" text="Đánh giá">
                <font>

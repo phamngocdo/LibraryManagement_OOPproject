@@ -61,19 +61,4 @@ public class Receipt {
     public String getDueDate() {
         return dueDate;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-
-        Receipt receipt = (Receipt) obj;
-
-        return id.equals(receipt.id) &&
-                memberId.equals(receipt.memberId) &&
-                docId.equals(receipt.docId) &&
-                borrowingDate.equals(receipt.borrowingDate) &&
-                dueDate.equals(receipt.dueDate) &&
-                status.equals(receipt.status);
-    }
 }

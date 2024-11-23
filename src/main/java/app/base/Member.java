@@ -35,7 +35,7 @@ public class Member extends User {
             return "Tên đăng nhập đã được sử dụng!";
         }
         UserDAO.addMember(this);
-        return "Đăng nhập thành công";
+        return "Đăng ký thành công";
     }
 
     public void borrowDocument(Document doc) {

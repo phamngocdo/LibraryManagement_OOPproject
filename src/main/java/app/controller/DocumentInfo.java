@@ -66,6 +66,7 @@ public class DocumentInfo {
         } else if (App.currentUser instanceof Member) {
             memberRatingPane.setDisable(false);
             editingButton.setVisible(false);
+
             Receipt receipt = ((Member) App.currentUser).getReceipts()
                     .stream()
                     .filter(r -> r.getDocId().equals(currentDoc.getId()))
@@ -73,16 +74,22 @@ public class DocumentInfo {
                     .orElse(null);
             if (receipt != null) {
                 if (receipt.getStatus().equals(STATUS_NOT_RETURNED)) {
-                    // Nếu đã mượn, hiển thị nút trả tài liệu
                     borrowingButton.setVisible(false);
-                } else if (receipt.getStatus().equals(STATUS_RETURNED)) {
-                    // Nếu chưa mượn, hiển thị nút mượn tài liệu
+                } else if (currentDoc.getRemaining() > 0 && receipt.getStatus().equals(STATUS_RETURNED)) {
                     borrowingButton.setVisible(true);
                 }
             } else {
                 borrowingButton.setVisible(true);
             }
+
+            Rating rating = currentDoc.getRatings()
+                    .stream()
+                    .filter(r -> r.getMemberId().equals(App.currentUser.getId()))
+                    .findFirst()
+                    .orElse(null);
+            memberRatingPane.setDisable(rating != null);
         }
+
         setUpInfo();
         setUpRatingHBox();
     }
