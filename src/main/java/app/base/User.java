@@ -109,6 +109,6 @@ public class User {
     }
 
     public static User login( String username, String password) {
-        return UserDAO.getUserFromLogin(password, username);
+        return UserDAO.getUserFromLogin(username, password);
     }
 }
