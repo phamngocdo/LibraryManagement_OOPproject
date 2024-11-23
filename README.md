@@ -87,7 +87,7 @@ Our team:
 ```
 - Step 4. **Run the application**:
   - Open the project in IDEA.
-  - Navigate to package src\main\java\app\main\ and run the RunApp class to start the application.
+  - Navigate to package src\main\java\app\run\ and run the RunApp class to start the application.
 
 ---
 ## License
