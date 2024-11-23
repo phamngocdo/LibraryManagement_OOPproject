@@ -27,7 +27,7 @@
          <Cursor fx:constant="HAND" />
       </cursor>
     </ImageView>
-   <JFXComboBox fx:id="filterComboBox" focusColor="#c4c4c4" layoutX="817.0" layoutY="55.0" prefHeight="34.0" prefWidth="88.0" promptText="   Lọc" styleClass="combo-box" unFocusColor="#c4c4c4">
+   <JFXComboBox fx:id="filterComboBox" focusColor="#c4c4c4" layoutX="804.0" layoutY="55.0" prefHeight="34.0" prefWidth="101.0" promptText="   Lọc" styleClass="combo-box" unFocusColor="#c4c4c4">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>
