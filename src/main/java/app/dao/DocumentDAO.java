@@ -16,7 +16,7 @@ public class DocumentDAO {
         query.append(" WHERE document_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, docId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -34,7 +34,7 @@ public class DocumentDAO {
         query.append("SELECT * FROM documents");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 documents.add(new Document(resultSet));
@@ -54,7 +54,7 @@ public class DocumentDAO {
         query.append("WHERE da.author_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, authorId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -75,7 +75,7 @@ public class DocumentDAO {
         query.append("WHERE c.category_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, categoryId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -93,7 +93,7 @@ public class DocumentDAO {
         query.append("SELECT * FROM documents ORDER BY average_score DESC LIMIT ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setInt(1, number);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -106,8 +106,8 @@ public class DocumentDAO {
     }
 
     public static void addDocument(Document doc) {
-        if (doc.getId().isEmpty()) {
-            doc.setId(DatabaseManagement.createRandomIdInTable("documents", "document_id"));
+        if (doc.getId() == null || doc.getId().isEmpty()) {
+            doc.setId(IdGenerator.createRandomIdInTable("documents", "document_id"));
         }
         StringBuilder docQuery = new StringBuilder();
         docQuery.append("INSERT INTO documents ");
@@ -116,7 +116,7 @@ public class DocumentDAO {
         docQuery.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(docQuery.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(docQuery.toString());
             preparedStatement.setString(1, doc.getId());
             preparedStatement.setString(2, doc.getTitle());
             preparedStatement.setString(3, doc.getIsbn());
@@ -140,7 +140,8 @@ public class DocumentDAO {
             categoryDocQuery.append(" VALUES (?, ?)");
             try {
                 PreparedStatement preparedStatement;
-                preparedStatement = DatabaseManagement.getConnection().prepareStatement(categoryDocQuery.toString());
+                preparedStatement = DatabaseManagement.getInstance().getConnection()
+                        .prepareStatement(categoryDocQuery.toString());
                 preparedStatement.setString(1, doc.getId());
                 preparedStatement.setString(2, category.getId());
                 preparedStatement.executeUpdate();
@@ -159,7 +160,8 @@ public class DocumentDAO {
             authorDocQuery.append(" VALUES (?, ?)");
             try {
                 PreparedStatement preparedStatement;
-                preparedStatement = DatabaseManagement.getConnection().prepareStatement(authorDocQuery.toString());
+                preparedStatement = DatabaseManagement.getInstance().getConnection()
+                        .prepareStatement(authorDocQuery.toString());
                 preparedStatement.setString(1, doc.getId());
                 preparedStatement.setString(2, author.getId());
                 preparedStatement.executeUpdate();
@@ -197,28 +199,33 @@ public class DocumentDAO {
         try {
             // Xóa tài liệu từ bảng documents
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(docQuery.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection()
+                    .prepareStatement(docQuery.toString());
             preparedStatement.setString(1, docId);
             preparedStatement.executeUpdate();
 
             // Xóa bản ghi liên quan trong bảng document_author
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(authorQuery.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection()
+                    .prepareStatement(authorQuery.toString());
             preparedStatement.setString(1, docId);
             preparedStatement.executeUpdate();
 
             // Xóa bản ghi liên quan trong bảng document_category
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(categoryQuery.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection()
+                    .prepareStatement(categoryQuery.toString());
             preparedStatement.setString(1, docId);
             preparedStatement.executeUpdate();
 
             // Xóa bản ghi liên quan trong bảng receipts
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(receiptsQuery.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().
+                    prepareStatement(receiptsQuery.toString());
             preparedStatement.setString(1, docId);
             preparedStatement.executeUpdate();
 
             // Xóa bản ghi liên quan trong bảng ratings
 
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(ratingsQuery.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection()
+                    .prepareStatement(ratingsQuery.toString());
             preparedStatement.setString(1, docId);
             preparedStatement.executeUpdate();
 
@@ -232,7 +239,7 @@ public class DocumentDAO {
         query.append("SELECT * FROM documents WHERE document_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next(); // Nếu có kết quả thì tài liệu tồn tại
@@ -249,7 +256,7 @@ public class DocumentDAO {
         query.append("WHERE document_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, document.getIsbn());
             preparedStatement.setString(2, document.getTitle());
             preparedStatement.setString(3, document.getPublisher());

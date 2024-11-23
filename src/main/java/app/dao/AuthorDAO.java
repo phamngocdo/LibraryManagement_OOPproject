@@ -15,7 +15,7 @@ public class AuthorDAO {
         query.append("SELECT * FROM authors");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 authors.add(new Author(
@@ -38,7 +38,7 @@ public class AuthorDAO {
 
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, docId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -60,7 +60,7 @@ public class AuthorDAO {
 
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next(); // Nếu có kết quả thì tác giả tồn tại
@@ -70,8 +70,8 @@ public class AuthorDAO {
     }
 
     public static void addAuthor(Author author) {
-        if (author.getId().isEmpty()) {
-            author.setId(DatabaseManagement.createRandomIdInTable("authors", "author_id"));
+        if (author.getId() == null || author.getId().isEmpty()) {
+            author.setId(IdGenerator.createRandomIdInTable("authors", "author_id"));
         }
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO authors ");
@@ -79,7 +79,7 @@ public class AuthorDAO {
         query.append("VALUES (?, ?)");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, author.getId());
             preparedStatement.setString(2, author.getName());
             preparedStatement.executeUpdate();

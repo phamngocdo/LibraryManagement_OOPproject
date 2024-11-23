@@ -1,20 +1,13 @@
 package base;
 
 import app.base.Document;
-import app.dao.DatabaseManagement;
 import app.dao.DocumentDAO;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 //All test are correct
 public class DocumentTest {
-
-    @BeforeEach
-    void setUp() {
-        DatabaseManagement.setConnection();
-    }
 
     @Test
     void testGetAuthorsToString() {

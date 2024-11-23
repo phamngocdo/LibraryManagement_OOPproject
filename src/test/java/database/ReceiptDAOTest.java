@@ -1,9 +1,7 @@
 package database;
 
 import app.base.Receipt;
-import app.dao.DatabaseManagement;
 import app.dao.ReceiptDAO;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,14 +11,9 @@ import static org.junit.jupiter.api.Assertions.*;
 //All Test are correct
 public class ReceiptDAOTest {
 
-    @BeforeEach
-    void setUp() {
-        DatabaseManagement.setConnection();
-    }
-
     @Test
     public void testGetReceiptFromId_ValidId() {
-        Receipt receipt = ReceiptDAO.getReceiptFromId("USHXJWYOKG4N");
+        Receipt receipt = ReceiptDAO.getReceiptFromId("I2HvbHx1GE5j");
         assertNotNull(receipt);
         //kiểm tra user_id có đúng k
         assertEquals("OJIK98JHNTMT", receipt.getMemberId());
@@ -77,7 +70,7 @@ public class ReceiptDAOTest {
     @Test
     public void testUpdateReceipt() {
         //lấy receipt id trong db có status là not return
-        Receipt originalReceipt = ReceiptDAO.getReceiptFromId("4V9KMV8NO0M4");
+        Receipt originalReceipt = ReceiptDAO.getReceiptFromId("ItT8OEFbQafH");
         assertNotNull(originalReceipt);
 
         // Cập nhật thông tin
@@ -85,7 +78,7 @@ public class ReceiptDAOTest {
         ReceiptDAO.updateReceipt(originalReceipt);
 
         // Kiểm tra xem thông tin đã được cập nhật chưa
-        Receipt updatedReceipt = ReceiptDAO.getReceiptFromId("4V9KMV8NO0M4");
+        Receipt updatedReceipt = ReceiptDAO.getReceiptFromId("ItT8OEFbQafH");
         assertNotNull(updatedReceipt);
         assertEquals("returned", updatedReceipt.getStatus());
     }

@@ -1,9 +1,7 @@
 package database;
 
 import app.base.Document;
-import app.dao.DatabaseManagement;
 import app.dao.DocumentDAO;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,10 +9,12 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 //All Test are correct
 public class DocumentDAOTest {
-
-    @BeforeEach
-    void setUp() {
-        DatabaseManagement.setConnection();
+    @Test
+    void testGetDocFromId() {
+        Document fetchedDocument = DocumentDAO.getDocFromId("nE0IPwAACAAJ");
+        assertNotNull(fetchedDocument);
+        assertEquals("nE0IPwAACAAJ", fetchedDocument.getId());
+        assertEquals("Computer Organization and Architecture", fetchedDocument.getTitle());
     }
 
     @Test
@@ -27,14 +27,6 @@ public class DocumentDAOTest {
         Document fetchedDocument = DocumentDAO.getDocFromId(newDocument.getId());
         assertNotNull(fetchedDocument);
         assertEquals("New Document", fetchedDocument.getTitle());
-    }
-
-    @Test
-    void testGetDocFromId() {
-        Document fetchedDocument = DocumentDAO.getDocFromId("nE0IPwAACAAJ");
-        assertNotNull(fetchedDocument);
-        assertEquals("nE0IPwAACAAJ", fetchedDocument.getId());
-        assertEquals("Computer Organization and Architecture", fetchedDocument.getTitle());
     }
 
     @Test

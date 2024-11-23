@@ -24,7 +24,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        DatabaseManagement.setConnection();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(START_FXML));
         Image logo = new Image(String.valueOf(getClass().getResource(LOGO_PATH)));
 

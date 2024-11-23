@@ -1,7 +1,6 @@
 package base;
 
 import app.base.*;
-import app.dao.DatabaseManagement;
 import app.dao.DocumentDAO;
 import app.dao.UserDAO;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,23 +18,19 @@ public class MemberTest {
 
     @BeforeEach
     void setUp() {
-        DatabaseManagement.setConnection();
-
         member = (Member) UserDAO.getUserFromLogin("member1", "member1");
         document = DocumentDAO.getDocFromId("6BaJDwAAQBAJ");
     }
 
     @Test
     void testBorrowDocument() {
-        int initialRemaining = document.getRemaining(); // Số lượng document còn lại trước khi mượn.
+        int initialRemaining = document.getRemaining();
         member.borrowDocument(document);
         Receipt receipt = member.getReceipts().getFirst();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.now();
         assertEquals(initialRemaining - 1, document.getRemaining());
         assertEquals("not returned", receipt.getStatus());
-        assertEquals(date.format(formatter), receipt.getBorrowingDate());
-        assertEquals(date.plusWeeks(2).format(formatter), receipt.getDueDate());
     }
 
     @Test

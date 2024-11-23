@@ -1,9 +1,7 @@
 package database;
 
 import app.base.Rating;
-import app.dao.DatabaseManagement;
 import app.dao.RatingDAO;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,12 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 //All Test are correct
 public class RatingDAOTest {
-
-    @BeforeEach
-    void setUp() {
-        DatabaseManagement.setConnection();
-    }
-
     @Test
     public void testGetRatingFromId_Valid() {
         Rating rating = RatingDAO.getRatingFromId("F7P3R9K2YJLM");

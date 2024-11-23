@@ -15,7 +15,7 @@ public class RatingDAO {
         query.append("WHERE rating_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, ratingId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -34,7 +34,7 @@ public class RatingDAO {
         query.append("WHERE document_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, docId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -47,8 +47,8 @@ public class RatingDAO {
     }
 
     public static void addRating(Rating rating) {
-        if (rating.getId().isEmpty()) {
-            rating.setId(DatabaseManagement.createRandomIdInTable("ratings", "rating_id"));
+        if (rating.getId() == null || rating.getId().isEmpty()) {
+            rating.setId(IdGenerator.createRandomIdInTable("ratings", "rating_id"));
         }
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ratings ");
@@ -56,7 +56,7 @@ public class RatingDAO {
         query.append("VALUES(?, ?, ?, ?, ?)");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, rating.getId());
             preparedStatement.setString(2, rating.getMemberId());
             preparedStatement.setString(3, rating.getDocId());
@@ -74,7 +74,7 @@ public class RatingDAO {
         query.append("WHERE rating_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, ratingId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -88,7 +88,7 @@ public class RatingDAO {
         query.append("WHERE user_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, userId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

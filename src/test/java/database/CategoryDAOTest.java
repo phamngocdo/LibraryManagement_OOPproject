@@ -2,8 +2,6 @@ package database;
 
 import app.base.Category;
 import app.dao.CategoryDAO;
-import app.dao.DatabaseManagement;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,12 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 //All test are correct
 public class CategoryDAOTest {
-
-    @BeforeEach
-    void setUp() {
-        DatabaseManagement.setConnection();
-    }
-
     @Test
     void testGetAllCategoryFromDocId() {
        String docId = "m7vT6i3xmC4C";

@@ -16,31 +16,11 @@ public class ReceiptDAO {
         query.append(" WHERE receipt_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, receiptId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 // Chuyển đổi ResultSet thành đối tượng Receipt
-                return new Receipt(resultSet);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    public static Receipt getReceiptFromDocAndMember(String docId, String memberId) {
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM receipts ");
-        query.append("WHERE document_id = ? AND user_id = ? AND status = ?");
-        try {
-            PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
-            preparedStatement.setString(1, docId);
-            preparedStatement.setString(2, memberId);
-            preparedStatement.setString(3, "not returned");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
                 return new Receipt(resultSet);
             }
         } catch (SQLException e) {
@@ -57,7 +37,7 @@ public class ReceiptDAO {
         query.append("WHERE user_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, memberId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -76,7 +56,7 @@ public class ReceiptDAO {
         query.append("SELECT * FROM receipts");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 // Chuyển đổi ResultSet thành đối tượng Receipt
@@ -89,8 +69,8 @@ public class ReceiptDAO {
     }
 
     public static void addReceipt(Receipt receipt) {
-        if (receipt.getId().isEmpty()) {
-            receipt.setId(DatabaseManagement.createRandomIdInTable("receipts", "receipt_id"));
+        if (receipt.getId() == null || receipt.getId().isEmpty()) {
+            receipt.setId(IdGenerator.createRandomIdInTable("receipts", "receipt_id"));
         }
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO receipts ");
@@ -98,7 +78,7 @@ public class ReceiptDAO {
         query.append(" VALUES(?, ?, ?, ?, ?, ?)");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, receipt.getId());
             preparedStatement.setString(2, receipt.getMemberId());
             preparedStatement.setString(3, receipt.getDocId());
@@ -112,13 +92,12 @@ public class ReceiptDAO {
     }
 
     public static void removeReceipt(String receiptId) {
-        //xóa receipt
         StringBuilder query = new StringBuilder();
         query.append("DELETE FROM receipts ");
         query.append("WHERE receipt_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, receiptId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -132,7 +111,7 @@ public class ReceiptDAO {
         query.append("WHERE user_id = ?");
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, userId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

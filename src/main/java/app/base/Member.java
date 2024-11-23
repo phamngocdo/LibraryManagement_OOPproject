@@ -41,7 +41,7 @@ public class Member extends User {
     public void borrowDocument(Document doc) {
         // Tạo receipt có đủ thông tin trong đó status = "not returned", borrowDate = today
         // returnDate + 2 week
-        String receiptId = DatabaseManagement.createRandomIdInTable("receipts", "receipt_id");
+        String receiptId = IdGenerator.createRandomIdInTable("receipts", "receipt_id");
         LocalDate borrowDate = LocalDate.now();
         LocalDate returnDate = borrowDate.plusWeeks(2);
 
@@ -63,6 +63,7 @@ public class Member extends User {
 
         // Trừ 1 cho remaining của tài liệu
         doc.setRemaining(doc.getRemaining() - 1);
+        DocumentDAO.updateDocument(doc);
 
         // Cập nhật vào cơ sở dữ liệu
         ReceiptDAO.addReceipt(receipt); // Thêm receipt vào DB

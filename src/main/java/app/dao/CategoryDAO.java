@@ -16,7 +16,7 @@ public class CategoryDAO {
 
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 categories.add(new Category(
@@ -39,7 +39,7 @@ public class CategoryDAO {
 
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, docId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -55,8 +55,8 @@ public class CategoryDAO {
     }
 
     public static void addCategory(Category category) {
-        if (category.getId().isEmpty()) {
-            category.setId(DatabaseManagement.createRandomIdInTable("categories", "category_id"));
+        if (category.getId() == null || category.getId().isEmpty()) {
+            category.setId(IdGenerator.createRandomIdInTable("categories", "category_id"));
         }
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO categories ");
@@ -64,7 +64,7 @@ public class CategoryDAO {
         query.append("VALUES (?, ?)");
        try {
            PreparedStatement preparedStatement;
-           preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+           preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
            preparedStatement.setString(1, category.getCategory());
            preparedStatement.setString(2, category.getCategory());
            preparedStatement.executeUpdate();
@@ -80,7 +80,7 @@ public class CategoryDAO {
 
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getConnection().prepareStatement(query.toString());
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, category);
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next(); // Nếu có kết quả thì thể loại tồn tại

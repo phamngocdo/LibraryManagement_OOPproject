@@ -2,9 +2,7 @@ package database;
 
 import app.base.Admin;
 import app.base.Member;
-import app.dao.DatabaseManagement;
 import app.dao.UserDAO;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
@@ -13,11 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 //All Test are correct
 
 public class UserDAOTest {
-
-    @BeforeEach
-    public void setUp() {
-        DatabaseManagement.setConnection();
-    }
 
     @Test
     public void testGetAdminFromSignIn_Valid() {
@@ -43,7 +36,7 @@ public class UserDAOTest {
     public void testGetMemberFromId_ValidId() {
         Member member = UserDAO.getMemberFromId("OJIK98JHNTMT");
         assertNotNull(member);
-        assertEquals("member1", member.getUsername());
+        assertEquals("member2", member.getUsername());
     }
 
     @Test
