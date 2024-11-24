@@ -148,7 +148,7 @@ public class Login {
 
         Member newMember = new Member("", username, password, firstName, lastName, birthday, email, phoneNumber);
         registerResult.setText(newMember.register());
-        if (registerResult.getText().equals("Đăng nhập thành công")) {
+        if (registerResult.getText().equals("Đăng ký thành công")) {
             registerResult.getStyleClass().clear();
             registerResult.getStyleClass().add("suc-result-label");
         }
