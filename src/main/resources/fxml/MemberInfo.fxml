@@ -15,36 +15,36 @@
          <Font name="Arial Bold" size="19.0" />
       </font>
    </Label>
-   <VBox fx:id="passwordVBox" layoutX="33.0" layoutY="404.0" prefHeight="184.0" prefWidth="890.0" spacing="20.0">
+   <VBox fx:id="passwordVBox" layoutX="28.0" layoutY="354.0" prefHeight="184.0" prefWidth="890.0" spacing="20.0">
       <Pane prefHeight="56.0" prefWidth="320.0">
          <Label layoutX="7.0" layoutY="6.0" text="Mật khẩu cũ">
             <font>
                <Font size="13.0" />
             </font></Label>
-         <TextField fx:id="oldPasswordTextField" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
+         <TextField fx:id="oldPasswordTextField" focusTraversable="false" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
       </Pane>
       <Pane prefHeight="56.0" prefWidth="320.0">
          <Label layoutX="7.0" layoutY="6.0" text="Mật khẩu mới">
             <font>
                <Font name="Arial" size="13.0" />
             </font></Label>
-         <TextField fx:id="newPasswordTextField" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
+         <TextField fx:id="newPasswordTextField" focusTraversable="false" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
       </Pane>
       <Pane prefHeight="56.0" prefWidth="320.0">
          <Label layoutX="7.0" layoutY="6.0" text="Nhập lại mật khẩu mới">
             <font>
                <Font name="Arial" size="13.0" />
             </font></Label>
-         <TextField fx:id="reEnterNewPasswordTextField" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
+         <TextField fx:id="reEnterNewPasswordTextField" focusTraversable="false" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
       </Pane>
    </VBox>
    <Button layoutX="37.0" layoutY="363.0" mnemonicParsing="false" prefHeight="32.0" text="Thay đổi mật khẩu" visible="false" />
-   <Label fx:id="resultLabel" layoutX="434.0" layoutY="600.0" />
-   <JFXButton fx:id="editingButton" layoutX="430.0" layoutY="614.0" onAction="#editInfo" prefHeight="32.0" prefWidth="97.0" styleClass="edit-button" text="Chỉnh sửa" />
-   <JFXButton fx:id="saveButton" layoutX="455.0" layoutY="614.0" onAction="#saveInfo" prefHeight="32.0" styleClass="edit-button" text="Lưu" />
-   <JFXButton fx:id="changePasswordButton" layoutX="35.0" layoutY="363.0" onAction="#changePassword" prefHeight="32.0" styleClass="edit-button" text="Thay đổi mật khẩu" />
-   <JFXButton fx:id="cancelPasswordButton" layoutX="37.0" layoutY="363.0" onAction="#cancelPassword" prefHeight="32.0" styleClass="edit-button" text="Hủy thay đổi mật khẩu" />
-   <VBox layoutX="33.0" layoutY="44.0" prefHeight="299.0" prefWidth="890.0" spacing="20.0">
+   <Label fx:id="resultLabel" layoutX="441.0" layoutY="573.0" styleClass="gen-label" />
+   <JFXButton fx:id="editingButton" layoutX="424.0" layoutY="596.0" onAction="#editInfo" prefHeight="32.0" prefWidth="97.0" styleClass="edit-button" text="Chỉnh sửa" />
+   <JFXButton fx:id="saveButton" layoutX="450.0" layoutY="596.0" onAction="#saveInfo" prefHeight="32.0" styleClass="edit-button" text="Lưu" />
+   <JFXButton fx:id="changePasswordButton" layoutX="31.0" layoutY="309.0" onAction="#changePassword" prefHeight="32.0" styleClass="edit-button" text="Thay đổi mật khẩu" />
+   <JFXButton fx:id="cancelPasswordButton" layoutX="31.0" layoutY="309.0" onAction="#cancelPassword" prefHeight="32.0" styleClass="edit-button" text="Hủy thay đổi mật khẩu" />
+   <VBox layoutX="28.0" layoutY="67.0" prefHeight="239.0" prefWidth="890.0" spacing="20.0">
       <HBox prefHeight="60.0" prefWidth="890.0" spacing="20.0">
          <Pane prefHeight="60.0" prefWidth="445.0">
             <Label layoutX="4.0" text="ID thành viên">
@@ -52,7 +52,7 @@
                   <Font name="Arial" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="idMenberTextField" focusTraversable="false" layoutX="4.0" layoutY="23.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
+            <TextField fx:id="idMenberTextField" focusTraversable="false" layoutY="22.0" prefHeight="32.0" prefWidth="435.0" styleClass="info-field" />
          </Pane>
          <Pane prefHeight="60.0" prefWidth="445.0">
             <Label layoutX="4.0" text="Tên đăng nhập">
@@ -60,25 +60,31 @@
                   <Font name="Arial" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="loginNameTextField" focusTraversable="false" layoutX="4.0" layoutY="23.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
+            <TextField fx:id="loginNameTextField" focusTraversable="false" layoutY="22.0" prefHeight="32.0" prefWidth="435.0" styleClass="info-field" />
          </Pane>
       </HBox>
       <HBox prefHeight="60.0" prefWidth="890.0" spacing="20.0">
          <Pane prefHeight="60.0" prefWidth="445.0">
-            <Label layoutX="7.0" layoutY="6.0" text="Họ">
+            <Label layoutX="6.0" layoutY="5.0" text="Họ">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="firstNameTextField" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
-         </Pane>
-         <Pane prefHeight="60.0" prefWidth="445.0">
-            <Label layoutX="7.0" layoutY="6.0" text="Tên">
+            <TextField fx:id="firstNameTextField" focusTraversable="false" layoutY="30.0" prefHeight="32.0" prefWidth="210.0" styleClass="info-field" />
+            <TextField fx:id="lastNameTextField" focusTraversable="false" layoutX="225.0" layoutY="30.0" prefHeight="32.0" prefWidth="210.0" styleClass="info-field" />
+            <Label layoutX="230.0" layoutY="6.0" text="Tên">
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="lastNameTextField" layoutX="7.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
+         </Pane>
+         <Pane prefHeight="56.0" prefWidth="445.0">
+            <Label layoutX="7.0" layoutY="6.0" text="Số điện thoại">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="phoneNumberTextFiled" focusTraversable="false" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
          </Pane>
       </HBox>
       <HBox prefHeight="60.0" prefWidth="200.0" spacing="20.0">
@@ -88,7 +94,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="birthdayTextField" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
+            <TextField fx:id="birthdayTextField" focusTraversable="false" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
          </Pane>
          <Pane prefHeight="56.0" prefWidth="445.0">
             <Label layoutX="7.0" layoutY="6.0" text="Email">
@@ -96,16 +102,8 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="emailTextField" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="435.0" styleClass="info-field" />
+            <TextField fx:id="emailTextField" focusTraversable="false" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
          </Pane>
       </HBox>
-      <Pane prefHeight="56.0" prefWidth="445.0">
-         <Label layoutX="7.0" layoutY="6.0" text="Số điện thoại">
-            <font>
-               <Font size="13.0" />
-            </font>
-         </Label>
-         <TextField fx:id="phoneNumberTextFiled" layoutX="4.0" layoutY="30.0" prefHeight="32.0" prefWidth="429.0" styleClass="info-field" />
-      </Pane>
    </VBox>
 </Pane>

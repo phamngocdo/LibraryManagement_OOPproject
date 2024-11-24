@@ -78,8 +78,8 @@
 }
 
 .doc-pane{
-    -fx-border-radius: 15;
-    -fx-background-radius: 15;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
     -fx-background-color: white;
     -fx-pref-width: 160;
     -fx-pref-height: 242;

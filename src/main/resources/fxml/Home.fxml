@@ -62,34 +62,34 @@
                </font></Label>
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" />
             <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
                <font>
-                  <Font name="Arial" size="12.0"/>
+                  <Font name="Arial" size="12.0" />
                </font>
             </Label>
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" />
             <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
                <font>
-                  <Font name="Arial" size="12.0"/>
+                  <Font name="Arial" size="12.0" />
                </font>
             </Label>
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" />
             <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
                <font>
-                  <Font name="Arial" size="12.0"/>
+                  <Font name="Arial" size="12.0" />
                </font>
             </Label>
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" />
             <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
                <font>
-                  <Font name="Arial" size="12.0"/>
+                  <Font name="Arial" size="12.0" />
                </font>
             </Label>
          </Pane>
@@ -99,49 +99,49 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="297.0" text="Các tài liệu đánh giá cao">
+      <Label layoutX="20.0" layoutY="292.0" text="Các tài liệu đánh giá cao">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
       <HBox fx:id="topRatingHBox" layoutX="20.0" layoutY="323.0" prefHeight="235.0" prefWidth="881.0" spacing="20.0">
          <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" />
             <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
                <font>
-                  <Font name="Arial" size="12.0"/>
+                  <Font name="Arial" size="12.0" />
                </font>
             </Label>
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" />
             <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
                <font>
-                  <Font name="Arial" size="12.0"/>
+                  <Font name="Arial" size="12.0" />
                </font>
             </Label>
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" />
             <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
                <font>
-                  <Font name="Arial" size="12.0"/>
+                  <Font name="Arial" size="12.0" />
                </font>
             </Label>
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" />
             <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
                <font>
-                  <Font name="Arial" size="12.0"/>
+                  <Font name="Arial" size="12.0" />
                </font>
             </Label>
          </Pane>
          <Pane prefHeight="242.0" prefWidth="160.0" styleClass="doc-pane">
-            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true"/>
+            <ImageView fitHeight="187.0" fitWidth="140.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" />
             <Label alignment="CENTER" layoutX="10.0" layoutY="207.0" prefHeight="17.0" prefWidth="140.0">
                <font>
-                  <Font name="Arial" size="12.0"/>
+                  <Font name="Arial" size="12.0" />
                </font>
             </Label>
          </Pane>

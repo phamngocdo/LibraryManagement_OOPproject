@@ -69,17 +69,15 @@ public class Member extends User {
         ReceiptDAO.addReceipt(receipt); // Thêm receipt vào DB
     }
 
-    public void rateDocument(Rating rating) {
-        Document doc = DocumentDAO.getDocFromId(rating.getDocId());
-        if (doc != null) {
-            double totalRating = doc.getRatingCount() * doc.getAverageScore();
-            totalRating += rating.getRatingScore();
-            int newRatingCount = doc.getRatingCount() + 1;
-            double newAverageRating = totalRating / newRatingCount;
-            doc.setRatingCount(newRatingCount);
-            doc.setAverageScore(newAverageRating);
-            DocumentDAO.updateDocument(doc);
-        }
+    public void rateDocument(Rating rating, Document doc) {
+        double totalRating = doc.getRatingCount() * doc.getAverageScore();
+        totalRating += rating.getRatingScore();
+        int newRatingCount = doc.getRatingCount() + 1;
+        double newAverageRating = totalRating / newRatingCount;
+        doc.setRatingCount(newRatingCount);
+        doc.setAverageScore(newAverageRating);
+        doc.getRatings().add(rating);
+        DocumentDAO.updateDocument(doc);
         RatingDAO.addRating(rating);
     }
 

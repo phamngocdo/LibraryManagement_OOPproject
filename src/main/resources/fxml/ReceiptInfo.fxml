@@ -40,7 +40,7 @@
    <HBox layoutX="41.0" layoutY="65.0" prefHeight="116.0" prefWidth="478.0" spacing="10.0">
       <VBox prefHeight="260.0" prefWidth="248.0" spacing="20.0">
          <TextFlow prefHeight="20.0" prefWidth="271.0">
-            <Label text="Mã phiếu             :">
+            <Label text="Mã phiếu: ">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
@@ -64,7 +64,7 @@
             </Label>
          </TextFlow>
          <TextFlow prefHeight="20.0" prefWidth="271.0">
-            <Label text="Mã ISBN tài liệu :">
+            <Label text="Mã ISBN tài liệu : ">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
@@ -78,7 +78,7 @@
       </VBox>
       <VBox prefHeight="200.0" prefWidth="220.0" spacing="20.0">
          <TextFlow prefHeight="20.0" prefWidth="271.0">
-            <Label text="Ngày mượn        :">
+            <Label text="Ngày mượn: ">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
@@ -90,7 +90,7 @@
             </Label>
          </TextFlow>
          <TextFlow prefHeight="20.0" prefWidth="271.0">
-            <Label text="Hạn trả                :">
+            <Label text="Hạn trả: ">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
@@ -102,7 +102,7 @@
             </Label>
          </TextFlow>
          <TextFlow prefHeight="20.0" prefWidth="271.0">
-            <Label text="Trạng thái           :">
+            <Label text="Trạng thái: ">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>

@@ -1,11 +1,11 @@
 .qrcode-icon {
-    -fx-image: url(../images/qr-code.png);
-    -fx-background-size: 32 32;
+    -fx-image: url(../images/qr-code-white.png);
+    -fx-background-size: 16 16;
 }
 
 .doc-pane-qr{
-    -fx-border-radius: 15;
-    -fx-background-radius: 15;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
     -fx-background-color: white;
     -fx-pref-width: 160;
     -fx-pref-height: 265;

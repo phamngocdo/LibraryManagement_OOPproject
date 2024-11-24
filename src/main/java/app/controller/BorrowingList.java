@@ -4,6 +4,7 @@ import app.base.Document;
 import app.base.Member;
 import app.base.Receipt;
 import app.run.App;
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -105,9 +106,13 @@ public class BorrowingList {
 
         ImageView qrImage = new ImageView();
         qrImage.getStyleClass().add("qrcode-icon");
-        qrImage.setOnMouseClicked(event -> onQrcode(receipt));
-        qrImage.setLayoutX(64);
-        qrImage.setLayoutY(225);
+
+        JFXButton qrButton = new JFXButton("Mã QR phiếu");
+        qrButton.setOnAction(event -> onQrcode(receipt));
+        qrButton.getStyleClass().add("edit-button");
+        qrButton.setLayoutX(18);
+        qrButton.setLayoutY(225);
+        qrButton.setGraphic(qrImage);
 
         Label label = new Label(doc.getTitle());
         label.setPrefWidth(140);
@@ -115,7 +120,7 @@ public class BorrowingList {
         label.setLayoutY(207);
         label.setLayoutX(10);
 
-        pane.getChildren().addAll(docImage, qrImage, label);
+        pane.getChildren().addAll(docImage, qrButton, label);
         return pane;
     }
 

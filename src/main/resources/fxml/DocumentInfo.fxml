@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
@@ -17,7 +18,7 @@
    <Pane fx:id="functionPane" minHeight="650.0" prefWidth="945.0" styleClass="function-pane">
       <ProgressIndicator fx:id="progressIndicator" layoutX="458.0" layoutY="285.0" prefHeight="39.0" prefWidth="29.0" />
       <Pane fx:id="infoPane" minHeight="647.0" prefWidth="945.0" styleClass="function-pane">
-         <VBox layoutX="342.0" layoutY="34.0" prefHeight="479.0" prefWidth="501.0" spacing="15.0">
+         <VBox layoutX="342.0" layoutY="34.0" prefHeight="479.0" prefWidth="466.0" spacing="15.0">
             <HBox prefWidth="499.0">
                <Label fx:id="titleLabel" text="Tiêu đề">
                   <font>
@@ -108,8 +109,14 @@
                <Label prefHeight="16.0" prefWidth="56.0" text="Mô tả:   ">
                   <font>
                      <Font name="Arial Bold" size="13.0" />
-                  </font></Label>
-               <TextArea fx:id="descriptionTextArea" editable="false" focusTraversable="false" prefHeight="127.0" prefWidth="453.0" styleClass="des-area" text="                                                                                                            " wrapText="true" />
+                  </font>
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                  <padding>
+                     <Insets top="5.0" />
+                  </padding></Label>
+               <TextArea fx:id="descriptionTextArea" editable="false" focusTraversable="false" prefHeight="128.0" prefWidth="421.0" styleClass="des-area" wrapText="true" />
             </HBox>
          </VBox>
          <VBox fx:id="otherRatingVBox" layoutX="12.0" layoutY="723.0" minHeight="0.0" prefWidth="911.0" spacing="15.0" />

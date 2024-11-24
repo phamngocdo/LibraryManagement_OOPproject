@@ -6,9 +6,6 @@ import app.dao.UserDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 //All test are correct
@@ -27,8 +24,6 @@ public class MemberTest {
         int initialRemaining = document.getRemaining();
         member.borrowDocument(document);
         Receipt receipt = member.getReceipts().getFirst();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate date = LocalDate.now();
         assertEquals(initialRemaining - 1, document.getRemaining());
         assertEquals("not returned", receipt.getStatus());
     }
@@ -45,7 +40,7 @@ public class MemberTest {
                 5,
                 "Great Document!");
 
-        member.rateDocument(rating);
+        member.rateDocument(rating, document);
 
         Document updatedDocument = DocumentDAO.getDocFromId(document.getId());
 

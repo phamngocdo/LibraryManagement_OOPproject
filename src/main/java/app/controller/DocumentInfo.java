@@ -89,7 +89,6 @@ public class DocumentInfo {
                     .orElse(null);
             memberRatingPane.setDisable(rating != null);
         }
-
         setUpInfo();
         setUpRatingHBox();
     }
@@ -114,12 +113,14 @@ public class DocumentInfo {
                 comment
         );
         // Lưu đánh giá vào cơ sở dữ liệu
-        ((Member) App.currentUser).rateDocument(newRating);
+        ((Member) App.currentUser).rateDocument(newRating, currentDoc);
         // Thêm đánh giá mới vào giao diện
         addRatingIntoVBox(newRating);
         // Xóa nhận xét sau khi gửi
         memberComment.clear();
         displayRatedStar(0, starRatingHBox); // Đặt lại HBox về trạng thái ban đầu
+        starRatingHBox.setDisable(true);
+        setUpInfo();
     }
 
     @FXML
