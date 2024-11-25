@@ -39,11 +39,11 @@
       </Pane>
    </VBox>
    <Button layoutX="37.0" layoutY="363.0" mnemonicParsing="false" prefHeight="32.0" text="Thay đổi mật khẩu" visible="false" />
-   <Label fx:id="resultLabel" layoutX="441.0" layoutY="573.0" styleClass="gen-label" />
-   <JFXButton fx:id="editingButton" layoutX="424.0" layoutY="596.0" onAction="#editInfo" prefHeight="32.0" prefWidth="97.0" styleClass="edit-button" text="Chỉnh sửa" />
-   <JFXButton fx:id="saveButton" layoutX="450.0" layoutY="596.0" onAction="#saveInfo" prefHeight="32.0" styleClass="edit-button" text="Lưu" />
-   <JFXButton fx:id="changePasswordButton" layoutX="31.0" layoutY="309.0" onAction="#changePassword" prefHeight="32.0" styleClass="edit-button" text="Thay đổi mật khẩu" />
-   <JFXButton fx:id="cancelPasswordButton" layoutX="31.0" layoutY="309.0" onAction="#cancelPassword" prefHeight="32.0" styleClass="edit-button" text="Hủy thay đổi mật khẩu" />
+   <Label fx:id="resultLabel" alignment="CENTER" layoutX="296.0" layoutY="568.0" prefHeight="16.0" prefWidth="355.0" styleClass="gen-label" />
+   <JFXButton fx:id="editingButton" layoutX="403.0" layoutY="596.0" onAction="#editInfo" prefHeight="32.0" prefWidth="141.0" styleClass="edit-button" text="Chỉnh sửa" />
+   <JFXButton fx:id="saveButton" layoutX="438.0" layoutY="596.0" onAction="#saveInfo" prefHeight="32.0" prefWidth="71.0" styleClass="edit-button" text="Lưu" />
+   <JFXButton fx:id="changePasswordButton" layoutX="31.0" layoutY="309.0" onAction="#changePassword" prefHeight="32.0" prefWidth="180.0" styleClass="edit-button" text="Thay đổi mật khẩu" />
+   <JFXButton fx:id="cancelPasswordButton" layoutX="31.0" layoutY="309.0" onAction="#cancelPassword" prefHeight="32.0" prefWidth="194.0" styleClass="edit-button" text="Hủy thay đổi mật khẩu" />
    <VBox layoutX="28.0" layoutY="67.0" prefHeight="239.0" prefWidth="890.0" spacing="20.0">
       <HBox prefHeight="60.0" prefWidth="890.0" spacing="20.0">
          <Pane prefHeight="60.0" prefWidth="445.0">
