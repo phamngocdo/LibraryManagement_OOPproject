@@ -41,11 +41,14 @@ public class RecommenderSystem {
                     }
                 }
             }
+
+            recommendedDocs.remove(docOfReceipt);
         }
 
         if (recommendedDocs.size() < number) {
             recommendedDocs.addAll(member.seeTopRatingDoc(40));
         }
+
         Collections.shuffle(recommendedDocs);
         return new ArrayList<>(recommendedDocs.subList(0, Math.min(recommendedDocs.size(), 5)));
     }
