@@ -63,7 +63,26 @@ public class AuthorDAO {
             preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next(); // Nếu có kết quả thì tác giả tồn tại
+            return resultSet.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean checkAuthorExist(Author author) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT author_id FROM authors ");
+        query.append("WHERE name = ?");
+        try {
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, author.getName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                author.setId(resultSet.getString("author_id"));
+                return true;
+            }
+            return false;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -87,4 +106,23 @@ public class AuthorDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public static String getOrAddAuthor(Author author) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT author_id FROM authors WHERE name = ?");
+        try {
+            PreparedStatement preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, author.getName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("author_id");
+            } else {
+                AuthorDAO.addAuthor(author);
+                return author.getId();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

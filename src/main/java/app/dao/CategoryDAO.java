@@ -88,4 +88,44 @@ public class CategoryDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public static boolean checkCategoryExist(Category category) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT category_id FROM categories ");
+        query.append("WHERE category = ?");
+
+        try {
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, category.getCategory());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                category.setId(resultSet.getString("category_id"));
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String getOrAddCategory(Category category) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT category_id FROM categories WHERE category = ?");
+        try {
+            PreparedStatement preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
+            preparedStatement.setString(1, category.getCategory());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("category_id");
+            } else {
+                // Nếu danh mục không tồn tại, thêm vào CSDL
+                CategoryDAO.addCategory(category);
+                return category.getId();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

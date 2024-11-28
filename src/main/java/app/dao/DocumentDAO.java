@@ -135,6 +135,7 @@ public class DocumentDAO {
         }
 
         for (Category category : doc.getCategories()) {
+            String id = CategoryDAO.getOrAddCategory(category);
             StringBuilder categoryDocQuery = new StringBuilder();
             categoryDocQuery.append("INSERT INTO document_category (document_id, category_id)");
             categoryDocQuery.append(" VALUES (?, ?)");
@@ -143,18 +144,16 @@ public class DocumentDAO {
                 preparedStatement = DatabaseManagement.getInstance().getConnection()
                         .prepareStatement(categoryDocQuery.toString());
                 preparedStatement.setString(1, doc.getId());
-                preparedStatement.setString(2, category.getId());
+                preparedStatement.setString(2, id);
                 preparedStatement.executeUpdate();
 
-                if (!CategoryDAO.checkCategoryExist(category.getCategory())) {
-                    CategoryDAO.addCategory(category);
-                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
 
         for (Author author : doc.getAuthors()) {
+            String id = AuthorDAO.getOrAddAuthor(author);
             StringBuilder authorDocQuery = new StringBuilder();
             authorDocQuery.append("INSERT INTO document_author (document_id, author_id)");
             authorDocQuery.append(" VALUES (?, ?)");
@@ -163,12 +162,8 @@ public class DocumentDAO {
                 preparedStatement = DatabaseManagement.getInstance().getConnection()
                         .prepareStatement(authorDocQuery.toString());
                 preparedStatement.setString(1, doc.getId());
-                preparedStatement.setString(2, author.getId());
+                preparedStatement.setString(2, id);
                 preparedStatement.executeUpdate();
-
-                if (!AuthorDAO.checkAuthorExist(author.getName())) {
-                    AuthorDAO.addAuthor(author);
-                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

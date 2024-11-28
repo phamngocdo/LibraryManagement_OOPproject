@@ -54,6 +54,7 @@ public class DocumentEditing {
             authorField.setText(doc.getAuthorsToString());
             categoryField.setText(doc.getCategoriesToString());
             quantityField.setText(String.valueOf(doc.getQuantity()));
+            ratingCountField.setText(String.valueOf(doc.getRatingCount()));
             remainingField.setText(String.valueOf(doc.getRemaining()));
             averageScoreField.setText(String.valueOf(doc.getAverageScore()));
             pageCountField.setText(String.valueOf(doc.getPageCount()));
@@ -106,22 +107,28 @@ public class DocumentEditing {
                 return;
             }
 
-            String[] authorsStringList = authorText.split("\\s*,\\s*");
+            authorText = authorText.trim();
+            String[] authorsStringList = authorText.isEmpty() ? new String[0] : authorText.split("\\s*,\\s*");
             ArrayList<Author> authors = new ArrayList<>();
             for (String str : authorsStringList) {
-                authors.add(new Author("", str));
+                if (!str.isEmpty()) {
+                    authors.add(new Author(null, str.trim()));
+                }
             }
 
-            String[] categoryStringList = categoryText.split("\\s*,\\s*");
+            categoryText = categoryText.trim();
+            String[] categoryStringList = categoryText.isEmpty() ? new String[0] : categoryText.split("\\s*,\\s*");
             ArrayList<Category> categories = new ArrayList<>();
             for (String str : categoryStringList) {
-                categories.add(new Category("", str));
+                if (!str.isEmpty()) {
+                    categories.add(new Category(null, str.trim()));
+                }
             }
 
             String docId = doc == null ? "" : doc.getId();
             Document newDoc = new Document(docId, title, isbn, quantity, remaining, ratingCount,
                     averageScore, pageCount, description, publisher, publishedDate,
-                    imageUrl, authors, categories, null);
+                    imageUrl, authors, categories, new ArrayList<>());
 
             if (functionLabel.getText().equals("Thêm tài liệu")) {
                 resultLabel.setText(((Admin) App.currentUser).addDocument(newDoc));
@@ -131,6 +138,7 @@ public class DocumentEditing {
                 }
             } else {
                 resultLabel.setText(((Admin) App.currentUser).updateDocument(doc));
+                setStyleForResultLabel("success");
             }
         } catch (NumberFormatException e) {
             resultLabel.setText("Vui lòng nhập đúng định dạng số cho các trường số.");
@@ -148,6 +156,7 @@ public class DocumentEditing {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == buttonType) {
             if (doc != null) {
+                setStyleForResultLabel("success");
                 resultLabel.setText(((Admin) App.currentUser).removeDocument(doc.getId()));
             } else {
                 resultLabel.setText("Tài liệu không tồn tại để xóa");

@@ -67,19 +67,12 @@ public class DocumentInfo {
             memberRatingPane.setDisable(false);
             editingButton.setVisible(false);
 
-            Receipt receipt = ((Member) App.currentUser).getReceipts()
-                    .stream()
-                    .filter(r -> r.getDocId().equals(currentDoc.getId()))
-                    .findFirst()
-                    .orElse(null);
-            if (receipt != null) {
-                if (receipt.getStatus().equals(STATUS_NOT_RETURNED)) {
+            borrowingButton.setVisible(true);
+            for (Receipt receipt : ((Member) App.currentUser).getReceipts()) {
+                if (receipt.getDocId().equals(currentDoc.getId()) && receipt.getStatus().equals(STATUS_NOT_RETURNED)) {
                     borrowingButton.setVisible(false);
-                } else if (currentDoc.getRemaining() > 0 && receipt.getStatus().equals(STATUS_RETURNED)) {
-                    borrowingButton.setVisible(true);
+                    break;
                 }
-            } else {
-                borrowingButton.setVisible(true);
             }
 
             Rating rating = currentDoc.getRatings()
