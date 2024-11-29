@@ -69,25 +69,6 @@ public class AuthorDAO {
         }
     }
 
-    public static boolean checkAuthorExist(Author author) {
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT author_id FROM authors ");
-        query.append("WHERE name = ?");
-        try {
-            PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
-            preparedStatement.setString(1, author.getName());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                author.setId(resultSet.getString("author_id"));
-                return true;
-            }
-            return false;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static void addAuthor(Author author) {
         if (author.getId() == null || author.getId().isEmpty()) {
             author.setId(IdGenerator.createRandomIdInTable("authors", "author_id"));

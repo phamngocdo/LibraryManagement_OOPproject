@@ -65,7 +65,7 @@ public class CategoryDAO {
        try {
            PreparedStatement preparedStatement;
            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
-           preparedStatement.setString(1, category.getCategory());
+           preparedStatement.setString(1, category.getId());
            preparedStatement.setString(2, category.getCategory());
            preparedStatement.executeUpdate();
        } catch (SQLException e) {
@@ -83,27 +83,7 @@ public class CategoryDAO {
             preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, category);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next(); // Nếu có kết quả thì thể loại tồn tại
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static boolean checkCategoryExist(Category category) {
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT category_id FROM categories ");
-        query.append("WHERE category = ?");
-
-        try {
-            PreparedStatement preparedStatement;
-            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
-            preparedStatement.setString(1, category.getCategory());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                category.setId(resultSet.getString("category_id"));
-                return true;
-            }
-            return false;
+            return resultSet.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -113,13 +93,13 @@ public class CategoryDAO {
         StringBuilder query = new StringBuilder();
         query.append("SELECT category_id FROM categories WHERE category = ?");
         try {
-            PreparedStatement preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
+            PreparedStatement preparedStatement;
+            preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, category.getCategory());
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getString("category_id");
             } else {
-                // Nếu danh mục không tồn tại, thêm vào CSDL
                 CategoryDAO.addCategory(category);
                 return category.getId();
             }

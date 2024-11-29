@@ -137,7 +137,7 @@ public class DocumentEditing {
                     setStyleForResultLabel("success");
                 }
             } else {
-                resultLabel.setText(((Admin) App.currentUser).updateDocument(doc));
+                resultLabel.setText(((Admin) App.currentUser).updateDocument(newDoc));
                 setStyleForResultLabel("success");
             }
         } catch (NumberFormatException e) {
