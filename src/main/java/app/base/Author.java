@@ -13,7 +13,7 @@ public class Author {
         this.name = name;
     }
 
-    public ArrayList<Document> getAllDoc() {
+    public ArrayList<Document> getAllDocument() {
         return DocumentDAO.getAllDocumentFromAuthor(id);
     }
 

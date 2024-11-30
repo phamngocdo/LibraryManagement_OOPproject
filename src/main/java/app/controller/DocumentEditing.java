@@ -45,7 +45,7 @@ public class DocumentEditing {
     }
 
     private void populateFields() {
-        if (doc != null) { // Nếu doc khác null tức là đang chỉnh sửa
+        if (doc != null) {
             functionLabel.setText("Chỉnh sửa thông tin tài liệu");
             titleField.setText(doc.getTitle());
             isbnField.setText(doc.getIsbn());
@@ -187,13 +187,12 @@ public class DocumentEditing {
         task.setOnSucceeded(event -> {
             doc = task.getValue();
             if (doc != null) {
-                // Điền lại các trường thông tin từ tài liệu API
                 titleField.setText(doc.getTitle());
                 isbnField.setText(doc.getIsbn());
                 publisherField.setText(doc.getPublisher());
                 publishedDateField.setText(doc.getPublishedDate());
-                authorField.setText(doc.getAuthorsToString()); // Sử dụng phương thức getAuthorsToString
-                categoryField.setText(doc.getCategoriesToString()); // Sử dụng phương thức getCategoriesToString
+                authorField.setText(doc.getAuthorsToString());
+                categoryField.setText(doc.getCategoriesToString());
                 quantityField.setText(String.valueOf(doc.getQuantity()));
                 remainingField.setText(String.valueOf(doc.getRemaining()));
                 ratingCountField.setText(String.valueOf(doc.getRatingCount()));

@@ -49,24 +49,21 @@ public class Admin extends User {
     }
 
     public void confirmReturnDocument(Receipt receipt, boolean isReturned) {
-        Document doc = DocumentDAO.getDocFromId(receipt.getDocId()); // Lấy tài liệu từ DB
-        // Cập nhật trạng thái của receipt
+        Document doc = DocumentDAO.getDocFromId(receipt.getDocId());
         if (isReturned) {
             receipt.setStatus("returned");
-            // Cộng 1 cho remaining của tài liệu
             if (doc != null) {
-                doc.setRemaining(doc.getRemaining() + 1); // Tăng số lượng tài liệu
+                doc.setRemaining(doc.getRemaining() + 1);
             }
         } else {
             receipt.setStatus("not returned");
-            // Trừ 1 cho remaining của tài liệu
             if (doc != null) {
-                doc.setRemaining(doc.getRemaining() - 1); // Giảm số lượng tài liệu
+                doc.setRemaining(doc.getRemaining() - 1);
             }
         }
-        ReceiptDAO.updateReceipt(receipt); // Cập nhật receipt
+        ReceiptDAO.updateReceipt(receipt);
         if (doc != null) {
-            DocumentDAO.updateDocument(doc); // Cập nhật document
+            DocumentDAO.updateDocument(doc);
         }
     }
 }

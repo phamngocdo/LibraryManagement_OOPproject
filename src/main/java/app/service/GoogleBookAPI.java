@@ -23,7 +23,6 @@ public class GoogleBookAPI {
 
         int responseCode = connection.getResponseCode();
         if (responseCode != 200) {
-            // Đọc phản hồi lỗi từ API
             BufferedReader errorReader = new BufferedReader(
                     new InputStreamReader(connection.getErrorStream()));
             StringBuilder errorResponse = new StringBuilder();
@@ -33,7 +32,6 @@ public class GoogleBookAPI {
             }
             errorReader.close();
 
-            // Phân tích JSON lỗi
             JSONObject errorJson = new JSONObject(errorResponse.toString());
             String errorMessage = errorJson.getJSONObject("error")
                     .getJSONArray("errors")
@@ -51,19 +49,15 @@ public class GoogleBookAPI {
         }
         in.close();
 
-        // Chuyển đổi chuỗi JSON thành đối tượng JSONObject
         JSONObject jsonResponse = new JSONObject(response.toString());
 
-        // Kiểm tra nếu có tài liệu nào trả về
         if (!jsonResponse.has("items")) {
             throw new Exception("Không tìm thấy tài liệu với ISBN: " + isbn);
         }
 
-        // Lấy thông tin từ volumeInfo của cuốn sách đầu tiên
         JSONObject volumeInfo = jsonResponse.getJSONArray("items")
                 .getJSONObject(0).getJSONObject("volumeInfo");
 
-        // Truy xuất thông tin từ JSON và xử lý nếu thiếu giá trị
         String id = jsonResponse.getJSONArray("items").getJSONObject(0).getString("id");
         String title = volumeInfo.optString("title", "N/A");
         String publisher = volumeInfo.optString("publisher", "N/A");
@@ -73,7 +67,6 @@ public class GoogleBookAPI {
         double averageScore = volumeInfo.optDouble("averageRating", 0);
         int ratingCount = volumeInfo.optInt("ratingsCount", 0);
 
-        // Lấy danh sách tác giả
         JSONArray authorsJSON = volumeInfo.optJSONArray("authors");
         ArrayList<Author> authors = new ArrayList<>();
         if (authorsJSON != null) {
@@ -82,7 +75,6 @@ public class GoogleBookAPI {
             }
         }
 
-        // Lấy danh sách thể loại
         JSONArray categoriesJSON = volumeInfo.optJSONArray("categories");
         ArrayList<Category> categories = new ArrayList<>();
         if (categoriesJSON != null) {
@@ -91,12 +83,10 @@ public class GoogleBookAPI {
             }
         }
 
-        // Lấy ảnh bìa (thumbnail) nếu có
         String imageUrl = volumeInfo.optJSONObject("imageLinks") != null
                 ? volumeInfo.getJSONObject("imageLinks").optString("thumbnail", "")
                 : "N/A";
 
-        // Tạo đối tượng Document và trả về
         return new Document(id, title, isbn, 0, 0, ratingCount, averageScore, pageCount,
                 description, publisher, publishedDate, imageUrl, authors, categories, null);
     }

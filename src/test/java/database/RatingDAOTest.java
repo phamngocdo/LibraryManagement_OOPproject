@@ -14,7 +14,6 @@ public class RatingDAOTest {
     public void testGetRatingFromId_Valid() {
         Rating rating = RatingDAO.getRatingFromId("F7P3R9K2YJLM");
         assertNotNull(rating);
-        //kiểm tra user_id có đúng k
         assertEquals("OJIK98JHNTMT", rating.getMemberId());
     }
 

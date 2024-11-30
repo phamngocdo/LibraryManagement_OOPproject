@@ -13,7 +13,7 @@ public class Category {
         this.category = category;
     }
 
-    public ArrayList<Document> getAllDoc() {
+    public ArrayList<Document> getAllDocument() {
         return DocumentDAO.getAllDocumentFromCategory(id);
     }
 

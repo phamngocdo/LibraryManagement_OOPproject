@@ -105,11 +105,9 @@ public class DocumentInfo {
                 selectedStar,
                 comment
         );
-        // Lưu đánh giá vào cơ sở dữ liệu
         ((Member) App.currentUser).rateDocument(newRating, currentDoc);
-        // Xóa nhận xét sau khi gửi
         memberComment.clear();
-        displayRatedStar(0, starRatingHBox); // Đặt lại HBox về trạng thái ban đầu
+        displayRatedStar(0, starRatingHBox);
         starRatingHBox.setDisable(true);
         setUpInfo();
     }
@@ -138,16 +136,11 @@ public class DocumentInfo {
     }
 
     private void setUpInfo() {
-        // Ẩn bảng thông tin và hiển thị ProgressIndicator khi đang tải dữ liệu
         infoPane.setVisible(false);
         progressIndicator.setVisible(true);
-        // Sử dụng một luồng mới để xử lý tải thông tin tài liệu
         new Thread(() -> {
-            // Lấy thông tin tài liệu hiện tại
             Document doc = currentDoc;
-            // Cập nhật giao diện trong JavaFX Application Thread
             Platform.runLater(() -> {
-                // Hiển thị thông tin tài liệu
                 assert doc != null;
                 titleLabel.setText(doc.getTitle());
                 isbnLabel.setText(doc.getIsbn());
@@ -161,12 +154,8 @@ public class DocumentInfo {
                 remainingLabel.setText(String.valueOf(doc.getRemaining()));
                 ratingCountLabel.setText(String.valueOf(doc.getRatingCount()));
                 averageScoreLabel.setText(String.format("%.2f", doc.getAverageScore()));
-
-                // Hiển thị hình ảnh tài liệu
                 docImage.setImage(doc.loadImage());
-                // Thêm các đánh giá vào VBox
                 doc.getRatings().forEach(this::addRatingIntoVBox);
-                // Sau khi tải xong, hiển thị bảng thông tin và ẩn ProgressIndicator
                 infoPane.setVisible(true);
                 progressIndicator.setVisible(false);
             });

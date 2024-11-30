@@ -59,7 +59,6 @@ public class ReceiptsSearching {
 
     @FXML
     private void initialize() {
-        // Gán các cột với các thuộc tính của Receipt
         idReceiptColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         memberIdColumn.setCellValueFactory(new PropertyValueFactory<>("memberId"));
         isbnColumn.setCellValueFactory(data -> {
@@ -77,19 +76,12 @@ public class ReceiptsSearching {
             checkBox.setStyle("-fx-cursor: HAND");
             return new javafx.beans.property.SimpleObjectProperty<>(checkBox);
         });
-
-        //loadreceipt vào bảng
         loadReceiptsData();
-        //Hiển thị thông báo khi không có dữ liệu
         receiptsTable.setPlaceholder(new Label("Không tìm thấy thông tin"));
 
-        //tìm kiếm ký tự bắt đầu
         setupSearchTextField();
-
-        //lọc receipt
         setupFilterComboBox();
 
-        // Xử lý tìm kiếm QR code
         qrCodeSearch.setOnMouseClicked(event -> searchByQRCode());
     }
 
@@ -103,8 +95,8 @@ public class ReceiptsSearching {
     private void setupSearchTextField() {
         searchTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                String keyword = searchTextField.getText().trim(); //lấy từ khóa từ TextField
-                searchReceipts(keyword); //gọi searchReceipts
+                String keyword = searchTextField.getText().trim();
+                searchReceipts(keyword);
             }
         });
     }
@@ -130,21 +122,18 @@ public class ReceiptsSearching {
                         case "Chưa trả" -> STATUS_NOT_RETURNED.equals(receipt.getStatus());
                         case "Quá hạn" -> isOverdue(receipt.getDueDate())
                                 && STATUS_NOT_RETURNED.equals(receipt.getStatus());
-                        default -> true; // "Tất cả"
+                        default -> true;
                     })
                     .collect(Collectors.toList());
             receiptsTable.setItems(FXCollections.observableArrayList(filteredReceipts));
         });
     }
 
-    // Hàm kiểm tra xem phiếu mượn có quá hạn không
     private boolean isOverdue(String dueDate) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             Date due = dateFormat.parse(dueDate);
             Date currentDate = new Date();
-
-            // So sánh ngày hiện tại với ngày hết hạn
             return due.before(currentDate);
         } catch (ParseException e) {
             throw new RuntimeException("Định dạng ngày không phải DD-MM-YYYY");
@@ -175,19 +164,14 @@ public class ReceiptsSearching {
 
     private JSONObject decodeQRCode(File file) {
         try {
-            // Đọc file ảnh vào BufferedImage
             BufferedImage bufferedImage = ImageIO.read(file);
-
-            // Chuyển thành BinaryBitmap
             BinaryBitmap binaryBitmap = new BinaryBitmap(
                     new HybridBinarizer(
                             new BufferedImageLuminanceSource(bufferedImage)));
 
             Result result = new MultiFormatReader().decode(binaryBitmap);
-            // Lấy JSON sau khi giải mã QR
             String qrCodeData = result.getText();
             return new JSONObject(qrCodeData);
-            // Tạo đối tượng Receipt từ dữ liệu JSON
         } catch (Exception e) {
             throw new RuntimeException("Lỗi khi giải mã QR code từ file: " + file.getName(), e);
         }

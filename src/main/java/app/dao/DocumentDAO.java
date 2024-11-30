@@ -192,32 +192,26 @@ public class DocumentDAO {
         ratingsQuery.append("WHERE document_id = ?");
 
         try {
-            // Xóa tài liệu từ bảng documents
             PreparedStatement preparedStatement;
             preparedStatement = DatabaseManagement.getInstance().getConnection()
                     .prepareStatement(docQuery.toString());
             preparedStatement.setString(1, docId);
             preparedStatement.executeUpdate();
 
-            // Xóa bản ghi liên quan trong bảng document_author
             preparedStatement = DatabaseManagement.getInstance().getConnection()
                     .prepareStatement(authorQuery.toString());
             preparedStatement.setString(1, docId);
             preparedStatement.executeUpdate();
 
-            // Xóa bản ghi liên quan trong bảng document_category
             preparedStatement = DatabaseManagement.getInstance().getConnection()
                     .prepareStatement(categoryQuery.toString());
             preparedStatement.setString(1, docId);
             preparedStatement.executeUpdate();
 
-            // Xóa bản ghi liên quan trong bảng receipts
             preparedStatement = DatabaseManagement.getInstance().getConnection().
                     prepareStatement(receiptsQuery.toString());
             preparedStatement.setString(1, docId);
             preparedStatement.executeUpdate();
-
-            // Xóa bản ghi liên quan trong bảng ratings
 
             preparedStatement = DatabaseManagement.getInstance().getConnection()
                     .prepareStatement(ratingsQuery.toString());
@@ -237,7 +231,7 @@ public class DocumentDAO {
             preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next(); // Nếu có kết quả thì tài liệu tồn tại
+            return resultSet.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

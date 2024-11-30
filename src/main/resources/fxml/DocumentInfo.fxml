@@ -148,9 +148,9 @@
                   <Font name="Arial" size="13.0" />
                </font>
             </TextArea>
-            <JFXButton fx:id="ratingSendingButton" layoutX="15.0" layoutY="151.0" onAction="#sendRating" styleClass="edit-button" text="Gửi đánh giá" />
+            <JFXButton layoutX="15.0" layoutY="151.0" onAction="#sendRating" styleClass="edit-button" text="Gửi đánh giá" />
          </Pane>
-         <ImageView fx:id="backButton" fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="11.0" onMouseClicked="#goBackToPrevPane" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="11.0" onMouseClicked="#goBackToPrevPane" pickOnBounds="true" preserveRatio="true">
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>

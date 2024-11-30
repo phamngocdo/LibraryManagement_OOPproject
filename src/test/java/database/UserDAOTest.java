@@ -15,15 +15,14 @@ public class UserDAOTest {
     @Test
     public void testGetAdminFromSignIn_Valid() {
         Admin admin = (Admin) UserDAO.getUserFromLogin("admin", "admin");
-        assertNotNull(admin);//kiểm tra xem có null k nếu null testcase sai
-        //kiểm tra username lấy đưược có bằng expected k
+        assertNotNull(admin);
         assertEquals("admin", admin.getUsername());
     }
 
     @Test
     public void testGetAdminFromSignIn_Invalid() {
         Admin admin = (Admin) UserDAO.getUserFromLogin("admin", "wrongPassword");
-        assertNull(admin);//null đúng
+        assertNull(admin);
     }
 
     @Test
@@ -74,7 +73,6 @@ public class UserDAOTest {
     public void testGetAllMembers() {
         ArrayList<Member> members = UserDAO.getAllMember();
         assertNotNull(members);
-        //kiểm tra danh sách member có trống k
         assertFalse(members.isEmpty());
     }
 

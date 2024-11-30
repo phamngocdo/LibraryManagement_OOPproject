@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class ReceiptDAO {
 
     public static Receipt getReceiptFromId(String receiptId) {
-        //kiểm tra receipt_id
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM receipts ");
         query.append(" WHERE receipt_id = ?");
@@ -20,7 +19,6 @@ public class ReceiptDAO {
             preparedStatement.setString(1, receiptId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                // Chuyển đổi ResultSet thành đối tượng Receipt
                 return new Receipt(resultSet);
             }
         } catch (SQLException e) {
@@ -30,7 +28,6 @@ public class ReceiptDAO {
     }
 
     public static ArrayList<Receipt> getAllReceiptFromMemberId(String memberId) {
-        //kiểm tra user_id
         ArrayList<Receipt> receipts = new ArrayList<>();
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM receipts ");
@@ -41,7 +38,6 @@ public class ReceiptDAO {
             preparedStatement.setString(1, memberId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                // Chuyển đổi ResultSet thành đối tượng Receipt
                 receipts.add(new Receipt(resultSet));
             }
         } catch (SQLException e) {
@@ -59,7 +55,6 @@ public class ReceiptDAO {
             preparedStatement = DatabaseManagement.getInstance().getConnection().prepareStatement(query.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                // Chuyển đổi ResultSet thành đối tượng Receipt
                 receipts.add(new Receipt(resultSet));
             }
         } catch (SQLException e) {
@@ -120,7 +115,6 @@ public class ReceiptDAO {
     }
 
     public static void updateReceipt(Receipt receipt) {
-        //Cập nhật receipt bằng cách gọi hàm remove(id) sau đó addReceipt
         removeReceipt(receipt.getId());
         addReceipt(receipt);
     }

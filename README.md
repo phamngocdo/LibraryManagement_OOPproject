@@ -31,7 +31,7 @@ Our team:
 
 ---
 ## Features
-- Login and search for book information are available for both user groups.
+- Login and search for book information (using Prefix Tree algorithm for smooth searching) are available for both user groups.
 
 - **For Admin (Librarian)**:
   - Edit book details and add new books.

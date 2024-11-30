@@ -15,7 +15,6 @@ public class ReceiptDAOTest {
     public void testGetReceiptFromId_ValidId() {
         Receipt receipt = ReceiptDAO.getReceiptFromId("I2HvbHx1GE5j");
         assertNotNull(receipt);
-        //kiểm tra user_id có đúng k
         assertEquals("OJIK98JHNTMT", receipt.getMemberId());
     }
 
@@ -29,7 +28,6 @@ public class ReceiptDAOTest {
     public void testGetAllReceiptFromMemberId_ValidMemberId() {
         ArrayList<Receipt> receipts = ReceiptDAO.getAllReceiptFromMemberId("OJIK98JHNTMT");
         assertNotNull(receipts);
-        //kiểm tra danh sách receipts có trống k
         assertFalse(receipts.isEmpty());
     }
 
@@ -37,7 +35,6 @@ public class ReceiptDAOTest {
     public void testGetAllReceipt() {
         ArrayList<Receipt> receipts = ReceiptDAO.getAllReceipt();
         assertNotNull(receipts);
-        //kiểm tra danh sách receipts có trống k
         assertFalse(receipts.isEmpty());
     }
 
@@ -69,15 +66,12 @@ public class ReceiptDAOTest {
 
     @Test
     public void testUpdateReceipt() {
-        //lấy receipt id trong db có status là not return
         Receipt originalReceipt = ReceiptDAO.getReceiptFromId("ItT8OEFbQafH");
         assertNotNull(originalReceipt);
 
-        // Cập nhật thông tin
         originalReceipt.setStatus("returned");
         ReceiptDAO.updateReceipt(originalReceipt);
 
-        // Kiểm tra xem thông tin đã được cập nhật chưa
         Receipt updatedReceipt = ReceiptDAO.getReceiptFromId("ItT8OEFbQafH");
         assertNotNull(updatedReceipt);
         assertEquals("returned", updatedReceipt.getStatus());

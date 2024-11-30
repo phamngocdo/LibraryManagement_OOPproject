@@ -250,12 +250,12 @@ public class Home {
                 } else if (trie instanceof AuthorNameTrie) {
                     for (Pair<String, String> pair : resultlist) {
                         Author author = new Author(pair.getKey(), pair.getValue());
-                        docList.addAll(author.getAllDoc());
+                        docList.addAll(author.getAllDocument());
                     }
                 } else if (trie instanceof CategoryTrie) {
                     for (Pair<String, String> pair : resultlist) {
                         Category category = new Category(pair.getKey(), pair.getValue());
-                        docList.addAll(category.getAllDoc());
+                        docList.addAll(category.getAllDocument());
                     }
                 }
 

@@ -33,10 +33,7 @@ public class MembersSearching {
 
     @FXML
     private void initialize() {
-        // Ẩn thông báo "Không tìm thấy thông tin"
         notFoundLabel.setVisible(false);
-
-        // Lấy danh sách thành viên từ Admin
         allMembers = ((Admin) App.currentUser).seeAllMemberInfo();
 
         if (allMembers == null || allMembers.isEmpty()) {
@@ -49,13 +46,8 @@ public class MembersSearching {
     }
 
     private void setUpSearchField() {
-        // Lắng nghe sự kiện Enter trong thanh tìm kiếm
         searchingField.setOnAction(event -> {String searchText = searchingField.getText().trim().toLowerCase();
-
-            // Lọc danh sách thành viên theo ID hoặc tên
             ArrayList<Member> filteredMembers = filterMembers(searchText);
-
-            // Xóa nội dung VBox và cập nhật danh sách
             vBox.getChildren().clear();
             if (filteredMembers.isEmpty()) {
                 notFoundLabel.setVisible(true);
@@ -67,15 +59,14 @@ public class MembersSearching {
     }
 
     private ArrayList<Member> filterMembers(String searchText) {
-        // Lọc danh sách thành viên theo ID hoặc tên (không phân biệt hoa/thường)
         return (ArrayList<Member>) allMembers.stream()
                 .filter(member -> member.getId().toLowerCase().contains(searchText) ||
-                        (member.getFirstName() + " " + member.getLastName()).toLowerCase().contains(searchText))
+                        (member.getFirstName() + " " + member.getLastName()).toLowerCase().contains(searchText) ||
+                        (member.getEmail()).toLowerCase().contains(searchText))
                 .collect(Collectors.toList());
     }
 
     private void addMembersToVbox(ArrayList<Member> members) {
-        // Tính số lượng hàng (mỗi hàng tối đa 3 thành viên)
         int rowCount = (int) Math.ceil(members.size() / 3.0);
 
         int memberIndex = 0;
@@ -97,10 +88,9 @@ public class MembersSearching {
     }
 
     private Pane createMemberPane(Member member) {
-        // Tạo Pane hiển thị thông tin của một thành viên
         Pane pane = new Pane();
         pane.setPrefSize(282, 200);
-        pane.getStyleClass().add("member-pane"); // Có thể thêm CSS class
+        pane.getStyleClass().add("member-pane");
 
         TextFlow nameFlow = getTextFlow("Họ và tên: ", member.getFirstName()+ " " + member.getLastName());
         nameFlow.setLayoutX(14);

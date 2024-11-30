@@ -13,8 +13,6 @@ public class CategoryDAOTest {
     void testGetAllCategoryFromDocId() {
        String docId = "m7vT6i3xmC4C";
         ArrayList<Category> categories = CategoryDAO.getAllCategoryFromDocId(docId);
-
-        // Kiểm tra danh sách thể loại không rỗng
         assertFalse(categories.isEmpty());
 
         boolean hasScienceCategory = categories.stream()
@@ -27,19 +25,15 @@ public class CategoryDAOTest {
         boolean categoryExists = CategoryDAO.checkCategoryExist("Medical");
         assertTrue(categoryExists);
 
-        // Kiểm tra thể loại không tồn tại (ví dụ: "UnknownCategory")
         boolean unknownCategoryExists = CategoryDAO.checkCategoryExist("UnknownCategory");
         assertFalse(unknownCategoryExists);
     }
 
     @Test
     void testAddCategory() {
-        // Thêm thể loại mới vào cơ sở dữ liệu, nếu chạy test thì đổi tên khác để test
         Category newCategory = new Category(null, "New Category");
-
         CategoryDAO.addCategory(newCategory);
 
-        // Kiểm tra thể loại đã được thêm thành công
         boolean categoryExists = CategoryDAO.checkCategoryExist("New Category");
         assertTrue(categoryExists);
     }

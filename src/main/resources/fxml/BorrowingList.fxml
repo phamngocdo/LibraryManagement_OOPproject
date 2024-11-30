@@ -21,7 +21,7 @@
             </font>
          </Label>
          <VBox fx:id="notReturnedDocVBox" layoutX="32.0" layoutY="55.0" minHeight="265.0" prefWidth="881.0" spacing="20.0" />
-         <VBox fx:id="returnedDocVBox" layoutX="24.0" layoutY="369.0" minHeight="265.0" prefWidth="881.0" spacing="20.0" />
+         <VBox fx:id="returnedDocVBox" layoutX="32.0" layoutY="369.0" minHeight="265.0" prefWidth="881.0" spacing="20.0" />
          <Pane fx:id="docInfoPane" minHeight="648.0" prefWidth="945.0" visible="false" />
       </Pane>
       <ProgressIndicator fx:id="progressIndicator" layoutX="459.0" layoutY="290.0" prefHeight="34.0" prefWidth="32.0" visible="false" />
